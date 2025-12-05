@@ -42,10 +42,11 @@ Key concepts here...
 More content...
 
 **Bold text** for emphasis
-*Italic text* for subtle emphasis`
+*Italic text* for subtle emphasis`;
 ```
 
 ### ADHD-Friendly Content Tips:
+
 - Use clear headings (##, ###)
 - Keep paragraphs short (2-3 lines max)
 - Use bullet points extensively
@@ -59,21 +60,24 @@ Flashcards follow this structure:
 ```typescript
 flashcards: [
   {
-    id: 'card-1',
-    question: 'What does Sitecore Edge do?',
-    answer: 'Edge is a CDN that caches and delivers your published content globally with low latency.',
-    difficulty: 'medium'  // 'easy' | 'medium' | 'hard'
+    id: "card-1",
+    question: "What does Sitecore Edge do?",
+    answer:
+      "Edge is a CDN that caches and delivers your published content globally with low latency.",
+    difficulty: "medium", // 'easy' | 'medium' | 'hard'
   },
   {
-    id: 'card-2',
-    question: 'What is the difference between Pages and Components?',
-    answer: 'Pages is the editing interface where content editors work. Components are reusable UI building blocks that make up pages.',
-    difficulty: 'easy'
-  }
-]
+    id: "card-2",
+    question: "What is the difference between Pages and Components?",
+    answer:
+      "Pages is the editing interface where content editors work. Components are reusable UI building blocks that make up pages.",
+    difficulty: "easy",
+  },
+];
 ```
 
 ### Flashcard Best Practices:
+
 - Keep questions clear and specific
 - Answers should be 1-2 sentences max
 - Aim for 5-10 cards per section
@@ -87,34 +91,39 @@ Quiz questions support scenarios:
 ```typescript
 quizQuestions: [
   {
-    id: 'quiz-1',
-    question: 'What should you do first when Pages fails to sync with Edge?',
+    id: "quiz-1",
+    question: "What should you do first when Pages fails to sync with Edge?",
     options: [
-      'Contact Sitecore support immediately',
-      'Check the deployment status in XM Cloud Deploy',
-      'Clear your browser cache',
-      'Restart the Pages application'
+      "Contact Sitecore support immediately",
+      "Check the deployment status in XM Cloud Deploy",
+      "Clear your browser cache",
+      "Restart the Pages application",
     ],
-    correctAnswer: 1,  // Index of correct option (0-based)
-    explanation: 'Always check XM Cloud Deploy first to verify the deployment completed successfully. The issue is often with the build/deploy process.',
-    scenario: 'A content editor reports that changes made in Pages are not appearing on the live website after 10 minutes.' // Optional
+    correctAnswer: 1, // Index of correct option (0-based)
+    explanation:
+      "Always check XM Cloud Deploy first to verify the deployment completed successfully. The issue is often with the build/deploy process.",
+    scenario:
+      "A content editor reports that changes made in Pages are not appearing on the live website after 10 minutes.", // Optional
   },
   {
-    id: 'quiz-2',
-    question: 'Which field type would you use for a multi-line text editor with rich text formatting?',
+    id: "quiz-2",
+    question:
+      "Which field type would you use for a multi-line text editor with rich text formatting?",
     options: [
-      'Single-Line Text',
-      'Multi-Line Text',
-      'Rich Text',
-      'General Link'
+      "Single-Line Text",
+      "Multi-Line Text",
+      "Rich Text",
+      "General Link",
     ],
     correctAnswer: 2,
-    explanation: 'Rich Text fields provide a WYSIWYG editor with formatting options like bold, italic, lists, and links.'
-  }
-]
+    explanation:
+      "Rich Text fields provide a WYSIWYG editor with formatting options like bold, italic, lists, and links.",
+  },
+];
 ```
 
 ### Quiz Best Practices:
+
 - Use scenario-based questions (real-world situations)
 - Provide 4 options per question
 - Include detailed explanations
@@ -205,6 +214,7 @@ Edge is Sitecore's global CDN (Content Delivery Network) that caches and deliver
 ## 💡 Tips for ADHD-Friendly Content
 
 ### Flash Exposure (Phase A):
+
 - Heavy use of headings and subheadings
 - Short paragraphs (max 3 lines)
 - Bullet points over long sentences
@@ -212,12 +222,14 @@ Edge is Sitecore's global CDN (Content Delivery Network) that caches and deliver
 - Clear visual hierarchy
 
 ### Flashcards (Phase B):
+
 - One concept per card
 - Direct, simple questions
 - Concise answers (1-2 sentences)
 - Mix easy/medium/hard
 
 ### Quiz (Phase D):
+
 - Real-world scenarios
 - Clear, unambiguous questions
 - Detailed explanations
@@ -241,10 +253,10 @@ Based on Sitecore XM Cloud certification, consider these sections:
 ## 📊 Progress Tracking
 
 The app automatically tracks:
+
 - Flash Exposure completion
 - Flashcard reviews
 - Quiz scores
 - Overall section completion
 
 All data is stored in browser localStorage.
-

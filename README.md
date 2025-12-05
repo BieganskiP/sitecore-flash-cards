@@ -7,16 +7,19 @@ A comprehensive learning application for mastering Sitecore XM Cloud, built spec
 ### 🎯 4-Phase Learning System
 
 1. **Phase A: Flash Exposure** (15-20 min)
+
    - Skim content for structure
    - Built-in timer to prevent overload
    - No memorization required
 
 2. **Phase B: Active Recall Flashcards**
+
    - Interactive flip cards
    - Difficulty levels (easy/medium/hard)
    - Track reviewed cards
 
 3. **Phase C: Teach-Back**
+
    - Guided prompts to explain concepts
    - Reinforces understanding
 
@@ -26,12 +29,14 @@ A comprehensive learning application for mastering Sitecore XM Cloud, built spec
    - Detailed explanations
 
 ### 📊 Progress Tracking
+
 - Section completion tracking
 - Quiz scores
 - Phase completion status
 - Local storage (no login required)
 
 ### 🎨 ADHD-Friendly Design
+
 - Clear visual hierarchy
 - Short, focused sessions
 - Immediate feedback
@@ -96,6 +101,7 @@ Open [http://localhost:3000](http://localhost:3000) to start learning!
 ### Detailed Guide
 
 See **[CONTENT_GUIDE.md](CONTENT_GUIDE.md)** for:
+
 - Complete content structure
 - Flashcard best practices
 - Quiz question examples

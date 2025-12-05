@@ -5,6 +5,7 @@ import { getProgress, resetProgress } from "@/lib/storage";
 import { sections } from "@/lib/data";
 import { UserProgress } from "@/lib/types";
 import Link from "next/link";
+import { BarChart3, CheckCircle, Target, BookOpen, Circle } from "lucide-react";
 
 export default function ProgressPage() {
   const [progress, setProgress] = useState<Record<string, UserProgress>>(() =>
@@ -52,7 +53,9 @@ export default function ProgressPage() {
       {/* Overall Stats */}
       <div className="grid md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6">
-          <div className="text-3xl mb-2">📊</div>
+          <div className="w-12 h-12 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-3">
+            <BarChart3 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+          </div>
           <div className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
             {overallProgress}%
           </div>
@@ -62,7 +65,9 @@ export default function ProgressPage() {
         </div>
 
         <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6">
-          <div className="text-3xl mb-2">✓</div>
+          <div className="w-12 h-12 rounded-lg bg-green-50 dark:bg-green-900/30 flex items-center justify-center mb-3">
+            <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
+          </div>
           <div className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
             {completedSections}/{totalSections}
           </div>
@@ -72,7 +77,9 @@ export default function ProgressPage() {
         </div>
 
         <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6">
-          <div className="text-3xl mb-2">🎯</div>
+          <div className="w-12 h-12 rounded-lg bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center mb-3">
+            <Target className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+          </div>
           <div className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
             {Object.keys(progress).length}
           </div>
@@ -101,7 +108,9 @@ export default function ProgressPage() {
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">{section.icon || "📖"}</span>
+                    <div className="w-10 h-10 rounded-lg bg-linear-to-br from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
+                      <BookOpen className="w-5 h-5 text-white" />
+                    </div>
                     <div>
                       <h3 className="font-semibold text-zinc-900 dark:text-white">
                         {section.title}
@@ -130,36 +139,55 @@ export default function ProgressPage() {
 
                 {sectionProgress && (
                   <div className="flex gap-4 text-xs text-zinc-600 dark:text-zinc-400">
-                    <span
-                      className={
-                        sectionProgress.flashExposureCompleted
-                          ? "text-green-600"
-                          : ""
-                      }
-                    >
-                      {sectionProgress.flashExposureCompleted ? "✓" : "○"} Flash
-                      Exposure
+                    <span className="flex items-center gap-1">
+                      {sectionProgress.flashExposureCompleted ? (
+                        <CheckCircle className="w-3.5 h-3.5 text-green-600" />
+                      ) : (
+                        <Circle className="w-3.5 h-3.5" />
+                      )}
+                      <span
+                        className={
+                          sectionProgress.flashExposureCompleted
+                            ? "text-green-600"
+                            : ""
+                        }
+                      >
+                        Flash Exposure
+                      </span>
                     </span>
-                    <span
-                      className={
-                        sectionProgress.flashcardsReviewed > 0
-                          ? "text-green-600"
-                          : ""
-                      }
-                    >
-                      {sectionProgress.flashcardsReviewed > 0 ? "✓" : "○"}{" "}
-                      Flashcards
+                    <span className="flex items-center gap-1">
+                      {sectionProgress.flashcardsReviewed > 0 ? (
+                        <CheckCircle className="w-3.5 h-3.5 text-green-600" />
+                      ) : (
+                        <Circle className="w-3.5 h-3.5" />
+                      )}
+                      <span
+                        className={
+                          sectionProgress.flashcardsReviewed > 0
+                            ? "text-green-600"
+                            : ""
+                        }
+                      >
+                        Flashcards
+                      </span>
                     </span>
-                    <span
-                      className={
-                        sectionProgress.quizScore !== null
-                          ? "text-green-600"
-                          : ""
-                      }
-                    >
-                      {sectionProgress.quizScore !== null
-                        ? `✓ Quiz (${sectionProgress.quizScore}%)`
-                        : "○ Quiz"}
+                    <span className="flex items-center gap-1">
+                      {sectionProgress.quizScore !== null ? (
+                        <CheckCircle className="w-3.5 h-3.5 text-green-600" />
+                      ) : (
+                        <Circle className="w-3.5 h-3.5" />
+                      )}
+                      <span
+                        className={
+                          sectionProgress.quizScore !== null
+                            ? "text-green-600"
+                            : ""
+                        }
+                      >
+                        {sectionProgress.quizScore !== null
+                          ? `Quiz (${sectionProgress.quizScore}%)`
+                          : "Quiz"}
+                      </span>
                     </span>
                   </div>
                 )}

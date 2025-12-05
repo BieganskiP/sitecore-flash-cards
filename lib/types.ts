@@ -24,7 +24,6 @@ export interface Section {
   flashcards: Flashcard[];
   quizQuestions: QuizQuestion[];
   estimatedTime: number; // in minutes
-  icon?: string;
 }
 
 export interface UserProgress {
@@ -40,5 +39,4 @@ export interface LearningPhase {
   id: "flash-exposure" | "flashcards" | "teach-back" | "quiz";
   name: string;
   description: string;
-  icon: string;
 }

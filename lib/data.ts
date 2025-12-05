@@ -6,25 +6,21 @@ export const learningPhases: LearningPhase[] = [
     id: "flash-exposure",
     name: "Phase A: Flash Exposure",
     description: "Skim for structure (15-20 min max) - no memorization needed",
-    icon: "⚡",
   },
   {
     id: "flashcards",
     name: "Phase B: Active Recall",
     description: "Review flashcards for quick retention",
-    icon: "🎯",
   },
   {
     id: "teach-back",
     name: "Phase C: Teach-Back",
     description: "Explain concepts in your own words",
-    icon: "💬",
   },
   {
     id: "quiz",
     name: "Phase D: Quiz Mode",
     description: "Test with scenario-based questions",
-    icon: "🎮",
   },
 ];
 
@@ -36,7 +32,6 @@ export const sections: Section[] = [
     title: "SitecoreAI CMS Fundamentals",
     description: "Core terminology, SaaS benefits, and platform overview",
     estimatedTime: 18,
-    icon: "🎯",
 
     content: `# SitecoreAI CMS Fundamentals
 
@@ -524,7 +519,6 @@ Adapts based on **user interactions or data**.
     description:
       "Developer workflow and SitecoreAI CMS architecture essentials",
     estimatedTime: 16,
-    icon: "🏗️",
 
     content: `# Key Architecture Components
 
@@ -1039,7 +1033,6 @@ Content cached globally for fast delivery
     description:
       "Multi-site management, organization structure, and content sharing",
     estimatedTime: 17,
-    icon: "🏢",
 
     content: `# Sites & Site Collections
 
@@ -1690,7 +1683,6 @@ SitecoreAI CMS is **built for enterprise multi-site**.
     title: "Deployment Fundamentals",
     description: "Deploy app, CLI, API, environments, and development setup",
     estimatedTime: 22,
-    icon: "🚀",
 
     content: `# Deployment Fundamentals
 
@@ -2541,7 +2533,6 @@ npm run start:connected
     title: "Experience Edge & APIs",
     description: "GraphQL queries, mutations, Admin API, and webhooks",
     estimatedTime: 24,
-    icon: "⚡",
 
     content: `# Experience Edge & APIs
 

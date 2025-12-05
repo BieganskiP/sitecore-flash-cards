@@ -11,7 +11,7 @@ Copy this template into `lib/data.ts` to create a new section.
   description: 'One-line description shown on cards',
   estimatedTime: 15,  // minutes for flash exposure
   icon: '📖',  // emoji icon
-  
+
   content: `# Section Title
 
 ## Main Topic 1
@@ -73,6 +73,7 @@ Content here...
 ## 📝 Checklist
 
 ### Content Section (Phase A)
+
 - [ ] Clear main title (# heading)
 - [ ] 3-5 main topics (## headings)
 - [ ] Subtopics as needed (### headings)
@@ -82,6 +83,7 @@ Content here...
 - [ ] 15-20 min reading time
 
 ### Flashcards (Phase B)
+
 - [ ] 5-10 flashcards total
 - [ ] Mix of easy/medium/hard
 - [ ] One concept per card
@@ -91,6 +93,7 @@ Content here...
 - [ ] Unique IDs
 
 ### Quiz Questions (Phase D)
+
 - [ ] 8-12 questions total
 - [ ] Scenario-based (not just definitions)
 - [ ] 4 options per question
@@ -102,18 +105,21 @@ Content here...
 ## 💡 Content Ideas by Topic
 
 ### Architecture/Overview Topics
+
 - What is [component]?
 - How does [process] work?
 - When to use [feature]?
 - Key differences between X and Y?
 
 ### Technical Topics
+
 - How to configure [setting]?
 - What happens when [action]?
 - Troubleshooting [issue]
 - Best practices for [task]
 
 ### Scenario Ideas for Quizzes
+
 - "A content editor reports..."
 - "Your deployment failed because..."
 - "A client wants to..."
@@ -123,6 +129,7 @@ Content here...
 ## 🎯 ADHD-Friendly Guidelines
 
 ### Content Writing
+
 ✅ Use headings liberally
 ✅ 2-3 line paragraphs max
 ✅ Bullet points > long sentences
@@ -134,6 +141,7 @@ Content here...
 ❌ Don't explain everything at once
 
 ### Flashcard Writing
+
 ✅ One concept only
 ✅ Direct questions
 ✅ Short answers
@@ -144,6 +152,7 @@ Content here...
 ❌ Don't make them too easy or too hard
 
 ### Quiz Writing
+
 ✅ Real scenarios
 ✅ Clear questions
 ✅ Explain why (in explanation)
@@ -164,18 +173,21 @@ Content here...
 ## 📚 Example Sections to Create
 
 ### Beginner Sections
+
 - XM Cloud Overview ✅ (sample included)
 - Content Modeling Basics
 - Pages Essentials
 - First Deployment
 
-### Intermediate Sections  
+### Intermediate Sections
+
 - Advanced Templates
 - Component Development
 - GraphQL Queries
 - Workflows & Publishing
 
 ### Advanced Sections
+
 - Performance Optimization
 - Custom Integrations
 - Security Best Practices
@@ -184,4 +196,3 @@ Content here...
 ---
 
 **Remember:** The best content is content that teaches! Start simple and iterate.
-
