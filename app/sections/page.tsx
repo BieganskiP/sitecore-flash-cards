@@ -33,7 +33,7 @@ export default function SectionsPage() {
   const courseSections = currentCourse
     ? currentCourse.sectionIds
         .map(id => sections.find(s => s.id === id))
-        .filter(Boolean)
+        .filter((s): s is typeof sections[0] => s !== undefined)
     : [];
 
   if (!selectedCourseId || !currentCourse) {
