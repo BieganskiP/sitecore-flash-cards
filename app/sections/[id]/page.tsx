@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { use, useState } from 'react';
-import { sections } from '@/lib/data';
-import { learningPhases } from '@/lib/data';
-import { saveProgress } from '@/lib/storage';
-import FlashcardView from '@/components/FlashcardView';
-import QuizView from '@/components/QuizView';
-import Link from 'next/link';
+import { use, useState } from "react";
+import { sections } from "@/lib/data";
+import { learningPhases } from "@/lib/data";
+import { saveProgress } from "@/lib/storage";
+import FlashcardView from "@/components/FlashcardView";
+import QuizView from "@/components/QuizView";
+import Link from "next/link";
 
 type PageProps = {
   params: Promise<{ id: string }>;
@@ -15,7 +15,7 @@ type PageProps = {
 export default function SectionDetailPage({ params }: PageProps) {
   const { id } = use(params);
   const section = sections.find((s) => s.id === id);
-  
+
   const [activePhase, setActivePhase] = useState<string | null>(null);
   const [timeRemaining, setTimeRemaining] = useState<number | null>(null);
 
@@ -35,9 +35,9 @@ export default function SectionDetailPage({ params }: PageProps) {
   }
 
   const startFlashExposure = () => {
-    setActivePhase('flash-exposure');
+    setActivePhase("flash-exposure");
     setTimeRemaining(20 * 60); // 20 minutes in seconds
-    
+
     const timer = setInterval(() => {
       setTimeRemaining((prev) => {
         if (prev === null || prev <= 1) {
@@ -61,9 +61,9 @@ export default function SectionDetailPage({ params }: PageProps) {
   };
 
   const completeQuiz = (score: number) => {
-    saveProgress(section.id, { 
+    saveProgress(section.id, {
       quizScore: score,
-      completed: score >= 70 
+      completed: score >= 70,
     });
     setActivePhase(null);
   };
@@ -71,11 +71,11 @@ export default function SectionDetailPage({ params }: PageProps) {
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
   // Flash Exposure View
-  if (activePhase === 'flash-exposure') {
+  if (activePhase === "flash-exposure") {
     return (
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-6">
@@ -128,7 +128,11 @@ export default function SectionDetailPage({ params }: PageProps) {
 
         {/* Content */}
         <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-8 prose dark:prose-invert max-w-none mb-6">
-          <div dangerouslySetInnerHTML={{ __html: section.content.replace(/\n/g, '<br />') }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: section.content.replace(/\n/g, "<br />"),
+            }}
+          />
         </div>
 
         <div className="flex justify-end">
@@ -144,7 +148,7 @@ export default function SectionDetailPage({ params }: PageProps) {
   }
 
   // Flashcard View
-  if (activePhase === 'flashcards') {
+  if (activePhase === "flashcards") {
     return (
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-6">
@@ -163,8 +167,8 @@ export default function SectionDetailPage({ params }: PageProps) {
           </p>
         </div>
 
-        <FlashcardView 
-          flashcards={section.flashcards} 
+        <FlashcardView
+          flashcards={section.flashcards}
           onComplete={completeFlashcards}
         />
       </div>
@@ -172,7 +176,7 @@ export default function SectionDetailPage({ params }: PageProps) {
   }
 
   // Quiz View
-  if (activePhase === 'quiz') {
+  if (activePhase === "quiz") {
     return (
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-6">
@@ -191,10 +195,7 @@ export default function SectionDetailPage({ params }: PageProps) {
           </p>
         </div>
 
-        <QuizView 
-          questions={section.quizQuestions} 
-          onComplete={completeQuiz}
-        />
+        <QuizView questions={section.quizQuestions} onComplete={completeQuiz} />
       </div>
     );
   }
@@ -203,7 +204,10 @@ export default function SectionDetailPage({ params }: PageProps) {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-6">
-        <Link href="/sections" className="text-blue-600 hover:text-blue-700 mb-4 inline-block">
+        <Link
+          href="/sections"
+          className="text-blue-600 hover:text-blue-700 mb-4 inline-block"
+        >
           ← Back to Sections
         </Link>
       </div>
@@ -212,7 +216,7 @@ export default function SectionDetailPage({ params }: PageProps) {
       <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-8 mb-8">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
-            <div className="text-5xl">{section.icon || '📖'}</div>
+            <div className="text-5xl">{section.icon || "📖"}</div>
             <div>
               <h1 className="text-3xl font-bold text-zinc-900 dark:text-white mb-2">
                 {section.title}
@@ -234,7 +238,8 @@ export default function SectionDetailPage({ params }: PageProps) {
           Complete All 4 Phases
         </h2>
         <p className="text-zinc-600 dark:text-zinc-400 mb-6">
-          Follow each phase in order for maximum retention. Each phase builds on the previous one.
+          Follow each phase in order for maximum retention. Each phase builds on
+          the previous one.
         </p>
 
         <div className="grid gap-4">
@@ -253,15 +258,16 @@ export default function SectionDetailPage({ params }: PageProps) {
                     <p className="text-sm text-zinc-600 dark:text-zinc-400">
                       {phase.description}
                     </p>
-                    {phase.id === 'teach-back' && (
+                    {phase.id === "teach-back" && (
                       <div className="mt-2 text-sm text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20 px-3 py-2 rounded-lg inline-block">
-                        💡 Try explaining this section to someone or write it in your own words
+                        💡 Try explaining this section to someone or write it in
+                        your own words
                       </div>
                     )}
                   </div>
                 </div>
-                
-                {phase.id !== 'teach-back' && (
+
+                {phase.id !== "teach-back" && (
                   <button
                     onClick={() => setActivePhase(phase.id)}
                     className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap"
@@ -282,7 +288,9 @@ export default function SectionDetailPage({ params }: PageProps) {
         </h3>
         <ul className="space-y-2 text-sm text-purple-800 dark:text-purple-300">
           <li>• Take a short break between phases if needed</li>
-          <li>• Don&apos;t try to memorize during Flash Exposure - just skim!</li>
+          <li>
+            • Don&apos;t try to memorize during Flash Exposure - just skim!
+          </li>
           <li>• Repeat flashcards multiple times for better retention</li>
           <li>• Quiz mode focuses on real-world scenarios</li>
         </ul>
@@ -290,4 +298,3 @@ export default function SectionDetailPage({ params }: PageProps) {
     </div>
   );
 }
-

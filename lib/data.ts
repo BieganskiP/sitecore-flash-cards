@@ -2536,4 +2536,1025 @@ npm run start:connected
       },
     ],
   },
+  {
+    id: "experience-edge-apis",
+    title: "Experience Edge & APIs",
+    description: "GraphQL queries, mutations, Admin API, and webhooks",
+    estimatedTime: 24,
+    icon: "⚡",
+
+    content: `# Experience Edge & APIs
+
+## What is Experience Edge?
+
+**Globally distributed, scalable API endpoint** for content delivery.
+
+### Purpose
+Replaces traditional **Content Delivery (CD) servers** with cloud-based CDN.
+
+### How It Works
+**Content flow:**
+1. Author content in **CM instance**
+2. Publish to **Experience Edge**
+3. Front-end apps fetch via **GraphQL API**
+4. Content delivered through **global CDN**
+
+### Key Characteristics
+- Serves **static, cached content**
+- Highly efficient
+- Globally distributed
+- API-first access (GraphQL)
+
+---
+
+## Benefits of Experience Edge
+
+### Scalability
+Handles **massive traffic spikes** effortlessly.
+
+### Performance
+**Rapid global delivery** through:
+- CDN caching
+- Optimized API access
+- Geographic distribution
+
+### Reduced Complexity
+**Eliminates need** for:
+- Managing CD servers
+- Scaling infrastructure
+- Server maintenance
+
+### Cost-Effectiveness
+**More affordable** than dedicated CD infrastructure.
+
+### Better Development
+**Clean API access** for front-end developers.
+
+---
+
+## SitecoreAI CMS APIs
+
+Five main APIs for different purposes.
+
+### 1. Preview API
+
+**Purpose:** Preview content before publishing
+
+**Access:** Content directly from CM instance
+
+**Used for:** Testing in staging environments
+
+**Endpoint:** \`https://<your-host>/sitecore/api/graph/edge\`
+
+**GraphQL IDE:** \`https://<your-host>/sitecore/api/graph/edge/ide\`
+
+**Key point:** Sees drafts and unapproved content
+
+### 2. Delivery API (Live)
+
+**Purpose:** Access published content on Edge
+
+**Used for:** Production websites and apps
+
+**Endpoint:** \`https://edge.sitecorecloud.io/api/graphql/v1\`
+
+**GraphQL IDE:** \`https://edge.sitecorecloud.io/api/graphql/ide\`
+
+**Key point:** High-performance, highly available
+
+### 3. Authoring and Management API
+
+**Purpose:** Manage Sitecore content via GraphQL
+
+**Capabilities:** Read AND write (CRUD operations)
+
+**Endpoint:** \`https://{instance}/sitecore/api/authoring/graphql/v1\`
+
+**GraphQL IDE:** \`https://{instance}/sitecore/api/authoring/graphql/ide\`
+
+**Key point:** Single endpoint for content management
+
+### 4. Token API
+
+**Purpose:** Manage API keys
+
+**Type:** REST API
+
+**Used for:** Controlling Delivery API access
+
+### 5. Admin API
+
+**Purpose:** Administer Edge configuration
+
+**Type:** REST API
+
+**Used for:** Webhooks, cache management, settings
+
+**Base URL:** \`https://edge.sitecorecloud.io/api/admin/v1\`
+
+---
+
+## Context IDs
+
+**Unified identifier** that maps to all your resources.
+
+### Purpose
+Simplifies setup and configuration for solutions.
+
+### Two Types
+
+**Preview Context ID:**
+- Access **all content** (drafts + approved)
+- Uses **Preview API**
+- For development/testing
+
+**Live Context ID:**
+- Access **published content only**
+- Uses **Delivery API**
+- For production sites
+
+### Important
+**Regenerating Context ID** requires:
+- Update all apps/services
+- Redeploy environment
+
+---
+
+## API Tokens
+
+**Required for authentication** when accessing APIs.
+
+### Preview API Token
+
+**Generate in Deploy app:**
+- Environment Details tab
+- "Generate Preview API token"
+- Copy token
+
+**Use for:** 
+- Testing content
+- Development work
+- Accessing drafts
+
+### Delivery API Token
+
+**Generate in Deploy app:**
+- Environment Details tab
+- "Generate Delivery API token"
+- Copy token
+
+**Use for:**
+- Production sites
+- Published content only
+- Live applications
+
+### Using Tokens
+
+**Add to HTTP headers:**
+\`\`\`json
+{
+  "sc_apikey": "YOUR-API-TOKEN"
+}
+\`\`\`
+
+---
+
+## Environment Variables
+
+**Key-value pairs** for configuration settings.
+
+### Where to Manage
+Three locations:
+1. \`.env\` or \`.env.local\` file
+2. Hosting provider settings (e.g., Vercel)
+3. **SitecoreAI Deploy app** (recommended)
+
+### Benefits
+- External to source code
+- Environment-dependent values
+- Easy configuration changes
+- No code modifications needed
+
+### Pre-Defined Variables
+
+**Sitecore_GraphQL_ExposePlayground:**
+- Enables/disables GraphQL playground
+- Set to "true" to enable
+
+**SITECORE_SPE_ELEVATION:**
+- User account control for PowerShell Extension
+
+**PUBLISHING_LOG_LEVEL_VALUE:**
+- Log level for publishing
+
+**LOG_LEVEL_VALUE:**
+- General log level
+
+### Managing Variables
+
+**In Deploy app:**
+1. Select project and environment
+2. Click "Variables" tab
+3. Edit or create variables
+4. Set as "Secret" to hide values
+5. Choose target (CM, rendering, or both)
+6. **Must rebuild/redeploy** to apply changes!
+
+---
+
+## GraphQL IDE Setup
+
+**Interactive playground** for testing queries.
+
+### Preview API Setup
+
+**Steps:**
+1. Deploy app → Environment → Details
+2. Click "Launch IDE" for Preview
+3. Generate Preview API token
+4. Add to HTTP headers: \`{"sc_apikey":"token"}\`
+5. Test queries!
+
+**What you can do:**
+- Test all content (including drafts)
+- Query CM instance directly
+- Develop and debug queries
+
+### Delivery API Setup
+
+**Steps:**
+1. Generate Delivery API token
+2. Open Delivery GraphQL IDE
+3. Add token to headers
+4. Query published content
+
+**What you can do:**
+- Test published content only
+- Simulate production queries
+- Verify Edge delivery
+
+---
+
+## Experience Edge Schema
+
+**Organized structure** of GraphQL API.
+
+### Exploring Schema
+
+**In GraphQL IDE:**
+- **Docs tab** - API documentation
+- **Schema tab** - Type system structure
+- Both help understand available operations
+
+### Query Entry Points
+
+**Four main entry points:**
+
+**item:**
+- Query content by path or ID
+- Access specific items
+
+**layout:**
+- Query by site and route
+- Get Layout Service JSON
+
+**search:**
+- Boolean search queries
+- Find items by field values
+
+**site:**
+- Retrieve site information
+- Access site configurations
+
+---
+
+## Querying Content
+
+### Basic Query Structure
+
+**Example - Query item by path:**
+\`\`\`graphql
+query {
+  item(path: "/sitecore/content/home") {
+    name
+    id
+    fields {
+      name
+      value
+    }
+  }
+}
+\`\`\`
+
+### Using Variables
+
+**Declare variables:**
+\`\`\`graphql
+query GetItem($path: String!) {
+  item(path: $path) {
+    name
+    id
+  }
+}
+\`\`\`
+
+**In Variables panel:**
+\`\`\`json
+{
+  "path": "/sitecore/content/home"
+}
+\`\`\`
+
+### Layout Query
+
+**Get page layout:**
+\`\`\`graphql
+query {
+  layout(
+    language: "en"
+    routePath: "/"
+    site: "skate-park"
+  ) {
+    item {
+      rendered
+    }
+  }
+}
+\`\`\`
+
+### Site Query
+
+**Get site info:**
+\`\`\`graphql
+query {
+  site {
+    allSiteInfo {
+      results {
+        name
+        routes(first: 10, language: "en") {
+          results {
+            routePath
+          }
+        }
+      }
+    }
+  }
+}
+\`\`\`
+
+---
+
+## Authoring and Management API
+
+**Dedicated GraphQL API** for content management.
+
+### Key Difference
+**Other APIs:** Read-only content delivery
+
+**This API:** Read AND write operations
+
+### Supported Operations
+
+**Queries:** Read content and configurations
+
+**Mutations:** Create, update, delete content
+
+### Key Features
+
+**Dedicated schema:**
+- Purpose-built for management
+- Separate from delivery API
+
+**Read/Write flexibility:**
+- Full CRUD operations
+- Content modifications
+
+**Upgrade safety:**
+- No in-process code
+- Easier upgrades
+
+**Standardized:**
+- Uses GraphQL
+- Consistent patterns
+
+**Extended functionality:**
+- Operations beyond UI
+- Automation possible
+
+### API Types Covered
+
+**Core types:**
+- **Item** - Content CRUD
+- **Media** - Asset management
+- **Template** - Template operations
+- **Search** - Content finding
+- **Site** - Site management
+- **Others** - Archive, Database, Index, Job, Language, Publishing, Security, Workflow, Rules
+
+### Practical Use Cases
+
+**Custom migration tools:**
+- External automation
+- No code deployment to CM
+- Independent operation
+
+**Editorial dashboards:**
+- Custom interfaces
+- Specialized workflows
+
+**Multi-channel distribution:**
+- Automated content push
+- Integration with other systems
+
+### Access Requirements
+
+**Role needed:** "sitecore\\Sitecore Client Users" or higher
+
+**Enable playground:** Set \`Sitecore_GraphQL_ExposePlayground\` to "true"
+
+---
+
+## GraphQL Mutations
+
+**Modify content** using GraphQL.
+
+### What are Mutations?
+
+**Queries = Read**
+
+**Mutations = Write** (Create, Update, Delete)
+
+### CRUD Operations
+
+**Create item:**
+\`\`\`graphql
+mutation {
+  createItem(
+    input: {
+      name: "New Page"
+      templateId: "{template-guid}"
+      parent: "/sitecore/content"
+    }
+  ) {
+    item {
+      id
+      name
+    }
+  }
+}
+\`\`\`
+
+**Update fields:**
+\`\`\`graphql
+mutation {
+  updateItem(
+    input: {
+      path: "/sitecore/content/home"
+      fields: [
+        { name: "Title", value: "New Title" }
+        { name: "Content", value: "New content" }
+      ]
+    }
+  ) {
+    item {
+      name
+      fields {
+        name
+        value
+      }
+    }
+  }
+}
+\`\`\`
+
+**Delete item:**
+\`\`\`graphql
+mutation {
+  deleteItem(
+    input: {
+      path: "/sitecore/content/old-page"
+    }
+  ) {
+    success
+  }
+}
+\`\`\`
+
+### Publishing Operations
+
+**Publish item:**
+\`\`\`graphql
+mutation {
+  publishItem(
+    input: {
+      path: "/sitecore/content/home"
+      targets: ["web"]
+    }
+  ) {
+    success
+  }
+}
+\`\`\`
+
+---
+
+## Experience Edge Admin API
+
+**REST API** for administrative operations.
+
+### Purpose
+Manage Edge tenant configuration and operations.
+
+### Key Endpoints
+
+**ClearCacheForTenant:**
+- Clear entire cache
+- Force content refresh
+
+**DeleteContent:**
+- Remove tenant data
+- Clean up storage
+
+**GetSettings:**
+- List all settings
+- Review configuration
+
+**UpdateSettings:**
+- Update all settings
+- Full configuration change
+
+**PatchSettings:**
+- Update specific setting
+- Partial updates
+
+**Webhook endpoints:**
+- Create, update, delete webhooks
+- List and get webhooks
+
+### Authentication
+
+**Uses JWT (JSON Web Token)**
+
+**Header format:**
+\`\`\`
+Authorization: Bearer <token>
+\`\`\`
+
+### Getting JWT
+
+**Prerequisites:**
+Create client credentials:
+- **Edge administration client** - Environment-specific
+- **Organization automation client** - Org-wide access
+
+**Request token:**
+
+**POST to:** \`https://auth.sitecorecloud.io/oauth/token\`
+
+**Include:**
+- \`audience\`: "https://api.sitecorecloud.io"
+- \`grant_type\`: "client_credentials"
+- \`client_id\`: Your client ID
+- \`client_secret\`: Your client secret
+
+**Token validity:** 24 hours
+
+### Creating Client Credentials
+
+**In Deploy app:**
+1. Go to Credentials tab
+2. Click Environment tab
+3. "Create credentials" → "Edge administration"
+4. Fill details and create
+5. **Copy secret immediately** (shown once!)
+
+### Using Admin API
+
+**Example - Get settings:**
+
+**HTTP GET:** \`https://edge.sitecorecloud.io/api/admin/v1/settings\`
+
+**Headers:** \`Authorization: Bearer <jwt>\`
+
+**Response includes:**
+- \`contentCacheTtl\` (default: 4 hours)
+- Other configuration settings
+
+---
+
+## Experience Edge Webhooks
+
+**Real-time notifications** for content events.
+
+### Purpose
+
+**Inform external apps** about:
+- Content updates
+- Publishing events
+- Changes to Edge
+
+**Trigger automated actions:**
+- Cache clearing
+- Build processes
+- Integration workflows
+
+### Common Use Case
+
+**Static Site Generation (SSG):**
+
+1. Content published to Edge
+2. Webhook triggers at end of publishing
+3. Calls build system (Vercel, Netlify)
+4. Build system pulls latest content
+5. New static site generated and deployed
+
+**Perfect for:** Gatsby, Next.js static exports
+
+### Execution Modes
+
+**OnEnd (Default):**
+- Executes after publishing completes
+- Configurable body format
+- Can use text/plain or application/json
+
+**OnUpdate:**
+- Executes with content changes
+- Always application/json format
+- Includes change details
+
+### Managing Webhooks
+
+**Via Admin API endpoints:**
+
+**ListWebhooks:**
+- \`GET /api/admin/v1/webhooks\`
+- See all webhooks
+
+**CreateWebhook:**
+- \`POST /api/admin/v1/webhooks\`
+- Create new webhook
+
+**UpdateWebhook:**
+- \`PUT /api/admin/v1/webhooks/{id}\`
+- Modify existing webhook
+
+**GetWebhookById:**
+- \`GET /api/admin/v1/webhooks/{id}\`
+- Get specific webhook
+
+**DeleteWebhook:**
+- \`DELETE /api/admin/v1/webhooks/{id}\`
+- Remove webhook
+
+### Creating Webhook
+
+**POST request properties:**
+\`\`\`json
+{
+  "executionMode": "OnEnd",
+  "url": "https://your-build-system.com/webhook",
+  "headers": {
+    "Authorization": "Bearer token"
+  }
+}
+\`\`\`
+
+### Testing Webhooks
+
+**Steps:**
+1. Create webhook pointing to test URL
+2. Publish content to Edge
+3. Check publishing status
+4. Verify payload received at target URL
+
+**Test tool:** webhook.site (for testing payloads)
+
+---
+
+## Key Concepts Summary
+
+### APIs Overview
+- **Preview API** = Draft content from CM
+- **Delivery API** = Published content from Edge
+- **Authoring API** = CRUD operations
+- **Admin API** = Edge configuration
+- **Token API** = Key management
+
+### Context IDs
+- **Preview** = All content (dev/test)
+- **Live** = Published only (production)
+
+### Authentication
+- **API tokens** = For Preview/Delivery APIs
+- **JWT** = For Admin API (24hr validity)
+
+### GraphQL Operations
+- **Queries** = Read data
+- **Mutations** = Write/modify data
+
+### Webhooks
+- **OnEnd** = After publishing
+- **OnUpdate** = With changes
+- **Use case** = Trigger builds/automation
+
+### Important Points
+- **Must rebuild** after env variable changes
+- **Context ID regeneration** requires redeploy
+- **Client secret** shown only once
+- **JWT expires** after 24 hours
+- **Webhooks require** Admin API access
+
+---
+
+## Best Practices
+
+### Development
+- Use **Preview API** for development
+- Test queries in **GraphQL IDE** first
+- Use **variables** for reusable queries
+- Store **tokens securely** in .env files
+
+### Production
+- Use **Delivery API** for live sites
+- Cache responses when possible
+- Monitor **webhook execution**
+- Set appropriate **cache TTL**
+
+### Security
+- **Never expose** API tokens in client code
+- Rotate tokens regularly
+- Use **Secret** option for sensitive env vars
+- Limit **JWT scope** to what's needed
+
+### Performance
+- Leverage **CDN caching** on Edge
+- Query **only needed fields**
+- Use **pagination** for large datasets
+- Implement **error handling**`,
+
+    flashcards: [
+      {
+        id: "edge-1",
+        question: "What is Experience Edge and what does it replace?",
+        answer:
+          "A globally distributed, scalable API endpoint for content delivery via CDN. Replaces traditional Content Delivery (CD) servers.",
+        difficulty: "easy",
+      },
+      {
+        id: "edge-2",
+        question: "What's the difference between Preview API and Delivery API?",
+        answer:
+          "Preview API: Access all content including drafts from CM. Delivery API: Access only published content from Edge for production.",
+        difficulty: "medium",
+      },
+      {
+        id: "edge-3",
+        question: "What are the two Context ID types?",
+        answer:
+          "1) Preview Context ID - all content including drafts, 2) Live Context ID - published content only for production.",
+        difficulty: "easy",
+      },
+      {
+        id: "edge-4",
+        question: "What authentication do you need for Admin API?",
+        answer:
+          "JWT (JSON Web Token) obtained via client credentials (client ID and secret). Token valid for 24 hours. Use Bearer token in Authorization header.",
+        difficulty: "medium",
+      },
+      {
+        id: "edge-5",
+        question:
+          "What's the difference between GraphQL queries and mutations?",
+        answer:
+          "Queries = Read operations (GET data). Mutations = Write operations (CREATE, UPDATE, DELETE data).",
+        difficulty: "easy",
+      },
+      {
+        id: "edge-6",
+        question: "What does the Authoring and Management API enable?",
+        answer:
+          "Full CRUD operations on Sitecore content via GraphQL. Unlike other APIs, it supports both read AND write operations for content management.",
+        difficulty: "medium",
+      },
+      {
+        id: "edge-7",
+        question: "What are the four GraphQL query entry points?",
+        answer:
+          "1) item - query by path/ID, 2) layout - query by site/route, 3) search - Boolean queries, 4) site - site information.",
+        difficulty: "hard",
+      },
+      {
+        id: "edge-8",
+        question: "What are Experience Edge webhooks used for?",
+        answer:
+          "Real-time notifications about content events. Trigger automated actions like builds, cache clearing, or integrations when content is published.",
+        difficulty: "medium",
+      },
+      {
+        id: "edge-9",
+        question:
+          "What are the two webhook execution modes and when do they trigger?",
+        answer:
+          "OnEnd (default) - executes after publishing completes. OnUpdate - executes with content changes as they happen.",
+        difficulty: "hard",
+      },
+      {
+        id: "edge-10",
+        question:
+          "What must you do after changing environment variables in Deploy app?",
+        answer:
+          "You MUST rebuild and redeploy the environment. Changes don't apply until rebuild/redeploy.",
+        difficulty: "medium",
+      },
+      {
+        id: "edge-11",
+        question: "Where do you add API tokens when using GraphQL IDE?",
+        answer: 'In HTTP Headers section, add: {"sc_apikey":"YOUR-TOKEN"}',
+        difficulty: "easy",
+      },
+      {
+        id: "edge-12",
+        question: "How long is a JWT token valid for Admin API?",
+        answer:
+          "24 hours. After that, you must request a new JWT using client credentials.",
+        difficulty: "easy",
+      },
+    ],
+
+    quizQuestions: [
+      {
+        id: "edge-quiz-1",
+        question:
+          "Your front-end app needs to fetch published content for your live production website. Which API should you use?",
+        options: [
+          "Preview API",
+          "Delivery API",
+          "Authoring and Management API",
+          "Admin API",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Delivery API is designed for production use, accessing published content from Edge with high performance and availability. Preview API is for development/testing.",
+        scenario:
+          "Building production Next.js app that displays content to users.",
+      },
+      {
+        id: "edge-quiz-2",
+        question:
+          "You're developing locally and need to test content that's not yet published. Which Context ID and API should you use?",
+        options: [
+          "Live Context ID with Delivery API",
+          "Preview Context ID with Preview API",
+          "Either Context ID works the same",
+          "Admin API with JWT",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Preview Context ID with Preview API accesses all content including drafts and unapproved items directly from CM. Perfect for development and testing.",
+        scenario: "Developer needs to test draft content before publishing.",
+      },
+      {
+        id: "edge-quiz-3",
+        question:
+          "You need to create and update content items programmatically. Which API provides this capability?",
+        options: [
+          "Preview API (read-only)",
+          "Delivery API (read-only)",
+          "Authoring and Management API (read/write)",
+          "Token API",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Authoring and Management API is the only one that supports write operations (mutations). Preview and Delivery APIs are read-only for content retrieval.",
+        scenario: "Building custom content migration tool.",
+      },
+      {
+        id: "edge-quiz-4",
+        question:
+          "You changed the Sitecore_GraphQL_ExposePlayground variable to 'true' but the IDE still won't load. What's missing?",
+        options: [
+          "Wait 24 hours for changes to apply",
+          "Rebuild and redeploy the environment",
+          "Regenerate the Context ID",
+          "Create new API token",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Environment variable changes require a rebuild and redeploy to take effect. The changes are not applied until you explicitly rebuild/redeploy.",
+        scenario: "Trying to enable GraphQL playground access.",
+      },
+      {
+        id: "edge-quiz-5",
+        question:
+          "Your static site generator needs to rebuild automatically when content is published. What should you set up?",
+        options: [
+          "Polling the Delivery API every minute",
+          "Experience Edge webhook with OnEnd mode",
+          "Manual rebuild after each publish",
+          "Admin API cache clear",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Webhooks with OnEnd mode notify your build system when publishing completes. This triggers automatic builds without polling or manual intervention.",
+        scenario: "Automating Next.js static site builds on content changes.",
+      },
+      {
+        id: "edge-quiz-6",
+        question:
+          "You're getting '401 Unauthorized' when calling Admin API. What do you need?",
+        options: [
+          "API token in sc_apikey header",
+          "JWT in Authorization: Bearer header",
+          "Preview Context ID",
+          "Regenerate Live Context ID",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Admin API requires JWT authentication with Bearer token in Authorization header. API tokens (sc_apikey) are for Preview/Delivery APIs, not Admin API.",
+        scenario: "Trying to clear Edge cache programmatically.",
+      },
+      {
+        id: "edge-quiz-7",
+        question: "Your JWT for Admin API stopped working. Most likely reason?",
+        options: [
+          "Context ID was regenerated",
+          "24-hour expiration reached",
+          "Environment was redeployed",
+          "API token was rotated",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "JWTs for Admin API expire after 24 hours. You must request a new token using your client credentials when the old one expires.",
+        scenario: "Admin API calls failing after working yesterday.",
+      },
+      {
+        id: "edge-quiz-8",
+        question:
+          "What's the correct HTTP header format for adding an API token in GraphQL IDE?",
+        options: [
+          '{"Authorization":"Bearer token"}',
+          '{"sc_apikey":"token"}',
+          '{"api-token":"token"}',
+          '{"X-API-Key":"token"}',
+        ],
+        correctAnswer: 1,
+        explanation:
+          'Preview and Delivery GraphQL APIs use sc_apikey header: {"sc_apikey":"YOUR-TOKEN"}. Bearer token is for Admin API, not GraphQL content APIs.',
+        scenario: "Setting up GraphQL IDE for first time.",
+      },
+      {
+        id: "edge-quiz-9",
+        question: "You regenerated a Context ID. What must you do now?",
+        options: [
+          "Nothing, it updates automatically",
+          "Update all apps/services and redeploy environment",
+          "Just restart the environment",
+          "Clear the Edge cache",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Regenerating Context ID requires updating all apps/services using the old ID and redeploying the environment. The old ID stops working immediately.",
+        scenario: "Context ID was compromised and needs rotation.",
+      },
+      {
+        id: "edge-quiz-10",
+        question: "Where are environment variables stored in Deploy app?",
+        options: [
+          "In the source code repository",
+          "In Variables tab of environment settings",
+          "In the .env.local file only",
+          "In Vercel project settings only",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Deploy app stores environment variables in the Variables tab of each environment. This is separate from source code and hosting providers for centralized management.",
+        scenario: "Managing configuration across environments.",
+      },
+      {
+        id: "edge-quiz-11",
+        question:
+          "What query entry point should you use to get Layout Service JSON for a page?",
+        options: ["item", "layout", "search", "site"],
+        correctAnswer: 1,
+        explanation:
+          "The 'layout' entry point is specifically designed to query items by site and route path to retrieve Layout Service JSON for rendering.",
+        scenario: "Next.js app needs page layout data for rendering.",
+      },
+      {
+        id: "edge-quiz-12",
+        question:
+          "Your webhook is created but not triggering. What should you verify first?",
+        options: [
+          "JWT is still valid",
+          "Content is actually being published to Edge",
+          "Context ID is correct",
+          "API token is not expired",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Webhooks trigger on publish events. Verify content is being published to Edge successfully. Check publishing status in Authoring API or CM interface.",
+        scenario: "Webhook configured but build not triggering.",
+      },
+    ],
+  },
 ];
