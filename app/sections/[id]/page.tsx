@@ -269,7 +269,13 @@ export default function SectionDetailPage({ params }: PageProps) {
 
                 {phase.id !== "teach-back" && (
                   <button
-                    onClick={() => setActivePhase(phase.id)}
+                    onClick={() => {
+                      if (phase.id === "flash-exposure") {
+                        startFlashExposure();
+                      } else {
+                        setActivePhase(phase.id);
+                      }
+                    }}
                     className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap"
                   >
                     Start Phase
