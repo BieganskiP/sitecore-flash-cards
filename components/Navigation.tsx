@@ -13,12 +13,12 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800">
+    <nav className="bg-white dark:bg-zinc-900 border-border-b border-border-zinc-200 dark:border-border-zinc-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <Link href="/" className="flex items-center">
-              <span className="text-2xl font-bold text-zinc-900 dark:text-white">
+              <span className="text-text-2xl font-bold text-text-zinc-900 dark:text-text-white">
                 SitecoreAI Learning
               </span>
             </Link>
@@ -29,10 +29,10 @@ export default function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-3 py-2 rounded-lg text-text-sm font-medium transition-colors ${
                   pathname === item.href
-                    ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
-                    : "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                    ? "bg-blue-50 text-text-blue-700 dark:bg-blue-900/30 dark:text-text-blue-300"
+                    : "text-text-zinc-700 hover:bg-zinc-100 dark:text-text-zinc-300 dark:hover:bg-zinc-800"
                 }`}
               >
                 <span className="mr-1 sm:mr-2">{item.icon}</span>

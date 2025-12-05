@@ -16,13 +16,13 @@ export default function QuizView({ questions, onComplete }: QuizViewProps) {
 
   if (questions.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-zinc-500 dark:text-zinc-400 mb-4">
+      <div className="text-text-center py-12">
+        <p className="text-text-zinc-500 dark:text-text-zinc-400 mb-4">
           No quiz questions available yet. They will be added with the content.
         </p>
         <button
           onClick={() => onComplete(0)}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="px-6 py-3 bg-blue-600 text-text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           Continue
         </button>
@@ -60,7 +60,7 @@ export default function QuizView({ questions, onComplete }: QuizViewProps) {
     <div className="max-w-3xl mx-auto">
       {/* Progress */}
       <div className="mb-6">
-        <div className="flex justify-between text-sm text-zinc-600 dark:text-zinc-400 mb-2">
+        <div className="flex justify-between text-text-sm text-text-zinc-600 dark:text-text-zinc-400 mb-2">
           <span>
             Question {currentIndex + 1} of {questions.length}
           </span>
@@ -78,14 +78,14 @@ export default function QuizView({ questions, onComplete }: QuizViewProps) {
 
       {/* Scenario (if present) */}
       {currentQuestion.scenario && (
-        <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-6">
+        <div className="bg-amber-50 dark:bg-amber-900/20 border border-border-amber-200 dark:border-border-amber-800 rounded-lg p-4 mb-6">
           <div className="flex items-start gap-3">
-            <span className="text-2xl">📋</span>
+            <span className="text-text-2xl">📋</span>
             <div>
-              <h4 className="font-semibold text-amber-900 dark:text-amber-200 mb-1">
+              <h4 className="font-semibold text-text-amber-900 dark:text-text-amber-200 mb-1">
                 Scenario
               </h4>
-              <p className="text-sm text-amber-800 dark:text-amber-300">
+              <p className="text-text-sm text-text-amber-800 dark:text-text-amber-300">
                 {currentQuestion.scenario}
               </p>
             </div>
@@ -94,8 +94,8 @@ export default function QuizView({ questions, onComplete }: QuizViewProps) {
       )}
 
       {/* Question */}
-      <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 mb-6">
-        <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-6">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl border border-border-zinc-200 dark:border-border-zinc-800 p-6 mb-6">
+        <h3 className="text-text-xl font-semibold text-text-zinc-900 dark:text-text-white mb-6">
           {currentQuestion.question}
         </h3>
 
@@ -111,25 +111,25 @@ export default function QuizView({ questions, onComplete }: QuizViewProps) {
                 key={index}
                 onClick={() => !showExplanation && setSelectedAnswer(index)}
                 disabled={showExplanation}
-                className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
+                className={`w-full text-text-left p-4 rounded-lg border-2 transition-all ${
                   showCorrectness && isCorrectOption
-                    ? "border-green-500 bg-green-50 dark:bg-green-900/20"
+                    ? "border-border-green-500 bg-green-50 dark:bg-green-900/20"
                     : showCorrectness && isSelected && !isCorrectOption
-                    ? "border-red-500 bg-red-50 dark:bg-red-900/20"
+                    ? "border-border-red-500 bg-red-50 dark:bg-red-900/20"
                     : isSelected
-                    ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-                    : "border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600"
+                    ? "border-border-blue-500 bg-blue-50 dark:bg-blue-900/20"
+                    : "border-border-zinc-200 dark:border-border-zinc-700 hover:border-border-zinc-300 dark:hover:border-border-zinc-600"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-zinc-900 dark:text-white">
+                  <span className="text-text-zinc-900 dark:text-text-white">
                     {option}
                   </span>
                   {showCorrectness && isCorrectOption && (
-                    <span className="text-green-600">✓</span>
+                    <span className="text-text-green-600">✓</span>
                   )}
                   {showCorrectness && isSelected && !isCorrectOption && (
-                    <span className="text-red-600">✗</span>
+                    <span className="text-text-red-600">✗</span>
                   )}
                 </div>
               </button>
@@ -143,24 +143,24 @@ export default function QuizView({ questions, onComplete }: QuizViewProps) {
         <div
           className={`rounded-lg p-4 mb-6 ${
             isCorrect
-              ? "bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800"
-              : "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
+              ? "bg-green-50 dark:bg-green-900/20 border border-border-green-200 dark:border-border-green-800"
+              : "bg-red-50 dark:bg-red-900/20 border border-border-red-200 dark:border-border-red-800"
           }`}
         >
           <h4
             className={`font-semibold mb-2 ${
               isCorrect
-                ? "text-green-900 dark:text-green-200"
-                : "text-red-900 dark:text-red-200"
+                ? "text-text-green-900 dark:text-text-green-200"
+                : "text-text-red-900 dark:text-text-red-200"
             }`}
           >
             {isCorrect ? "✓ Correct!" : "✗ Incorrect"}
           </h4>
           <p
-            className={`text-sm ${
+            className={`text-text-sm ${
               isCorrect
-                ? "text-green-800 dark:text-green-300"
-                : "text-red-800 dark:text-red-300"
+                ? "text-text-green-800 dark:text-text-green-300"
+                : "text-text-red-800 dark:text-text-red-300"
             }`}
           >
             {currentQuestion.explanation}
@@ -177,7 +177,7 @@ export default function QuizView({ questions, onComplete }: QuizViewProps) {
             setShowExplanation(false);
             setCorrectAnswers(0);
           }}
-          className="px-6 py-3 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-lg hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors"
+          className="px-6 py-3 bg-zinc-200 dark:bg-zinc-800 text-text-zinc-700 dark:text-text-zinc-300 rounded-lg hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors"
         >
           Restart Quiz
         </button>
@@ -186,14 +186,14 @@ export default function QuizView({ questions, onComplete }: QuizViewProps) {
           <button
             onClick={handleSubmit}
             disabled={selectedAnswer === null}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-3 bg-blue-600 text-text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Submit Answer
           </button>
         ) : (
           <button
             onClick={handleNext}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-6 py-3 bg-blue-600 text-text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             {currentIndex === questions.length - 1
               ? "Finish Quiz"

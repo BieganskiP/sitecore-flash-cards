@@ -1033,4 +1033,1507 @@ Content cached globally for fast delivery
       },
     ],
   },
+  {
+    id: "sites-and-collections",
+    title: "Sites & Site Collections",
+    description:
+      "Multi-site management, organization structure, and content sharing",
+    estimatedTime: 17,
+    icon: "🏢",
+
+    content: `# Sites & Site Collections
+
+## SitecoreAI CMS Structure Overview
+
+SitecoreAI CMS has a **hierarchical structure** for organizing your digital properties.
+
+**Three core building blocks:**
+1. Organization (top level)
+2. Project (middle level)
+3. Environment (where sites live)
+
+---
+
+## Organization
+
+Your **highest-level container** in Sitecore.
+
+### What It Represents
+A business unit - your company or brand.
+
+### What It Contains
+- Team members
+- Sitecore product subscriptions
+- Multiple projects
+- Access rules and permissions
+
+### Purpose
+**Manage subscriptions and control access** across all Sitecore products.
+
+### Key Points
+- Can include multiple Sitecore products (XM Cloud, Content Hub ONE, etc.)
+- Accessed through Sitecore Cloud Portal
+- Establishes who can access what
+- **Larger companies:** May have multiple organizations
+- **Smaller companies:** Usually just one organization
+
+---
+
+## Project
+
+A **logical grouping of environments**.
+
+### What It Represents
+A specific web initiative or application.
+
+### Structure
+- Connected to **one source code repository**
+- Houses codebase for one website/app
+- Contains multiple environments (dev, QA, prod)
+
+### Purpose
+**Organize environments** for a specific web initiative.
+
+### When to Create
+Create a new project when starting a **separate software solution** that needs isolated environments.
+
+### Benefits
+- Clear separation between brands/initiatives
+- Fundamental unit for managing deployments
+- Organized environment management
+
+### How to Create
+- Sitecore Cloud CLI
+- SitecoreAI Deploy App
+
+---
+
+## Environment
+
+Where your **actual Sitecore instance lives**.
+
+### What It Contains
+- CM instance and related services
+- Code branches
+- Deployment logs
+- Environment variables
+- Developer settings
+- **Multiple sites** (multi-site capable)
+
+### Purpose
+Provide **isolated spaces** for different project stages.
+
+### Typical Setup
+1. **Development** - active development
+2. **QA/Staging** - testing
+3. **Production** - live site
+
+### Configuration
+- Each environment has specific SLA
+- **Standard license:** 1 production + 2 non-production
+- Must mark correctly (prod vs non-prod)
+
+### Key Point
+**One environment can host multiple sites** - built for multi-site scenarios.
+
+---
+
+## Site Collections
+
+**Containers that group related websites**.
+
+### Purpose
+Organization and content sharing between sites.
+
+### What They Do
+**Organize sites based on:**
+- Business units
+- Brands
+- Similar characteristics
+
+**Enable sharing:**
+- Content between sites
+- Data templates
+- Digital assets
+- Page templates
+- Presentation items (designs, renderings, styles)
+
+### Key Features
+**Shared Page Templates:**
+- Sites use same templates
+- Ensures consistency
+
+**Content Separation:**
+- Can create dedicated collections
+- When strong separation needed
+
+**Centralized Management:**
+- Manage global campaigns
+- Administer sites centrally
+
+---
+
+## Sites
+
+A **single website** within SitecoreAI CMS.
+
+### What It Represents
+One front-end website project.
+
+### Where It Lives
+**Must belong to a site collection** - no standalone sites.
+
+### Creation
+Created with just a few clicks in Sites app.
+
+### Site Templates
+**Choose from:**
+- Empty site
+- Basic site
+- Custom templates you create
+
+### Configuration Options
+**Basic settings:**
+- Display name
+- Item/system name
+- Site thumbnail
+
+**Host configuration:**
+- Host languages
+- Rendering host URL
+
+**Analytics:**
+- Site identifier for CDP/Personalize
+
+**Language support:**
+- Configure multiple languages
+- Create content in each language
+- Language fallback support
+
+### Shared Sites
+**Mark site as "shared"** to enable:
+- Content sharing across sites in collection
+- Configuration sharing
+- Centralized content management
+
+---
+
+## Multi-Site Capabilities
+
+SitecoreAI CMS is **built for enterprise multi-site**.
+
+### Key Capabilities
+**Multiple sites per environment:**
+- One environment = many sites
+- Flexible for development
+
+**Multiple languages per site:**
+- Configure all needed languages
+- Create content in each language
+- Manage from central location
+
+**Complex scenarios:**
+- Multi-site AND multi-lingual
+- Managed from one place
+- Enterprise-scale support
+
+---
+
+## Content Sharing Strategies
+
+### What Can Be Shared
+**Within a site collection:**
+- Data templates
+- Digital assets (images, files)
+- Page designs and partial designs
+- Rendering configurations
+- Styles and variants
+- Centralized campaign content
+
+### When to Share
+**Good for sharing:**
+- Global branding elements
+- Core product information
+- Base templates and components
+- Company-wide campaigns
+
+**Keep separate:**
+- Brand-specific content
+- Region-specific information
+- Different target audiences
+
+---
+
+## Strategic Architecture Patterns
+
+### Pattern 1: Multiple Brands
+**Scenario:** Company owns several distinct brands
+
+**Solution:**
+- One site collection for organization
+- Individual site per brand within collection
+- Share foundational elements
+- Brand-specific customization per site
+
+**Benefits:**
+- Central management
+- Shared infrastructure
+- Brand independence
+
+### Pattern 2: Global + Regional
+**Scenario:** Global company with regional sites
+
+**Solution:**
+- Primary site collection for global content
+- Separate site per region
+- Configure appropriate languages
+- Share global branding and products
+
+**Strategy:**
+- Global content at collection level
+- Localized content at site level
+- Language fallback for consistency
+- Clear governance model
+
+### Pattern 3: Marketing vs. Documentation
+**Scenario:** Separate marketing and product docs sites
+
+**Solution:**
+- **Two separate site collections**
+- Marketing site in one collection
+- Documentation site in another collection
+- Complete isolation
+
+**Benefits:**
+- No accidental overlap
+- Independent permissions
+- Distinct information architecture
+- Different update cycles
+
+---
+
+## Site Management Features
+
+### Sites Dashboard
+**Access from dashboard:**
+- Search for sites
+- View all sites
+- Filter and organize
+
+### Per-Site Configuration
+**Manage for each site:**
+- Display name and system name
+- Thumbnail (regenerate or upload)
+- Shared status toggle
+- Host languages
+- Rendering host configuration
+- Analytics identifiers
+- Available languages
+
+### Direct Actions
+**From dashboard:**
+- Create new sites
+- Create new site collections
+- Delete sites
+- Access documentation
+- Raise support tickets
+
+---
+
+## Best Practices
+
+### Planning Your Structure
+**Before creating:**
+1. Map out your brands/initiatives
+2. Identify shared vs. unique content
+3. Plan content governance
+4. Define permissions strategy
+
+### Site Collection Strategy
+**Use separate collections when:**
+- Strong content separation needed
+- Different target audiences
+- Distinct information architecture
+- Independent governance
+
+**Use shared collection when:**
+- Related brands/initiatives
+- Common foundational elements
+- Shared resources beneficial
+- Centralized management desired
+
+### Environment Planning
+**Standard setup:**
+- Mark production correctly
+- Use non-prod for dev and QA
+- Configure appropriate SLAs
+- Plan for multi-site if needed
+
+---
+
+## Key Relationships
+
+### Organization → Projects
+- One org can have multiple projects
+- Project count depends on subscription
+
+### Project → Environments
+- One project contains multiple environments
+- Typically: dev, QA, production
+
+### Environment → Sites
+- One environment can host multiple sites
+- Multi-site capable out of the box
+
+### Site Collection → Sites
+- One collection contains multiple sites
+- Sites share content and templates
+
+---
+
+## Important Concepts
+
+### Multi-Site Support
+**Built-in capability** to manage:
+- Multiple websites
+- Multiple languages
+- Complex enterprise scenarios
+- All from central location
+
+### Content Governance
+**Critical for success:**
+- Define what's shared
+- Establish content flow
+- Set permissions clearly
+- Plan localization strategy
+
+### Isolation vs. Sharing
+**Balance needed:**
+- Share to reduce duplication
+- Isolate for independence
+- Clear strategy required
+- Think long-term
+
+---
+
+## Key Takeaways
+
+- **Hierarchy:** Organization > Project > Environment > Site Collection > Site
+- **Multi-site ready:** One environment = many sites
+- **Content sharing:** Collections enable sharing
+- **Strategic planning:** Architecture depends on business needs
+- **Flexibility:** Support small to enterprise scale
+- **Governance:** Critical for multi-site success`,
+
+    flashcards: [
+      {
+        id: "sites-1",
+        question: "What is the hierarchy in SitecoreAI CMS structure?",
+        answer:
+          "Organization (top) > Project > Environment > Site Collection > Site. Each level contains the next level.",
+        difficulty: "easy",
+      },
+      {
+        id: "sites-2",
+        question: "What is an Organization in SitecoreAI CMS?",
+        answer:
+          "The highest-level container representing a business unit. Contains team members, product subscriptions, and controls access across all Sitecore products.",
+        difficulty: "easy",
+      },
+      {
+        id: "sites-3",
+        question: "What is a Project?",
+        answer:
+          "A logical grouping of environments connected to one source code repository. Contains dev, QA, and production environments for a specific web initiative.",
+        difficulty: "easy",
+      },
+      {
+        id: "sites-4",
+        question: "What is an Environment?",
+        answer:
+          "Where the actual Sitecore instance lives. Contains CM instance, code branches, deployment logs, and can host multiple sites.",
+        difficulty: "medium",
+      },
+      {
+        id: "sites-5",
+        question: "What is a Site Collection and what does it do?",
+        answer:
+          "A container that groups related websites and enables sharing of content, templates, and digital assets between sites within the collection.",
+        difficulty: "medium",
+      },
+      {
+        id: "sites-6",
+        question: "Can one environment host multiple sites?",
+        answer:
+          "Yes! SitecoreAI CMS is built for multi-site. One environment can host multiple sites, supporting complex multi-site and multi-lingual scenarios.",
+        difficulty: "easy",
+      },
+      {
+        id: "sites-7",
+        question:
+          "When should you create separate site collections vs. one shared collection?",
+        answer:
+          "Separate collections when you need strong content separation, different audiences, or independent governance. Shared collection when you want to share resources and manage centrally.",
+        difficulty: "hard",
+      },
+      {
+        id: "sites-8",
+        question: "What can be shared within a site collection?",
+        answer:
+          "Data templates, digital assets, page designs, rendering configurations, styles, variants, and centralized content like global campaigns.",
+        difficulty: "medium",
+      },
+      {
+        id: "sites-9",
+        question: "How many environments do you get with a standard license?",
+        answer:
+          "1 production environment and 2 non-production environments (typically used for dev and QA).",
+        difficulty: "medium",
+      },
+      {
+        id: "sites-10",
+        question: "What does marking a site as 'shared' enable?",
+        answer:
+          "Allows content and configuration to be shared with other sites in the same site collection, enabling centralized management.",
+        difficulty: "medium",
+      },
+    ],
+
+    quizQuestions: [
+      {
+        id: "sites-quiz-1",
+        question:
+          "Your company owns 3 fashion brands that share some assets but need independent branding. What's the best structure?",
+        options: [
+          "3 separate organizations",
+          "1 site collection with 3 sites (one per brand)",
+          "3 separate projects",
+          "1 site with 3 languages",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "One site collection with 3 sites is ideal. You can share foundational elements at the collection level while maintaining brand independence at the site level.",
+        scenario:
+          "You're architecting for a company with Brand A, Brand B, and Brand C fashion lines.",
+      },
+      {
+        id: "sites-quiz-2",
+        question:
+          "You need a marketing site and a documentation site with completely separate content. What should you do?",
+        options: [
+          "1 site collection with 2 sites",
+          "2 separate site collections",
+          "1 site with 2 site collections",
+          "2 separate environments",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Two separate site collections ensure complete content and template isolation. This prevents overlap and allows independent permissions and governance for each initiative.",
+        scenario:
+          "Different teams, different audiences, different content strategies.",
+      },
+      {
+        id: "sites-quiz-3",
+        question:
+          "You're building a global site with regional variants for NA, Europe, and Asia. What's the best approach?",
+        options: [
+          "3 separate projects",
+          "1 site collection with 3 regional sites",
+          "3 separate organizations",
+          "1 site with 3 languages",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "One site collection with regional sites allows you to share global branding and core content at the collection level, while maintaining region-specific content and languages at each site.",
+        scenario:
+          "Global tech company needs localized content but consistent branding.",
+      },
+      {
+        id: "sites-quiz-4",
+        question:
+          "How many sites can you run in a single SitecoreAI CMS environment?",
+        options: [
+          "Only 1 site per environment",
+          "Maximum 3 sites per environment",
+          "Multiple sites - no fixed limit",
+          "Depends on your license tier",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "SitecoreAI CMS is built for multi-site scenarios. One environment can host multiple sites, making it ideal for enterprise multi-site and multi-lingual implementations.",
+        scenario:
+          "You're planning a multi-brand environment and need to know capacity.",
+      },
+      {
+        id: "sites-quiz-5",
+        question:
+          "Your team wants to share global campaign content across 5 brand sites. How do you enable this?",
+        options: [
+          "Copy content to each site manually",
+          "Put all sites in one site collection and mark content as shared",
+          "Create 5 separate projects",
+          "Use the same environment for all sites",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Sites within the same collection can share content. Mark the site with global content as 'shared' to enable other sites in the collection to access it.",
+        scenario:
+          "Marketing runs campaigns that should appear across all brand sites.",
+      },
+      {
+        id: "sites-quiz-6",
+        question:
+          "You have a standard SitecoreAI CMS license. How many environments do you get?",
+        options: [
+          "1 production only",
+          "2 production, 1 non-production",
+          "1 production, 2 non-production",
+          "3 production environments",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Standard license includes 1 production environment and 2 non-production environments (typically used for development and QA/staging).",
+        scenario: "Planning your environment strategy for a new project.",
+      },
+      {
+        id: "sites-quiz-7",
+        question: "What's the relationship between Projects and Environments?",
+        options: [
+          "They're the same thing",
+          "One Project contains multiple Environments",
+          "One Environment contains multiple Projects",
+          "They're independent of each other",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "A Project is a logical grouping of Environments. Typically, one project contains dev, QA, and production environments for a specific web initiative.",
+        scenario: "Understanding the architecture to explain to your team.",
+      },
+      {
+        id: "sites-quiz-8",
+        question:
+          "You want to manage user access across SitecoreAI CMS and Content Hub ONE. Where do you do this?",
+        options: [
+          "In each product separately",
+          "At the Organization level in Cloud Portal",
+          "In the Deploy app",
+          "In the CM instance",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Organization is the top-level container accessed through Cloud Portal. It manages subscriptions, user access, and permissions across all Sitecore products.",
+        scenario: "New team members need access to multiple Sitecore products.",
+      },
+      {
+        id: "sites-quiz-9",
+        question: "What can be shared between sites within a site collection?",
+        options: [
+          "Only content, not templates",
+          "Only templates, not content",
+          "Templates, content, assets, and presentation items",
+          "Nothing can be shared",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Site collections enable sharing of data templates, digital assets, page designs, rendering configurations, styles, variants, and content marked as shared.",
+        scenario: "Architect needs to plan what resources can be centralized.",
+      },
+      {
+        id: "sites-quiz-10",
+        question: "When should you create a new Project in SitecoreAI CMS?",
+        options: [
+          "For each new page",
+          "For each new language",
+          "When starting a separate software solution needing isolated environments",
+          "Never - use one project for everything",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Create a new project when embarking on a separate software solution that requires its own isolated set of environments. Each project typically connects to one code repository.",
+        scenario:
+          "Company is launching a new initiative separate from existing sites.",
+      },
+      {
+        id: "sites-quiz-11",
+        question:
+          "Your site needs to support English, French, and German. Where do you configure this?",
+        options: [
+          "At the Organization level",
+          "At the Project level",
+          "At the Site level in site configuration",
+          "In the Environment settings",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Language support is configured at the Site level. You can add multiple languages and then create content in each language using Page builder.",
+        scenario: "European website needs multi-language support.",
+      },
+      {
+        id: "sites-quiz-12",
+        question:
+          "What's the purpose of marking an environment as Production vs Non-Production?",
+        options: [
+          "It's just a label with no real effect",
+          "Production gets faster support and specific SLA",
+          "Non-production environments are slower",
+          "Production environments can't host multiple sites",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Production environments get faster support than non-production environments and have specific SLAs. It's crucial to mark them correctly based on intended use.",
+        scenario: "Setting up environments and choosing the right designation.",
+      },
+    ],
+  },
+  {
+    id: "deployment-fundamentals",
+    title: "Deployment Fundamentals",
+    description: "Deploy app, CLI, API, environments, and development setup",
+    estimatedTime: 22,
+    icon: "🚀",
+
+    content: `# Deployment Fundamentals
+
+## Three Deployment Tools
+
+SitecoreAI CMS provides **3 main tools** for managing deployments.
+
+### 1. SitecoreAI Deploy App
+
+**Web-based visual interface** for project management.
+
+**URL:** https://deploy.sitecorecloud.io
+
+**Who can access:** Organization Admin or Owner role required
+
+**Best for:**
+- Visual, GUI-based management
+- Quick project creation
+- Managing connections
+
+**Key features:**
+- Out-of-the-box connectors (Vercel, GitHub, Azure DevOps)
+- Central hub for projects and environments
+- Credential management
+- Visual deployment monitoring
+
+**Perfect when:** You want a user-friendly interface
+
+### 2. CLI SitecoreAI CMS Plugin
+
+**Command-line tool** extending Sitecore CLI.
+
+**Best for:**
+- Automation and CI/CD
+- Scripting deployments
+- Detailed output and monitoring
+
+**Key commands:**
+- \`login\` - Authenticate with organization
+- \`logout\` - Log out of environment
+- \`organization\` - Manage organizations
+- \`project\` - Manage projects
+- \`environment\` - Manage environments
+- \`deployment\` - Manage deployments
+
+**Benefits:**
+- Unified commands for serialization and publishing
+- Automate CI/CD pipelines
+- Support any source control system
+- More verbose output than API
+- Can combine multiple API calls
+
+**Perfect when:** You need automation or detailed feedback
+
+### 3. SitecoreAI Deploy API
+
+**REST API** for custom automation.
+
+**Base URL:** https://xmclouddeploy-api.sitecorecloud.io
+
+**Authentication:** JWT access tokens (from automation client ID/secret)
+
+**Best for:**
+- Custom build pipelines
+- Integration with other systems
+- Advanced automation
+
+**Benefits:**
+- Full programmatic control
+- Custom processes
+- Integration flexibility
+- Build custom tools
+
+**Perfect when:** You need complete customization
+
+---
+
+## Deployment Process (3 Stages)
+
+**All tools follow the same process:**
+
+### Stage 1: Provisioning
+
+**Initial infrastructure setup.**
+
+**What happens:**
+- Resource allocation (servers, databases, services)
+- Environment configuration (dev, QA, prod)
+- Service setup (Experience Edge, auth services)
+
+**Think:** "Setting up the foundation"
+
+### Stage 2: Build
+
+**Code and content compilation.**
+
+**What happens:**
+- Code compilation (Next.js front-end, back-end configs)
+- Content serialization (packaging for deployment)
+- Dependencies installation
+- Asset processing
+
+**Think:** "Preparing the package"
+
+### Stage 3: Deployment
+
+**Pushing to environment.**
+
+**What happens:**
+- Artifact deployment (push built app)
+- Environment variables application
+- Configuration settings
+- Service connections
+
+**Post-actions (automatic):**
+- Index schema population
+- Index rebuilding
+- CM instance warm-up
+
+**Think:** "Going live"
+
+---
+
+## Foundation Template (Starter Kit)
+
+**Pre-configured starting point** for new projects.
+
+### What It Provides
+- Standardized structure
+- Best practices built-in
+- Essential components
+- Saves setup time
+
+### Repository Structure
+
+**Key folders:**
+
+**\`authoring/\`**
+- Serialization files
+- Serialized items
+- Content definitions
+
+**\`headapps/\`**
+- Next.js starter app
+- Angular starter app
+- Front-end code
+
+**\`local-containers/\`**
+- PowerShell scripts
+- Docker setup for local dev
+- Local environment tools
+
+**Key files:**
+
+**\`Sitecore.json\`**
+- Content Serialization config
+- Project configuration
+
+**\`xmcloud.build.json\`**
+- Build process settings
+- Host definitions
+- Build targets
+- Content deployment config
+
+---
+
+## Prerequisites for Deployment
+
+### Required Access
+
+**Organization Admin or Owner role**
+- Necessary for Deploy app
+- Can create/manage projects
+- Grant access to team members
+
+**How to grant access:**
+- Change team member's org role to Admin
+- Done in Cloud Portal
+
+### Required Connections
+
+**GitHub or Azure DevOps**
+- Automates source code deployment
+- Links repo to Deploy app
+- Enables automatic deployments
+
+**Setup:**
+1. Click "Create connection"
+2. Select GitHub or Azure DevOps
+3. Authorize Sitecore Deploy app
+
+**Vercel (for hosting)**
+- Automates deployment to Vercel
+- Connects hosting service
+- Manages rendering host
+
+**Setup:**
+1. In Hosting tab, "Create connection"
+2. Select Vercel
+3. Add Sitecore XM Cloud integration
+
+---
+
+## Creating Your First Project
+
+### Step-by-Step Process
+
+**1. Access Deploy App**
+- Log in to Cloud Portal
+- Click "SitecoreAI CMS Deploy"
+- Or go to deploy.sitecorecloud.io
+
+**2. Create Project**
+- Click "Create project"
+- Enter project name
+- Select "Connect to GitHub"
+- Choose "Use SitecoreAI CMS template"
+- Select GitHub account
+- Name repository
+
+**3. Configure Environment**
+- Name environment (e.g., "dev")
+- Select Production SLA: **No** for dev (can't change later!)
+- Auto-redeploy on push: **No** (enable later if needed)
+- Monitor deployment status
+
+**Result:** New project with environment deployed!
+
+---
+
+## Deployment Logs
+
+**Critical for troubleshooting** deployment issues.
+
+### Accessing Logs
+
+**In Deploy app:**
+1. Select project
+2. Select environment
+3. Click actions menu (...)
+4. Select "View deployment logs"
+5. Review or download
+
+### What Logs Show
+
+**Progress tracking:**
+- Current deployment status
+- Phase progression
+- Timestamped entries
+
+**Warnings:**
+- Non-critical issues
+- Potential future problems
+- Configuration notices
+
+**Errors:**
+- Critical failures
+- Specific error details
+- Failure reasons
+
+### Deployment Phases in Logs
+
+**1. Provisioning**
+- Infrastructure setup
+- Resource allocation
+
+**2. Build**
+- Code compilation
+- Content packaging
+- Dependency installation
+
+**3. Deployment**
+- Artifact deployment
+- Configuration application
+
+**4. Post Actions**
+- Index operations
+- CM warm-up
+- Final setup
+
+### Troubleshooting with Logs
+
+**Build failures:**
+- Compiler errors (syntax, dependencies)
+- Node.js build errors (npm failures)
+- Configuration errors (env vars)
+- **Look for:** Error messages in Build phase
+
+**Deployment issues:**
+- Warnings (deprecated settings)
+- Anomalous activity (unusual timing)
+- Post-action script errors
+- **Look for:** Issues during Deployment/Post-actions
+
+---
+
+## Managing Projects & Environments
+
+### Project Dashboard
+
+**View all projects** in your organization.
+
+**Filter:** "My projects" to see your projects
+
+**Actions available:**
+- Create new project
+- View project details
+- Delete project (must delete all environments first)
+
+**Limit:** Project count per subscription
+
+### Environment Management
+
+**Actions menu (...) options:**
+
+**Create environment:**
+- Max: 1 production + 2 non-production
+
+**Build and deploy:**
+- Create new build
+- Deploy to environment
+- Based on latest commits
+
+**Manage variables:**
+- Set environment variables
+- Configuration settings
+
+**Delete:**
+- Remove environment
+
+**Open dashboard:**
+- Access CM dashboard
+
+**Restart environment:**
+- Restart only (no rebuild/redeploy)
+
+### Environment Details
+
+**Tabs available:**
+- Websites (available sites)
+- Content Management (authoring details)
+- Context IDs (preview/published)
+- Operational logs
+- Environment variables
+- Developer settings
+
+---
+
+## Site Collections & Sites
+
+### Creating Site Collection
+
+**Purpose:** Grouping container for related websites.
+
+**All sites must belong to a collection.**
+
+**Creation methods:**
+1. Independently in dashboard
+2. During site creation
+
+**Steps:**
+1. In Deploy app, select environment
+2. Click actions (...) → "Open dashboard"
+3. Click "Create" → "Collection"
+4. Fill name and description
+5. Click "Create"
+
+**Multi-site support:** Multiple collections + multiple sites per environment
+
+### Creating a Site
+
+**Components:** Content + presentation + settings
+
+**Each site has:** Unique analytics identifier
+
+**Steps:**
+1. Click "Create site" in collection
+2. Choose template (e.g., "Basic")
+3. Provide name and description
+4. Add languages (default: English)
+5. Select default language
+
+**Important:** Can't move sites between collections after creation
+
+### Site Structure
+
+**Typical site folders:**
+
+**Home** - Site pages and presentation
+
+**Media** - Digital assets (Media Library)
+
+**Data** - Reusable data sources
+
+**Dictionary** - Translatable phrases
+
+**Presentation** - Layouts, designs, styles, components
+
+**Settings** - Site configurations
+
+### Analytics Identifiers
+
+**Purpose:**
+- Define analytics scope (language, site, multi-site)
+- Independent analytics calculation
+- Track user interactions
+- Enable personalization
+
+**Assigning identifier:**
+1. Click site settings icon
+2. Select "Site hosts"
+3. Choose site
+4. Go to "Analytics and personalization" tab
+5. Click ⊕ to assign/create identifier
+
+**View all:** Dashboard → Settings → Analytics identifiers
+
+---
+
+## Development Approaches
+
+### Two Development Modes
+
+**Choose based on your needs.**
+
+### Front-End Only Development
+
+**Your machine:** Runs front-end code (Next.js)
+
+**The cloud:** Hosts CM instance (content)
+
+**The bridge:** Local app connects to cloud CM
+
+**When to use:**
+- Focus on UI/UX only
+- Styling and layout work
+- Component logic (front-end)
+- Quick iterations
+
+**Benefits:**
+- **Simplicity** - No local Docker/CM
+- **Speed** - Faster startup
+- **Focus** - UI/UX tasks only
+- **Real data** - Actual cloud content
+
+**Limitations:**
+- Can't modify CM locally
+- Content changes in cloud only
+- Template changes need full setup
+- No local editing without config
+
+**Perfect for:** Front-end developers, UI work
+
+### Full-Stack Development
+
+**Everything runs locally** including CM.
+
+**When to use:**
+- Developing Sitecore backend (C#)
+- Creating/modifying templates
+- Backend logic changes
+- Complete isolation needed
+- Heavy CM interface work
+
+**Setup:** Docker containers with full CM
+
+**Perfect for:** Backend developers, template work
+
+---
+
+## Front-End Setup Walkthrough
+
+### Prerequisites
+
+**Install:** Latest Node.js LTS version
+
+**Access:** Environment's Developer settings
+
+### Step 1: Access Developer Settings
+
+**In Deploy app:**
+1. Select project environment
+2. Click "Developer settings" tab
+3. Select your site
+4. Choose "Preview" context (for non-published content)
+
+### Step 2: Clone Repository
+
+**Copy command from step 1:**
+- Clones repository
+- Switches to project directory
+- Installs dependencies
+
+**Run in terminal** - follow on-screen instructions
+
+### Step 3: Configure Environment Variables
+
+**In Deploy app:**
+1. Copy environment variables
+2. Open project in code editor
+3. Create \`.env.local\` file
+4. Paste variables
+
+**Variables connect:** Local app → Cloud CM
+
+### Step 4: Run and Configure
+
+**Start the app:**
+\`\`\`bash
+npm run start:connected
+\`\`\`
+
+**View site:** http://localhost:3000
+
+**Configure editing host:**
+1. Open Page builder in CM
+2. Change local host to http://localhost:3000
+3. Edit content in Page builder
+4. Verify updates on localhost
+
+**Result:** Local editing with cloud content!
+
+---
+
+## Key Concepts Summary
+
+### Deployment Tools
+- **Deploy App** = Visual management
+- **CLI** = Automation & scripting
+- **API** = Custom integration
+
+### Deployment Stages
+1. **Provision** = Setup infrastructure
+2. **Build** = Compile code/content
+3. **Deploy** = Push to environment
+
+### Site Organization
+- **Collection** = Groups related sites
+- **Site** = Individual website
+- **Multi-site** = Multiple sites per environment
+
+### Development Modes
+- **Front-end only** = UI focus, cloud CM
+- **Full-stack** = Complete local setup
+
+### Critical Points
+- **Admin access required** for Deploy app
+- **Connections needed** (GitHub, Vercel)
+- **Logs are essential** for troubleshooting
+- **Can't move sites** between collections
+- **Production SLA** can't be changed after creation
+
+---
+
+## Best Practices
+
+### Planning
+- Plan environment strategy (dev, QA, prod)
+- Choose right deployment tool for task
+- Set up connections before starting
+- Understand front-end vs. full-stack needs
+
+### Troubleshooting
+- Always check deployment logs first
+- Look for errors in specific phases
+- Review warnings for future issues
+- Download logs for detailed analysis
+
+### Development
+- Use front-end only when possible (faster)
+- Full-stack when modifying templates/backend
+- Configure environment variables correctly
+- Test locally before deploying`,
+
+    flashcards: [
+      {
+        id: "deploy-1",
+        question: "What are the three deployment tools for SitecoreAI CMS?",
+        answer:
+          "1) Deploy App (web UI), 2) CLI plugin (command-line), 3) Deploy API (REST API for custom automation).",
+        difficulty: "easy",
+      },
+      {
+        id: "deploy-2",
+        question: "What are the three stages of deployment?",
+        answer:
+          "1) Provisioning (setup infrastructure), 2) Build (compile code/content), 3) Deployment (push to environment + post-actions).",
+        difficulty: "easy",
+      },
+      {
+        id: "deploy-3",
+        question: "What role is required to access the Deploy app?",
+        answer:
+          "Organization Admin or Organization Owner role. These have permissions to create and manage projects and environments.",
+        difficulty: "easy",
+      },
+      {
+        id: "deploy-4",
+        question: "What connections are needed before deploying?",
+        answer:
+          "1) GitHub or Azure DevOps (source code), 2) Vercel (hosting). Plus Admin access to Cloud Portal.",
+        difficulty: "medium",
+      },
+      {
+        id: "deploy-5",
+        question: "Can you change Production SLA after environment creation?",
+        answer:
+          "No! The Production SLA setting cannot be changed after environment creation. Choose carefully.",
+        difficulty: "medium",
+      },
+      {
+        id: "deploy-6",
+        question: "Where do you find deployment logs and what do they show?",
+        answer:
+          "Deploy app → Project → Environment → Actions (...) → View logs. Shows progress, warnings, and errors across all deployment phases.",
+        difficulty: "medium",
+      },
+      {
+        id: "deploy-7",
+        question: "Can sites be moved between site collections after creation?",
+        answer:
+          "No. Sites cannot be moved between collections once created. Plan your collections carefully.",
+        difficulty: "medium",
+      },
+      {
+        id: "deploy-8",
+        question:
+          "What's the difference between front-end only and full-stack development?",
+        answer:
+          "Front-end only: Local UI code + cloud CM (fast, simple). Full-stack: Everything local including CM (needed for backend/template work).",
+        difficulty: "hard",
+      },
+      {
+        id: "deploy-9",
+        question: "What does the foundation template provide?",
+        answer:
+          "Pre-configured starter kit with: standardized structure, best practices, authoring files, headapps (Next.js), local-containers, and config files.",
+        difficulty: "medium",
+      },
+      {
+        id: "deploy-10",
+        question:
+          "How many environments do you get with standard license and what's the limit?",
+        answer:
+          "1 production environment + 2 non-production environments (typically dev and QA).",
+        difficulty: "easy",
+      },
+      {
+        id: "deploy-11",
+        question: "What is an analytics identifier used for?",
+        answer:
+          "Defines analytics scope, tracks user interactions, enables personalization, ensures independent analytics calculation per site/language.",
+        difficulty: "medium",
+      },
+      {
+        id: "deploy-12",
+        question: "What's in the .env.local file and why is it needed?",
+        answer:
+          "Environment variables that connect your local front-end app to the cloud CM instance. Required for front-end development.",
+        difficulty: "medium",
+      },
+    ],
+
+    quizQuestions: [
+      {
+        id: "deploy-quiz-1",
+        question:
+          "Your team wants to automate deployments in a CI/CD pipeline. Which tool should you use?",
+        options: [
+          "Deploy App only",
+          "CLI plugin or Deploy API",
+          "Manual deployment through Cloud Portal",
+          "Vercel dashboard",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "CLI plugin or Deploy API are designed for automation. CLI provides commands for scripting, while API enables custom pipelines. Deploy App is for manual/visual management.",
+        scenario: "DevOps team needs automated deployment workflow.",
+      },
+      {
+        id: "deploy-quiz-2",
+        question:
+          "Your deployment failed during the Build phase. Where do you look first to understand why?",
+        options: [
+          "Cloud Portal settings",
+          "Deployment logs in Deploy app",
+          "GitHub repository",
+          "Vercel dashboard",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Deployment logs show detailed error messages for each phase. Look for 'Error' entries in the Build phase - they'll show compiler errors, npm failures, or configuration issues.",
+        scenario: "Build failed and you need to diagnose the problem.",
+      },
+      {
+        id: "deploy-quiz-3",
+        question:
+          "You're creating a dev environment. Should you mark it as Production SLA?",
+        options: [
+          "Yes, for better performance",
+          "No, and this can't be changed later",
+          "Yes, you can change it later",
+          "Doesn't matter for dev",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Never mark dev as Production SLA. This setting CANNOT be changed after creation. Production SLA is for live sites only and affects support priority.",
+        scenario: "Creating your first development environment.",
+      },
+      {
+        id: "deploy-quiz-4",
+        question:
+          "You need to modify Sitecore templates and test locally. Which development approach do you need?",
+        options: [
+          "Front-end only development",
+          "Full-stack local development with Docker",
+          "Deploy app visual editor",
+          "CLI commands only",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Modifying templates requires the full local CM instance. Front-end only development connects to cloud CM but can't modify templates or backend logic.",
+        scenario: "Developer needs to create new content templates.",
+      },
+      {
+        id: "deploy-quiz-5",
+        question:
+          "Your designer only needs to work on CSS and React components. What's the fastest setup?",
+        options: [
+          "Full Docker setup with local CM",
+          "Front-end only development",
+          "Deploy and test on cloud only",
+          "CLI development mode",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Front-end only is perfect for UI/UX work. Faster setup, no Docker needed, connects to cloud for content. Designer can focus solely on styling and components.",
+        scenario: "UI designer needs to iterate on component styling.",
+      },
+      {
+        id: "deploy-quiz-6",
+        question:
+          "You created 3 sites in collection A. Now you want to move one to collection B. Can you do this?",
+        options: [
+          "Yes, in site settings",
+          "Yes, through CLI",
+          "No, sites can't be moved between collections",
+          "Yes, but only in Deploy app",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Sites cannot be moved between collections after creation. You must plan your site collection structure carefully before creating sites.",
+        scenario: "Reorganizing your multi-site architecture.",
+      },
+      {
+        id: "deploy-quiz-7",
+        question: "What role is required to access the SitecoreAI Deploy app?",
+        options: [
+          "Any authenticated user",
+          "Organization Admin or Owner",
+          "Project Manager",
+          "Developer role",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Organization Admin or Owner role is required to access Deploy app. These roles can create/manage projects, grant access, and configure deployments.",
+        scenario: "New team member needs Deploy app access.",
+      },
+      {
+        id: "deploy-quiz-8",
+        question:
+          "During deployment, you see warnings in the log but it completes successfully. What should you do?",
+        options: [
+          "Ignore them completely",
+          "Review warnings - they may indicate future problems",
+          "Roll back the deployment",
+          "Delete and redeploy",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Warnings are non-critical but should be reviewed. They may indicate deprecated settings or potential issues that could cause problems later. Address them proactively.",
+        scenario: "Deployment succeeded but logs show warnings.",
+      },
+      {
+        id: "deploy-quiz-9",
+        question:
+          "Your local front-end app needs to connect to cloud CM. What file contains the connection settings?",
+        options: [
+          "package.json",
+          ".env.local",
+          "sitecore.json",
+          "xmcloud.build.json",
+        ],
+        correctAnswer: 1,
+        explanation:
+          ".env.local contains environment variables that connect your local app to cloud CM. Copy these from Deploy app's Developer settings.",
+        scenario: "Setting up local development environment.",
+      },
+      {
+        id: "deploy-quiz-10",
+        question:
+          "You have standard license. How many production environments can you create per project?",
+        options: [
+          "Unlimited",
+          "3 production environments",
+          "1 production + 2 non-production",
+          "2 production + 1 non-production",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Standard license includes 1 production environment and 2 non-production environments per project. Plan your dev, QA, and prod strategy accordingly.",
+        scenario: "Planning environment strategy for new project.",
+      },
+      {
+        id: "deploy-quiz-11",
+        question:
+          "What's the purpose of an analytics identifier assigned to a site?",
+        options: [
+          "Just a unique ID with no function",
+          "Tracks interactions and enables personalization",
+          "Required for deployment only",
+          "Links to Google Analytics",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Analytics identifiers track user interactions, enable personalization, and define the scope of analytics (per site, language, or multi-site). Essential for CDP/Personalize.",
+        scenario: "Setting up analytics for new site.",
+      },
+      {
+        id: "deploy-quiz-12",
+        question:
+          "Which deployment tool gives the most verbose output for troubleshooting?",
+        options: [
+          "Deploy App",
+          "Deploy API",
+          "CLI plugin",
+          "All provide same output",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "CLI plugin provides more verbose output than the REST API and can combine multiple API calls. Best for detailed monitoring and troubleshooting.",
+        scenario: "Need detailed deployment feedback for debugging.",
+      },
+    ],
+  },
 ];
