@@ -1,5 +1,5 @@
 // Initial data structure - sections will be populated by the user later
-import { Section, LearningPhase } from "./types";
+import { Section, LearningPhase, Course } from "./types";
 
 export const learningPhases: LearningPhase[] = [
   {
@@ -3547,5 +3547,23 @@ Create client credentials:
         scenario: "Webhook configured but build not triggering.",
       },
     ],
+  },
+];
+
+// Courses - collections of sections
+export const courses: Course[] = [
+  {
+    id: "sitecoreai-cms-for-developers",
+    title: "SitecoreAI CMS for Developers",
+    description: "Complete guide to building with SitecoreAI XM Cloud - from fundamentals to advanced APIs",
+    sectionIds: [
+      "sitecoreai-cms-fundamentals",
+      "key-architecture-components",
+      "sites-and-collections",
+      "deployment-fundamentals",
+      "experience-edge-apis",
+    ],
+    estimatedHours: 2.5,
+    level: "beginner",
   },
 ];

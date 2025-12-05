@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Section } from "@/lib/types";
 import { getSectionProgress } from "@/lib/storage";
 import { useEffect, useState } from "react";
-import { BookOpen, Clock, CreditCard, HelpCircle } from "lucide-react";
+import { BookOpen, Clock, CreditCard, HelpCircle, ChevronRight } from "lucide-react";
 
 interface SectionCardProps {
   section: Section;
@@ -21,58 +21,63 @@ export default function SectionCard({ section }: SectionCardProps) {
       if (sectionProgress.flashcardsReviewed > 0) completed += 25;
       if (sectionProgress.quizScore !== null) completed += 25;
       if (sectionProgress.completed) completed += 25;
-      setTimeout(() => {
-        setProgress(completed);
-      }, 0);
+      setProgress(completed);
     }
   }, [section.id]);
 
   return (
     <Link
       href={`/sections/${section.id}`}
-      className="block bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 hover:shadow-lg transition-all hover:border-blue-300 dark:hover:border-blue-700"
+      className="group block bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-blue-500 transition-all hover:shadow-xl hover:shadow-blue-500/10"
     >
+      {/* Header */}
       <div className="flex items-start justify-between mb-4">
-        <div className="w-12 h-12 rounded-lg bg-linear-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+        <div className="w-12 h-12 rounded-xl bg-linear-to-br from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
           <BookOpen className="w-6 h-6 text-white" />
         </div>
-        <div className="flex items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400">
-          <Clock className="w-4 h-4" />
-          <span>{section.estimatedTime} min</span>
+        <div className="flex items-center gap-2">
+          <Clock className="w-4 h-4 text-zinc-500" />
+          <span className="text-sm text-zinc-400">{section.estimatedTime}m</span>
         </div>
       </div>
 
-      <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">
+      {/* Title */}
+      <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
         {section.title}
       </h3>
 
-      <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-4">
+      {/* Description */}
+      <p className="text-zinc-400 text-sm mb-4 line-clamp-2">
         {section.description}
       </p>
 
+      {/* Progress */}
       {progress > 0 && (
         <div className="space-y-2 mb-4">
-          <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-2">
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-zinc-400">Progress</span>
+            <span className="text-xs font-medium text-blue-400">{progress}%</span>
+          </div>
+          <div className="w-full bg-zinc-800 rounded-full h-1.5 overflow-hidden">
             <div
-              className="bg-blue-600 dark:bg-blue-500 h-2 rounded-full transition-all"
+              className="bg-linear-to-r from-blue-600 to-purple-600 h-1.5 rounded-full transition-all"
               style={{ width: `${progress}%` }}
             />
-          </div>
-          <div className="text-xs text-zinc-500 dark:text-zinc-400">
-            {progress}% complete
           </div>
         </div>
       )}
 
-      <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400">
-        <div className="flex items-center gap-1">
+      {/* Stats */}
+      <div className="flex items-center gap-4 text-xs text-zinc-500 pt-4 border-t border-zinc-800">
+        <div className="flex items-center gap-1.5">
           <CreditCard className="w-3.5 h-3.5" />
           <span>{section.flashcards.length} cards</span>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <HelpCircle className="w-3.5 h-3.5" />
           <span>{section.quizQuestions.length} questions</span>
         </div>
+        <ChevronRight className="w-4 h-4 ml-auto text-zinc-600 group-hover:text-blue-400 transition-colors" />
       </div>
     </Link>
   );

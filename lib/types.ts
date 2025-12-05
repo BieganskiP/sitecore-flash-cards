@@ -40,3 +40,12 @@ export interface LearningPhase {
   name: string;
   description: string;
 }
+
+export interface Course {
+  id: string;
+  title: string;
+  description: string;
+  sectionIds: string[]; // Array of section IDs in display order
+  estimatedHours: number;
+  level: "beginner" | "intermediate" | "advanced";
+}

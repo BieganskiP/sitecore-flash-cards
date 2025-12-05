@@ -2,6 +2,7 @@
 import { UserProgress } from "./types";
 
 const STORAGE_KEY = "sitecore-learning-progress";
+const SELECTED_COURSE_KEY = "sitecore-selected-course";
 
 export function getProgress(): Record<string, UserProgress> {
   if (typeof window === "undefined") return {};
@@ -48,4 +49,15 @@ export function getSectionProgress(sectionId: string): UserProgress | null {
 export function resetProgress() {
   if (typeof window === "undefined") return;
   localStorage.removeItem(STORAGE_KEY);
+}
+
+// Course selection storage
+export function getSelectedCourse(): string | null {
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem(SELECTED_COURSE_KEY);
+}
+
+export function setSelectedCourse(courseId: string) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(SELECTED_COURSE_KEY, courseId);
 }

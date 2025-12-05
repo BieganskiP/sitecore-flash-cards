@@ -45,7 +45,8 @@ export default function QuizView({ questions, onComplete }: QuizViewProps) {
   const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
 
   const handleNext = () => {
-    if (selectedAnswer !== null && isCorrect && !showExplanation) {
+    // Increment correct answers if the current answer is correct
+    if (selectedAnswer !== null && isCorrect && showExplanation) {
       setCorrectAnswers((prev) => prev + 1);
     }
 
