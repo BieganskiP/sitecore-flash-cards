@@ -1,18 +1,16 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { getProgress, resetProgress } from '@/lib/storage';
-import { sections } from '@/lib/data';
-import { UserProgress } from '@/lib/types';
-import Link from 'next/link';
+import { useState } from "react";
+import { getProgress, resetProgress } from "@/lib/storage";
+import { sections } from "@/lib/data";
+import { UserProgress } from "@/lib/types";
+import Link from "next/link";
 
 export default function ProgressPage() {
-  const [progress, setProgress] = useState<Record<string, UserProgress>>({});
+  const [progress, setProgress] = useState<Record<string, UserProgress>>(() =>
+    getProgress()
+  );
   const [showResetConfirm, setShowResetConfirm] = useState(false);
-
-  useEffect(() => {
-    setProgress(getProgress());
-  }, []);
 
   const handleReset = () => {
     resetProgress();
@@ -23,7 +21,7 @@ export default function ProgressPage() {
   const getSectionCompletion = (sectionId: string) => {
     const sectionProgress = progress[sectionId];
     if (!sectionProgress) return 0;
-    
+
     let completed = 0;
     if (sectionProgress.flashExposureCompleted) completed += 33;
     if (sectionProgress.flashcardsReviewed > 0) completed += 33;
@@ -32,56 +30,61 @@ export default function ProgressPage() {
   };
 
   const totalSections = sections.length;
-  const completedSections = Object.values(progress).filter(p => p.completed).length;
-  const overallProgress = totalSections > 0 ? Math.round((completedSections / totalSections) * 100) : 0;
+  const completedSections = Object.values(progress).filter(
+    (p) => p.completed
+  ).length;
+  const overallProgress =
+    totalSections > 0
+      ? Math.round((completedSections / totalSections) * 100)
+      : 0;
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8">
-        <h1 className="text-text-4xl font-bold text-text-zinc-900 dark:text-text-white mb-4">
+        <h1 className="text-4xl font-bold text-zinc-900 dark:text-white mb-4">
           Your Progress
         </h1>
-        <p className="text-text-lg text-text-zinc-600 dark:text-text-zinc-400">
+        <p className="text-lg text-zinc-600 dark:text-zinc-400">
           Track your learning journey through Sitecore XM Cloud
         </p>
       </div>
 
       {/* Overall Stats */}
       <div className="grid md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white dark:bg-zinc-900 rounded-xl border border-border-zinc-200 dark:border-border-zinc-800 p-6">
-          <div className="text-text-3xl mb-2">📊</div>
-          <div className="text-text-3xl font-bold text-text-zinc-900 dark:text-text-white mb-1">
+        <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6">
+          <div className="text-3xl mb-2">📊</div>
+          <div className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
             {overallProgress}%
           </div>
-          <div className="text-text-sm text-text-zinc-600 dark:text-text-zinc-400">
+          <div className="text-sm text-zinc-600 dark:text-zinc-400">
             Overall Progress
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 rounded-xl border border-border-zinc-200 dark:border-border-zinc-800 p-6">
-          <div className="text-text-3xl mb-2">✓</div>
-          <div className="text-text-3xl font-bold text-text-zinc-900 dark:text-text-white mb-1">
+        <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6">
+          <div className="text-3xl mb-2">✓</div>
+          <div className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
             {completedSections}/{totalSections}
           </div>
-          <div className="text-text-sm text-text-zinc-600 dark:text-text-zinc-400">
+          <div className="text-sm text-zinc-600 dark:text-zinc-400">
             Sections Completed
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 rounded-xl border border-border-zinc-200 dark:border-border-zinc-800 p-6">
-          <div className="text-text-3xl mb-2">🎯</div>
-          <div className="text-text-3xl font-bold text-text-zinc-900 dark:text-text-white mb-1">
+        <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6">
+          <div className="text-3xl mb-2">🎯</div>
+          <div className="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
             {Object.keys(progress).length}
           </div>
-          <div className="text-text-sm text-text-zinc-600 dark:text-text-zinc-400">
+          <div className="text-sm text-zinc-600 dark:text-zinc-400">
             Sections Started
           </div>
         </div>
       </div>
 
       {/* Section Progress */}
-      <div className="bg-white dark:bg-zinc-900 rounded-xl border border-border-zinc-200 dark:border-border-zinc-800 p-6 mb-8">
-        <h2 className="text-text-xl font-bold text-text-zinc-900 dark:text-text-white mb-6">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 mb-8">
+        <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-6">
           Section Progress
         </h2>
 
@@ -94,23 +97,26 @@ export default function ProgressPage() {
               <Link
                 key={section.id}
                 href={`/sections/${section.id}`}
-                className="block p-4 rounded-lg border border-border-zinc-200 dark:border-border-zinc-700 hover:border-border-blue-300 dark:hover:border-border-blue-700 transition-all"
+                className="block p-4 rounded-lg border border-zinc-200 dark:border-zinc-700 hover:border-blue-300 dark:hover:border-blue-700 transition-all"
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <span className="text-text-2xl">{section.icon || '📖'}</span>
+                    <span className="text-2xl">{section.icon || "📖"}</span>
                     <div>
-                      <h3 className="font-semibold text-text-zinc-900 dark:text-text-white">
+                      <h3 className="font-semibold text-zinc-900 dark:text-white">
                         {section.title}
                       </h3>
                       {sectionProgress && (
-                        <div className="text-text-xs text-text-zinc-500 dark:text-text-zinc-400 mt-1">
-                          Last studied: {new Date(sectionProgress.lastStudied).toLocaleDateString()}
+                        <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                          Last studied:{" "}
+                          {new Date(
+                            sectionProgress.lastStudied
+                          ).toLocaleDateString()}
                         </div>
                       )}
                     </div>
                   </div>
-                  <div className="text-text-sm font-medium text-text-zinc-600 dark:text-text-zinc-400">
+                  <div className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
                     {completion}%
                   </div>
                 </div>
@@ -123,15 +129,37 @@ export default function ProgressPage() {
                 </div>
 
                 {sectionProgress && (
-                  <div className="flex gap-4 text-text-xs text-text-zinc-600 dark:text-text-zinc-400">
-                    <span className={sectionProgress.flashExposureCompleted ? 'text-text-green-600' : ''}>
-                      {sectionProgress.flashExposureCompleted ? '✓' : '○'} Flash Exposure
+                  <div className="flex gap-4 text-xs text-zinc-600 dark:text-zinc-400">
+                    <span
+                      className={
+                        sectionProgress.flashExposureCompleted
+                          ? "text-green-600"
+                          : ""
+                      }
+                    >
+                      {sectionProgress.flashExposureCompleted ? "✓" : "○"} Flash
+                      Exposure
                     </span>
-                    <span className={sectionProgress.flashcardsReviewed > 0 ? 'text-text-green-600' : ''}>
-                      {sectionProgress.flashcardsReviewed > 0 ? '✓' : '○'} Flashcards
+                    <span
+                      className={
+                        sectionProgress.flashcardsReviewed > 0
+                          ? "text-green-600"
+                          : ""
+                      }
+                    >
+                      {sectionProgress.flashcardsReviewed > 0 ? "✓" : "○"}{" "}
+                      Flashcards
                     </span>
-                    <span className={sectionProgress.quizScore !== null ? 'text-text-green-600' : ''}>
-                      {sectionProgress.quizScore !== null ? `✓ Quiz (${sectionProgress.quizScore}%)` : '○ Quiz'}
+                    <span
+                      className={
+                        sectionProgress.quizScore !== null
+                          ? "text-green-600"
+                          : ""
+                      }
+                    >
+                      {sectionProgress.quizScore !== null
+                        ? `✓ Quiz (${sectionProgress.quizScore}%)`
+                        : "○ Quiz"}
                     </span>
                   </div>
                 )}
@@ -142,18 +170,19 @@ export default function ProgressPage() {
       </div>
 
       {/* Reset Progress */}
-      <div className="bg-red-50 dark:bg-red-900/20 border border-border-red-200 dark:border-border-red-800 rounded-lg p-6">
-        <h3 className="text-text-lg font-semibold text-text-red-900 dark:text-text-red-200 mb-2">
+      <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6">
+        <h3 className="text-lg font-semibold text-red-900 dark:text-red-200 mb-2">
           Reset Progress
         </h3>
-        <p className="text-text-sm text-text-red-800 dark:text-text-red-300 mb-4">
-          This will clear all your learning progress. This action cannot be undone.
+        <p className="text-sm text-red-800 dark:text-red-300 mb-4">
+          This will clear all your learning progress. This action cannot be
+          undone.
         </p>
-        
+
         {!showResetConfirm ? (
           <button
             onClick={() => setShowResetConfirm(true)}
-            className="px-4 py-2 bg-red-600 text-text-white rounded-lg hover:bg-red-700 transition-colors text-text-sm"
+            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm"
           >
             Reset All Progress
           </button>
@@ -161,13 +190,13 @@ export default function ProgressPage() {
           <div className="flex gap-3">
             <button
               onClick={handleReset}
-              className="px-4 py-2 bg-red-600 text-text-white rounded-lg hover:bg-red-700 transition-colors text-text-sm"
+              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm"
             >
               Confirm Reset
             </button>
             <button
               onClick={() => setShowResetConfirm(false)}
-              className="px-4 py-2 bg-zinc-200 dark:bg-zinc-700 text-text-zinc-700 dark:text-text-zinc-300 rounded-lg hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors text-text-sm"
+              className="px-4 py-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-lg hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors text-sm"
             >
               Cancel
             </button>
@@ -177,4 +206,3 @@ export default function ProgressPage() {
     </div>
   );
 }
-

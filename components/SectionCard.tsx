@@ -27,20 +27,20 @@ export default function SectionCard({ section }: SectionCardProps) {
   return (
     <Link
       href={`/sections/${section.id}`}
-      className="block bg-white dark:bg-zinc-900 rounded-xl border border-border-zinc-200 dark:border-border-zinc-800 p-6 hover:shadow-lg transition-all hover:border-border-blue-300 dark:hover:border-border-blue-700"
+      className="block bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 hover:shadow-lg transition-all hover:border-blue-300 dark:hover:border-blue-700"
     >
       <div className="flex items-start justify-between mb-4">
-        <div className="text-text-4xl">{section.icon || "📖"}</div>
-        <div className="text-text-sm text-text-zinc-500 dark:text-text-zinc-400">
+        <div className="text-4xl">{section.icon || "📖"}</div>
+        <div className="text-sm text-zinc-500 dark:text-zinc-400">
           ~{section.estimatedTime} min
         </div>
       </div>
 
-      <h3 className="text-text-xl font-semibold text-text-zinc-900 dark:text-text-white mb-2">
+      <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">
         {section.title}
       </h3>
 
-      <p className="text-text-zinc-600 dark:text-text-zinc-400 text-text-sm mb-4">
+      <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-4">
         {section.description}
       </p>
 
@@ -52,13 +52,13 @@ export default function SectionCard({ section }: SectionCardProps) {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="text-text-xs text-text-zinc-500 dark:text-text-zinc-400">
+          <div className="text-xs text-zinc-500 dark:text-zinc-400">
             {progress}% complete
           </div>
         </div>
       )}
 
-      <div className="mt-4 flex gap-2 text-text-xs text-text-zinc-500 dark:text-text-zinc-400">
+      <div className="mt-4 flex gap-2 text-xs text-zinc-500 dark:text-zinc-400">
         <span>🎯 {section.flashcards.length} cards</span>
         <span>•</span>
         <span>🎮 {section.quizQuestions.length} questions</span>
