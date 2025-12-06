@@ -36,13 +36,13 @@ export default function SettingsPage() {
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <div className="w-10 h-10 rounded-lg bg-linear-to-br from-purple-600 to-pink-600 flex items-center justify-center">
-            <SettingsIcon className="w-5 h-5 text-white" />
+            <SettingsIcon className="w-5 h-5 text-white" aria-hidden="true" />
           </div>
           <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">
             Settings
           </h1>
         </div>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-zinc-600 dark:text-zinc-300">
           Customize your learning experience
         </p>
       </div>
@@ -53,7 +53,7 @@ export default function SettingsPage() {
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center">
-              <Palette className="w-4 h-4 text-white" />
+              <Palette className="w-4 h-4 text-white" aria-hidden="true" />
             </div>
             <h2 className="text-xl font-bold text-zinc-900 dark:text-white">
               Appearance
@@ -73,20 +73,22 @@ export default function SettingsPage() {
                     onClick={() => updateSetting("theme", value)}
                     className={`relative flex flex-col items-center gap-2 p-4 rounded-lg border-2 transition-all ${
                       settings.theme === value
-                        ? "border-blue-500 bg-blue-500/10 text-blue-400"
-                        : "border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-100 dark:hover:bg-zinc-750"
+                        ? "border-blue-500 bg-blue-500/10 text-blue-600 dark:text-blue-400"
+                        : "border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-100 dark:hover:bg-zinc-750"
                     }`}
+                    aria-label={`Set theme to ${label}`}
+                    aria-pressed={settings.theme === value}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-5 h-5" aria-hidden="true" />
                     <span className="text-sm font-medium">{label}</span>
                     {settings.theme === value && (
-                      <Check className="w-4 h-4 absolute top-2 right-2" />
+                      <Check className="w-4 h-4 absolute top-2 right-2" aria-hidden="true" />
                     )}
                   </button>
                 ))}
               </div>
             )}
-            <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2">
+            <p className="text-xs text-zinc-600 dark:text-zinc-300 mt-2">
               {mounted && settings.theme === "system"
                 ? "Using your system's color scheme preference"
                 : mounted &&
@@ -101,7 +103,7 @@ export default function SettingsPage() {
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-              <Bell className="w-4 h-4 text-white" />
+              <Bell className="w-4 h-4 text-white" aria-hidden="true" />
             </div>
             <h2 className="text-xl font-bold text-zinc-900 dark:text-white">
               Display Preferences
@@ -112,12 +114,12 @@ export default function SettingsPage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-750 transition-colors">
               <div className="flex items-start gap-3 flex-1">
-                <Lightbulb className="w-5 h-5 text-amber-400 mt-0.5 shrink-0" />
+                <Lightbulb className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" aria-hidden="true" />
                 <div>
                   <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">
                     Show Tips
                   </h3>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-300">
                     Display helpful tips and guidance throughout the app
                   </p>
                 </div>
@@ -130,6 +132,9 @@ export default function SettingsPage() {
                       ? "bg-blue-600"
                       : "bg-zinc-300 dark:bg-zinc-700"
                   }`}
+                  role="switch"
+                  aria-checked={settings.showTips}
+                  aria-label="Toggle tips visibility"
                 >
                   <span
                     className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -141,13 +146,13 @@ export default function SettingsPage() {
             </div>
 
             {mounted && settings.showTips && (
-              <div className="flex items-start gap-3 p-4 bg-green-900/20 border border-green-800 rounded-lg">
-                <Check className="w-5 h-5 text-green-400 shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 border border-green-300 dark:border-green-800 rounded-lg">
+                <Check className="w-5 h-5 text-green-700 dark:text-green-400 shrink-0 mt-0.5" aria-hidden="true" />
                 <div className="text-sm">
-                  <p className="text-green-300 font-medium mb-1">
+                  <p className="text-green-800 dark:text-green-300 font-medium mb-1">
                     Tips are visible
                   </p>
-                  <p className="text-green-400/70">
+                  <p className="text-green-700 dark:text-green-300/90">
                     You&apos;ll see helpful tips in sidebars and learning
                     phases.
                   </p>
@@ -162,7 +167,7 @@ export default function SettingsPage() {
           <h2 className="text-lg font-bold text-zinc-900 dark:text-white mb-4">
             About Tips
           </h2>
-          <div className="space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
+          <div className="space-y-3 text-sm text-zinc-600 dark:text-zinc-300">
             <p>
               Tips are designed to help you get the most out of your learning
               experience:

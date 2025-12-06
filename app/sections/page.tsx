@@ -68,13 +68,13 @@ export default function SectionsPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
           <div className="flex items-center gap-2 sm:gap-3">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-linear-to-br from-blue-600 to-purple-600 flex items-center justify-center">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-white" aria-hidden="true" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-white">
+              <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white">
                 Learning Sections
               </h1>
-              <p className="text-zinc-400 text-xs sm:text-sm">
+              <p className="text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm">
                 Complete all 4 phases for maximum retention
               </p>
             </div>
@@ -83,11 +83,12 @@ export default function SectionsPage() {
           {/* Course Selector */}
           {courses.length > 1 && (
             <div className="flex items-center gap-2 sm:gap-3">
-              <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-400" />
+              <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-600 dark:text-zinc-300" aria-hidden="true" />
               <select
                 value={selectedCourseId}
                 onChange={(e) => handleCourseChange(e.target.value)}
-                className="bg-zinc-900 border border-zinc-800 text-white rounded-lg px-3 sm:px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto"
+                className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-lg px-3 sm:px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto"
+                aria-label="Select course"
               >
                 {courses.map((course) => (
                   <option key={course.id} value={course.id}>
@@ -141,14 +142,16 @@ export default function SectionsPage() {
             <button
               onClick={() => setIsSectionsExpanded(!isSectionsExpanded)}
               className="flex items-center justify-between px-4 py-3 bg-blue-900/30 hover:bg-blue-900/50 rounded-lg transition-colors border border-blue-700/30"
+              aria-expanded={isSectionsExpanded}
+              aria-controls="course-sections"
             >
               <span className="text-sm font-semibold text-blue-100">
                 {isSectionsExpanded ? "Hide" : "Show"} Course Sections
               </span>
               {isSectionsExpanded ? (
-                <ChevronUp className="w-5 h-5 text-blue-300" />
+                <ChevronUp className="w-5 h-5 text-blue-300" aria-hidden="true" />
               ) : (
-                <ChevronDown className="w-5 h-5 text-blue-300" />
+                <ChevronDown className="w-5 h-5 text-blue-300" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -157,7 +160,7 @@ export default function SectionsPage() {
 
       {/* Sections Grid - Collapsible */}
       {isSectionsExpanded && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 lg:mb-8">
+        <div id="course-sections" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 lg:mb-8">
           {courseSections.map((section) => (
             <SectionCard key={section.id} section={section} />
           ))}
@@ -165,16 +168,16 @@ export default function SectionsPage() {
       )}
 
       {/* Notice */}
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 sm:p-6">
+      <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 rounded-xl p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-blue-600 flex items-center justify-center shrink-0">
-            <FileEdit className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+            <FileEdit className="w-5 h-5 sm:w-6 sm:h-6 text-white" aria-hidden="true" />
           </div>
           <div>
-            <h3 className="text-base sm:text-lg font-semibold text-white mb-2">
+            <h3 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-white mb-2">
               Course Content
             </h3>
-            <p className="text-zinc-400 text-xs sm:text-sm">
+            <p className="text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm">
               Each section includes detailed materials, flashcards, and
               scenario-based quiz questions. Sections are presented in the
               recommended learning order for this course.

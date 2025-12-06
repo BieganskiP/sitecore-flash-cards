@@ -59,7 +59,7 @@ export default function RootLayout({
         <SettingsProvider>
           <ThemeProvider>
             <Navigation />
-            <main className="lg:ml-64 min-h-screen bg-white dark:bg-zinc-950">
+            <main className="lg:ml-64 min-h-screen bg-white dark:bg-zinc-950" role="main">
               {children}
             </main>
             <ScrollToTop />
