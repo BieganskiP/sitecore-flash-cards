@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getProgress, resetProgress } from "@/lib/storage";
 import { sections } from "@/lib/data";
 import { UserProgress } from "@/lib/types";
@@ -17,10 +17,15 @@ import {
 } from "lucide-react";
 
 export default function ProgressPage() {
-  const [progress, setProgress] = useState<Record<string, UserProgress>>(() =>
-    getProgress()
-  );
+  const [progress, setProgress] = useState<Record<string, UserProgress>>({});
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+
+  useEffect(() => {
+    // Load progress from localStorage on client mount to avoid hydration mismatch
+    // Only set mounted after initial render (client-side only)
+    const timer = setTimeout(() => setProgress(getProgress()), 0);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleReset = () => {
     resetProgress();
@@ -54,7 +59,10 @@ export default function ProgressPage() {
       <div className="mb-6 lg:mb-8">
         <div className="flex items-center gap-2 sm:gap-3 mb-2">
           <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-linear-to-br from-green-600 to-emerald-600 flex items-center justify-center">
-            <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-white" aria-hidden="true" />
+            <TrendingUp
+              className="w-4 h-4 sm:w-5 sm:h-5 text-white"
+              aria-hidden="true"
+            />
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white">
             Your Progress
@@ -70,11 +78,20 @@ export default function ProgressPage() {
         <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-3 sm:mb-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-linear-to-br from-blue-600 to-cyan-600 flex items-center justify-center">
-              <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-white" aria-hidden="true" />
+              <BarChart3
+                className="w-5 h-5 sm:w-6 sm:h-6 text-white"
+                aria-hidden="true"
+              />
             </div>
-            <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-500" aria-hidden="true" />
+            <TrendingUp
+              className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-500"
+              aria-hidden="true"
+            />
           </div>
-          <div className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1">
+          <div
+            className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1"
+            suppressHydrationWarning
+          >
             {overallProgress}%
           </div>
           <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300">
@@ -85,11 +102,20 @@ export default function ProgressPage() {
         <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-3 sm:mb-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-linear-to-br from-green-600 to-emerald-600 flex items-center justify-center">
-              <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-white" aria-hidden="true" />
+              <CheckCircle
+                className="w-5 h-5 sm:w-6 sm:h-6 text-white"
+                aria-hidden="true"
+              />
             </div>
-            <Award className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-500" aria-hidden="true" />
+            <Award
+              className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-500"
+              aria-hidden="true"
+            />
           </div>
-          <div className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1">
+          <div
+            className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1"
+            suppressHydrationWarning
+          >
             {completedSections}/{totalSections}
           </div>
           <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300">
@@ -100,11 +126,20 @@ export default function ProgressPage() {
         <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-3 sm:mb-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-linear-to-br from-purple-600 to-pink-600 flex items-center justify-center">
-              <Target className="w-5 h-5 sm:w-6 sm:h-6 text-white" aria-hidden="true" />
+              <Target
+                className="w-5 h-5 sm:w-6 sm:h-6 text-white"
+                aria-hidden="true"
+              />
             </div>
-            <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-500" aria-hidden="true" />
+            <TrendingUp
+              className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-500"
+              aria-hidden="true"
+            />
           </div>
-          <div className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1">
+          <div
+            className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1"
+            suppressHydrationWarning
+          >
             {Object.keys(progress).length}
           </div>
           <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300">
@@ -132,7 +167,10 @@ export default function ProgressPage() {
               >
                 <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-linear-to-br from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
-                    <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-white" aria-hidden="true" />
+                    <BookOpen
+                      className="w-5 h-5 sm:w-6 sm:h-6 text-white"
+                      aria-hidden="true"
+                    />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate text-sm sm:text-base">
@@ -167,9 +205,15 @@ export default function ProgressPage() {
                   <div className="flex flex-wrap gap-2 sm:gap-4 text-[10px] sm:text-xs">
                     <span className="flex items-center gap-1 sm:gap-1.5">
                       {sectionProgress.flashExposureCompleted ? (
-                        <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600 dark:text-green-500" aria-hidden="true" />
+                        <CheckCircle
+                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600 dark:text-green-500"
+                          aria-hidden="true"
+                        />
                       ) : (
-                        <Circle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-400 dark:text-zinc-600" aria-hidden="true" />
+                        <Circle
+                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-400 dark:text-zinc-600"
+                          aria-hidden="true"
+                        />
                       )}
                       <span
                         className={
@@ -183,9 +227,15 @@ export default function ProgressPage() {
                     </span>
                     <span className="flex items-center gap-1 sm:gap-1.5">
                       {sectionProgress.flashcardsReviewed > 0 ? (
-                        <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600 dark:text-green-500" aria-hidden="true" />
+                        <CheckCircle
+                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600 dark:text-green-500"
+                          aria-hidden="true"
+                        />
                       ) : (
-                        <Circle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-400 dark:text-zinc-600" aria-hidden="true" />
+                        <Circle
+                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-400 dark:text-zinc-600"
+                          aria-hidden="true"
+                        />
                       )}
                       <span
                         className={
@@ -199,9 +249,15 @@ export default function ProgressPage() {
                     </span>
                     <span className="flex items-center gap-1 sm:gap-1.5">
                       {sectionProgress.quizScore !== null ? (
-                        <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600 dark:text-green-500" aria-hidden="true" />
+                        <CheckCircle
+                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600 dark:text-green-500"
+                          aria-hidden="true"
+                        />
                       ) : (
-                        <Circle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-400 dark:text-zinc-600" aria-hidden="true" />
+                        <Circle
+                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-400 dark:text-zinc-600"
+                          aria-hidden="true"
+                        />
                       )}
                       <span
                         className={
@@ -227,7 +283,10 @@ export default function ProgressPage() {
       <div className="bg-zinc-100 dark:bg-zinc-900 border border-red-300 dark:border-red-900/50 rounded-xl p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-red-600 flex items-center justify-center shrink-0">
-            <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 text-white" aria-hidden="true" />
+            <AlertTriangle
+              className="w-5 h-5 sm:w-6 sm:h-6 text-white"
+              aria-hidden="true"
+            />
           </div>
           <div className="flex-1">
             <h3 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-white mb-2">
