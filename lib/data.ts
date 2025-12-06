@@ -3555,7 +3555,8 @@ export const courses: Course[] = [
   {
     id: "sitecoreai-cms-for-developers",
     title: "SitecoreAI CMS for Developers",
-    description: "Complete guide to building with SitecoreAI XM Cloud - from fundamentals to advanced APIs",
+    description:
+      "Complete guide to building with SitecoreAI XM Cloud - from fundamentals to advanced APIs",
     sectionIds: [
       "sitecoreai-cms-fundamentals",
       "key-architecture-components",
