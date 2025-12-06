@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Section } from "@/lib/types";
 import { getSectionProgress } from "@/lib/storage";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BookOpen, Clock, CreditCard, HelpCircle, ChevronRight } from "lucide-react";
 
 interface SectionCardProps {
@@ -11,9 +11,8 @@ interface SectionCardProps {
 }
 
 export default function SectionCard({ section }: SectionCardProps) {
-  const [progress, setProgress] = useState<number>(0);
-
-  useEffect(() => {
+  const [progress] = useState<number>(() => {
+    // Initialize progress from storage
     const sectionProgress = getSectionProgress(section.id);
     if (sectionProgress) {
       let completed = 0;
@@ -21,39 +20,40 @@ export default function SectionCard({ section }: SectionCardProps) {
       if (sectionProgress.flashcardsReviewed > 0) completed += 25;
       if (sectionProgress.quizScore !== null) completed += 25;
       if (sectionProgress.completed) completed += 25;
-      setProgress(completed);
+      return completed;
     }
-  }, [section.id]);
+    return 0;
+  });
 
   return (
     <Link
       href={`/sections/${section.id}`}
-      className="group block bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-blue-500 transition-all hover:shadow-xl hover:shadow-blue-500/10"
+      className="group block bg-zinc-900 border border-zinc-800 rounded-xl p-4 sm:p-6 hover:border-blue-500 transition-all hover:shadow-xl hover:shadow-blue-500/10"
     >
       {/* Header */}
-      <div className="flex items-start justify-between mb-4">
-        <div className="w-12 h-12 rounded-xl bg-linear-to-br from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
-          <BookOpen className="w-6 h-6 text-white" />
+      <div className="flex items-start justify-between mb-3 sm:mb-4">
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-linear-to-br from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
+          <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         </div>
-        <div className="flex items-center gap-2">
-          <Clock className="w-4 h-4 text-zinc-500" />
-          <span className="text-sm text-zinc-400">{section.estimatedTime}m</span>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-500" />
+          <span className="text-xs sm:text-sm text-zinc-400">{section.estimatedTime}m</span>
         </div>
       </div>
 
       {/* Title */}
-      <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
+      <h3 className="text-base sm:text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
         {section.title}
       </h3>
 
       {/* Description */}
-      <p className="text-zinc-400 text-sm mb-4 line-clamp-2">
+      <p className="text-zinc-400 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">
         {section.description}
       </p>
 
       {/* Progress */}
       {progress > 0 && (
-        <div className="space-y-2 mb-4">
+        <div className="space-y-2 mb-3 sm:mb-4">
           <div className="flex justify-between items-center">
             <span className="text-xs text-zinc-400">Progress</span>
             <span className="text-xs font-medium text-blue-400">{progress}%</span>
@@ -68,16 +68,16 @@ export default function SectionCard({ section }: SectionCardProps) {
       )}
 
       {/* Stats */}
-      <div className="flex items-center gap-4 text-xs text-zinc-500 pt-4 border-t border-zinc-800">
-        <div className="flex items-center gap-1.5">
-          <CreditCard className="w-3.5 h-3.5" />
+      <div className="flex items-center gap-3 sm:gap-4 text-[10px] sm:text-xs text-zinc-500 pt-3 sm:pt-4 border-t border-zinc-800">
+        <div className="flex items-center gap-1 sm:gap-1.5">
+          <CreditCard className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
           <span>{section.flashcards.length} cards</span>
         </div>
-        <div className="flex items-center gap-1.5">
-          <HelpCircle className="w-3.5 h-3.5" />
+        <div className="flex items-center gap-1 sm:gap-1.5">
+          <HelpCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
           <span>{section.quizQuestions.length} questions</span>
         </div>
-        <ChevronRight className="w-4 h-4 ml-auto text-zinc-600 group-hover:text-blue-400 transition-colors" />
+        <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-auto text-zinc-600 group-hover:text-blue-400 transition-colors" />
       </div>
     </Link>
   );

@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-950`}
       >
         <Navigation />
-        <main className="ml-64 min-h-screen bg-zinc-950">
+        <main className="lg:ml-64 min-h-screen bg-zinc-950">
           {children}
         </main>
         <ScrollToTop />
