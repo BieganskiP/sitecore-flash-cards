@@ -84,9 +84,9 @@ export default function SectionDetailPage({ params }: PageProps) {
           </h1>
           <Link
             href="/sections"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm"
+            className="inline-flex items-center gap-2 text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
             Back to Sections
           </Link>
         </div>
@@ -145,9 +145,9 @@ export default function SectionDetailPage({ params }: PageProps) {
               <Link
                 href={`/sections/${section.id}`}
                 onClick={() => setActivePhase(null)}
-                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-4 text-sm"
+                className="inline-flex items-center gap-2 text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-4 text-sm"
               >
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="w-4 h-4" aria-hidden="true" />
                 Back to Section
               </Link>
             </div>
@@ -281,9 +281,9 @@ export default function SectionDetailPage({ params }: PageProps) {
           <Link
             href={`/sections/${section.id}`}
             onClick={() => setActivePhase(null)}
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-4 text-sm"
+            className="inline-flex items-center gap-2 text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-4 text-sm"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
             Back to Section
           </Link>
           <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-2">
@@ -310,9 +310,9 @@ export default function SectionDetailPage({ params }: PageProps) {
           <Link
             href={`/sections/${section.id}`}
             onClick={() => setActivePhase(null)}
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-4 text-sm"
+            className="inline-flex items-center gap-2 text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-4 text-sm"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
             Back to Section
           </Link>
           <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-2">
@@ -339,9 +339,9 @@ export default function SectionDetailPage({ params }: PageProps) {
           <div className="mb-4 sm:mb-6">
             <Link
               href="/sections"
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-4 text-sm"
+              className="inline-flex items-center gap-2 text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-4 text-sm"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-4 h-4" aria-hidden="true" />
               Back to Sections
             </Link>
           </div>

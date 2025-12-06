@@ -147,7 +147,7 @@ export default function ProgressPage() {
                       </div>
                     )}
                   </div>
-                  <div className="text-base sm:text-lg font-bold text-blue-600 dark:text-blue-400">
+                  <div className="text-base sm:text-lg font-bold text-blue-700 dark:text-blue-400">
                     {completion}%
                   </div>
                 </div>

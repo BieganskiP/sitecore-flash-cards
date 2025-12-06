@@ -67,7 +67,7 @@ export default function SectionCard({ section }: SectionCardProps) {
             <span className="text-xs text-zinc-600 dark:text-zinc-300">
               Progress
             </span>
-            <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
+            <span className="text-xs font-medium text-blue-700 dark:text-blue-400">
               {progress}%
             </span>
           </div>

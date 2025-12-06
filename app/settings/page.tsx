@@ -73,7 +73,7 @@ export default function SettingsPage() {
                     onClick={() => updateSetting("theme", value)}
                     className={`relative flex flex-col items-center gap-2 p-4 rounded-lg border-2 transition-all ${
                       settings.theme === value
-                        ? "border-blue-500 bg-blue-500/10 text-blue-600 dark:text-blue-400"
+                        ? "border-blue-500 bg-blue-500/10 text-blue-700 dark:text-blue-400"
                         : "border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-100 dark:hover:bg-zinc-750"
                     }`}
                     aria-label={`Set theme to ${label}`}
