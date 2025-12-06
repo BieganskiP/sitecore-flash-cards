@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { QuizQuestion } from "@/lib/types";
+import TipsWrapper from "@/components/TipsWrapper";
 import {
   Check,
   X,
@@ -230,44 +231,46 @@ export default function QuizView({ questions, onComplete }: QuizViewProps) {
       </div>
 
       {/* Tips Sidebar */}
-      <div className="w-80 shrink-0 hidden lg:block">
-        <div className="sticky top-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-              <Target className="w-4 h-4 text-white" />
+      <TipsWrapper>
+        <div className="w-80 shrink-0 hidden lg:block">
+          <div className="sticky top-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                <Target className="w-4 h-4 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-200">
+                Quiz Tips
+              </h3>
             </div>
-            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-200">
-              Quiz Tips
-            </h3>
+            <ul className="space-y-3 text-sm text-blue-800 dark:text-blue-300">
+              <li className="flex items-start gap-2">
+                <Brain className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>
+                  Read scenarios carefully - they provide important context
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Clock className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>Take your time - there&apos;s no time limit</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Lightbulb className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>Read all answer options before selecting</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <FileText className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>
+                  Review explanations even when correct to reinforce learning
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <RefreshCw className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>Retake the quiz if you score below 70%</span>
+              </li>
+            </ul>
           </div>
-          <ul className="space-y-3 text-sm text-blue-800 dark:text-blue-300">
-            <li className="flex items-start gap-2">
-              <Brain className="w-4 h-4 mt-0.5 shrink-0" />
-              <span>
-                Read scenarios carefully - they provide important context
-              </span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Clock className="w-4 h-4 mt-0.5 shrink-0" />
-              <span>Take your time - there&apos;s no time limit</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Lightbulb className="w-4 h-4 mt-0.5 shrink-0" />
-              <span>Read all answer options before selecting</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <FileText className="w-4 h-4 mt-0.5 shrink-0" />
-              <span>
-                Review explanations even when correct to reinforce learning
-              </span>
-            </li>
-            <li className="flex items-start gap-2">
-              <RefreshCw className="w-4 h-4 mt-0.5 shrink-0" />
-              <span>Retake the quiz if you score below 70%</span>
-            </li>
-          </ul>
         </div>
-      </div>
+      </TipsWrapper>
     </div>
   );
 }

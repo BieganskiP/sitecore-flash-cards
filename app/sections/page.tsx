@@ -1,25 +1,26 @@
 "use client";
 
-import { sections, courses } from '@/lib/data';
-import SectionCard from '@/components/SectionCard';
-import { FileEdit, Sparkles, GraduationCap } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import { getSelectedCourse, setSelectedCourse } from '@/lib/storage';
+import { sections, courses } from "@/lib/data";
+import SectionCard from "@/components/SectionCard";
+import { FileEdit, Sparkles, GraduationCap } from "lucide-react";
+import { useState } from "react";
+import { getSelectedCourse, setSelectedCourse } from "@/lib/storage";
 
 export default function SectionsPage() {
-  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Load selected course from storage or default to first course
-    const stored = getSelectedCourse();
-    if (stored && courses.find(c => c.id === stored)) {
-      setSelectedCourseId(stored);
-    } else if (courses.length > 0) {
-      const firstCourseId = courses[0].id;
-      setSelectedCourseId(firstCourseId);
-      setSelectedCourse(firstCourseId);
+  // Use lazy initialization to load selected course from storage
+  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(
+    () => {
+      const stored = getSelectedCourse();
+      if (stored && courses.find((c) => c.id === stored)) {
+        return stored;
+      } else if (courses.length > 0) {
+        const firstCourseId = courses[0].id;
+        setSelectedCourse(firstCourseId);
+        return firstCourseId;
+      }
+      return null;
     }
-  }, []);
+  );
 
   const handleCourseChange = (courseId: string) => {
     setSelectedCourseId(courseId);
@@ -27,13 +28,13 @@ export default function SectionsPage() {
   };
 
   // Get current course
-  const currentCourse = courses.find(c => c.id === selectedCourseId);
+  const currentCourse = courses.find((c) => c.id === selectedCourseId);
 
   // Filter sections by current course's sectionIds (in the correct order)
   const courseSections = currentCourse
     ? currentCourse.sectionIds
-        .map(id => sections.find(s => s.id === id))
-        .filter((s): s is typeof sections[0] => s !== undefined)
+        .map((id) => sections.find((s) => s.id === id))
+        .filter((s): s is (typeof sections)[0] => s !== undefined)
     : [];
 
   if (!selectedCourseId || !currentCourse) {
@@ -92,7 +93,9 @@ export default function SectionsPage() {
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
-                <h2 className="text-xl font-bold text-white">{currentCourse.title}</h2>
+                <h2 className="text-xl font-bold text-white">
+                  {currentCourse.title}
+                </h2>
                 <span className="px-2 py-1 bg-blue-600 text-white text-xs rounded-full uppercase font-semibold">
                   {currentCourse.level}
                 </span>
@@ -126,8 +129,9 @@ export default function SectionsPage() {
               Course Content
             </h3>
             <p className="text-zinc-400 text-sm">
-              Each section includes detailed materials, flashcards, and scenario-based quiz questions.
-              Sections are presented in the recommended learning order for this course.
+              Each section includes detailed materials, flashcards, and
+              scenario-based quiz questions. Sections are presented in the
+              recommended learning order for this course.
             </p>
           </div>
         </div>

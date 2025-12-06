@@ -5,7 +5,16 @@ import { getProgress, resetProgress } from "@/lib/storage";
 import { sections } from "@/lib/data";
 import { UserProgress } from "@/lib/types";
 import Link from "next/link";
-import { BarChart3, CheckCircle, Target, BookOpen, Circle, TrendingUp, Award, AlertTriangle } from "lucide-react";
+import {
+  BarChart3,
+  CheckCircle,
+  Target,
+  BookOpen,
+  Circle,
+  TrendingUp,
+  Award,
+  AlertTriangle,
+} from "lucide-react";
 
 export default function ProgressPage() {
   const [progress, setProgress] = useState<Record<string, UserProgress>>(() =>
@@ -47,9 +56,7 @@ export default function ProgressPage() {
           <div className="w-10 h-10 rounded-lg bg-linear-to-br from-green-600 to-emerald-600 flex items-center justify-center">
             <TrendingUp className="w-5 h-5 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-white">
-            Your Progress
-          </h1>
+          <h1 className="text-3xl font-bold text-white">Your Progress</h1>
         </div>
         <p className="text-zinc-400">
           Track your learning journey through Sitecore XM Cloud
@@ -68,9 +75,7 @@ export default function ProgressPage() {
           <div className="text-3xl font-bold text-white mb-1">
             {overallProgress}%
           </div>
-          <div className="text-sm text-zinc-400">
-            Overall Progress
-          </div>
+          <div className="text-sm text-zinc-400">Overall Progress</div>
         </div>
 
         <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
@@ -83,9 +88,7 @@ export default function ProgressPage() {
           <div className="text-3xl font-bold text-white mb-1">
             {completedSections}/{totalSections}
           </div>
-          <div className="text-sm text-zinc-400">
-            Sections Completed
-          </div>
+          <div className="text-sm text-zinc-400">Sections Completed</div>
         </div>
 
         <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
@@ -98,17 +101,13 @@ export default function ProgressPage() {
           <div className="text-3xl font-bold text-white mb-1">
             {Object.keys(progress).length}
           </div>
-          <div className="text-sm text-zinc-400">
-            Sections Started
-          </div>
+          <div className="text-sm text-zinc-400">Sections Started</div>
         </div>
       </div>
 
       {/* Section Progress */}
       <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 mb-8">
-        <h2 className="text-xl font-bold text-white mb-6">
-          Section Progress
-        </h2>
+        <h2 className="text-xl font-bold text-white mb-6">Section Progress</h2>
 
         <div className="space-y-4">
           {sections.map((section) => {
@@ -158,7 +157,13 @@ export default function ProgressPage() {
                       ) : (
                         <Circle className="w-3.5 h-3.5 text-zinc-600" />
                       )}
-                      <span className={sectionProgress.flashExposureCompleted ? "text-green-400" : "text-zinc-500"}>
+                      <span
+                        className={
+                          sectionProgress.flashExposureCompleted
+                            ? "text-green-400"
+                            : "text-zinc-500"
+                        }
+                      >
                         Flash Exposure
                       </span>
                     </span>
@@ -168,7 +173,13 @@ export default function ProgressPage() {
                       ) : (
                         <Circle className="w-3.5 h-3.5 text-zinc-600" />
                       )}
-                      <span className={sectionProgress.flashcardsReviewed > 0 ? "text-green-400" : "text-zinc-500"}>
+                      <span
+                        className={
+                          sectionProgress.flashcardsReviewed > 0
+                            ? "text-green-400"
+                            : "text-zinc-500"
+                        }
+                      >
                         Flashcards
                       </span>
                     </span>
@@ -178,7 +189,13 @@ export default function ProgressPage() {
                       ) : (
                         <Circle className="w-3.5 h-3.5 text-zinc-600" />
                       )}
-                      <span className={sectionProgress.quizScore !== null ? "text-green-400" : "text-zinc-500"}>
+                      <span
+                        className={
+                          sectionProgress.quizScore !== null
+                            ? "text-green-400"
+                            : "text-zinc-500"
+                        }
+                      >
                         {sectionProgress.quizScore !== null
                           ? `Quiz (${sectionProgress.quizScore}%)`
                           : "Quiz"}
@@ -203,7 +220,8 @@ export default function ProgressPage() {
               Reset Progress
             </h3>
             <p className="text-sm text-zinc-400 mb-4">
-              This will clear all your learning progress. This action cannot be undone.
+              This will clear all your learning progress. This action cannot be
+              undone.
             </p>
 
             {!showResetConfirm ? (

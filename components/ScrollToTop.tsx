@@ -1,24 +1,41 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ArrowUp } from "lucide-react";
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      // Show button when page is scrolled down 300px
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+      // Use requestAnimationFrame to throttle scroll updates
+      if (rafRef.current !== null) {
+        return;
       }
+
+      rafRef.current = requestAnimationFrame(() => {
+        // Show button when page is scrolled down 300px
+        if (window.scrollY > 300) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
+        rafRef.current = null;
+      });
     };
 
-    window.addEventListener("scroll", toggleVisibility);
+    // Check initial state
+    toggleVisibility();
 
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
   }, []);
 
   const scrollToTop = () => {

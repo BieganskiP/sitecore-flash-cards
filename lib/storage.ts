@@ -1,8 +1,15 @@
 // Local storage utilities for progress tracking
-import { UserProgress } from "./types";
+import { UserProgress, UserSettings } from "./types";
 
 const STORAGE_KEY = "sitecore-learning-progress";
 const SELECTED_COURSE_KEY = "sitecore-selected-course";
+const SETTINGS_KEY = "sitecore-user-settings";
+
+const DEFAULT_SETTINGS: UserSettings = {
+  showTips: true,
+  tipsPromptDismissed: false,
+  theme: "system",
+};
 
 export function getProgress(): Record<string, UserProgress> {
   if (typeof window === "undefined") return {};
@@ -60,4 +67,26 @@ export function getSelectedCourse(): string | null {
 export function setSelectedCourse(courseId: string) {
   if (typeof window === "undefined") return;
   localStorage.setItem(SELECTED_COURSE_KEY, courseId);
+}
+
+// User settings storage
+export function getSettings(): UserSettings {
+  if (typeof window === "undefined") return DEFAULT_SETTINGS;
+
+  const stored = localStorage.getItem(SETTINGS_KEY);
+  if (!stored) return DEFAULT_SETTINGS;
+
+  try {
+    return { ...DEFAULT_SETTINGS, ...JSON.parse(stored) };
+  } catch {
+    return DEFAULT_SETTINGS;
+  }
+}
+
+export function updateSettings(settings: Partial<UserSettings>) {
+  if (typeof window === "undefined") return;
+
+  const current = getSettings();
+  const updated = { ...current, ...settings };
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(updated));
 }

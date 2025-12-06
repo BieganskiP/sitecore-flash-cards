@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { learningPhases } from "@/lib/data";
 import { sections } from "@/lib/data";
+import TipsWrapper from "@/components/TipsWrapper";
 import {
   Zap,
   Brain,
@@ -17,9 +18,24 @@ export default function Home() {
   const phaseIcons = [Zap, Target, Brain, Rocket];
 
   const stats = [
-    { label: "Total Sections", value: sections.length, Icon: BookOpen, color: "from-blue-600 to-cyan-600" },
-    { label: "Learning Phases", value: "4", Icon: Target, color: "from-purple-600 to-pink-600" },
-    { label: "Study Method", value: "TLL", Icon: Brain, color: "from-green-600 to-emerald-600" },
+    {
+      label: "Total Sections",
+      value: sections.length,
+      Icon: BookOpen,
+      color: "from-blue-600 to-cyan-600",
+    },
+    {
+      label: "Learning Phases",
+      value: "4",
+      Icon: Target,
+      color: "from-purple-600 to-pink-600",
+    },
+    {
+      label: "Study Method",
+      value: "TLL",
+      Icon: Brain,
+      color: "from-green-600 to-emerald-600",
+    },
   ];
 
   return (
@@ -42,12 +58,16 @@ export default function Home() {
             className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-colors"
           >
             <div className="flex items-center justify-between mb-4">
-              <div className={`w-12 h-12 rounded-lg bg-linear-to-br ${stat.color} flex items-center justify-center`}>
+              <div
+                className={`w-12 h-12 rounded-lg bg-linear-to-br ${stat.color} flex items-center justify-center`}
+              >
                 <stat.Icon className="w-6 h-6 text-white" />
               </div>
               <TrendingUp className="w-5 h-5 text-green-500" />
             </div>
-            <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
+            <div className="text-3xl font-bold text-white mb-1">
+              {stat.value}
+            </div>
             <div className="text-sm text-zinc-400">{stat.label}</div>
           </div>
         ))}
@@ -59,7 +79,9 @@ export default function Home() {
         <div className="lg:col-span-2">
           <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-white">4-Phase Learning System</h2>
+              <h2 className="text-xl font-bold text-white">
+                4-Phase Learning System
+              </h2>
               <Link
                 href="/sections"
                 className="text-sm text-blue-400 hover:text-blue-300 flex items-center gap-1"
@@ -121,28 +143,30 @@ export default function Home() {
           </div>
 
           {/* Tips Card */}
-          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-amber-600 flex items-center justify-center">
-                <Zap className="w-4 h-4 text-white" />
+          <TipsWrapper>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 rounded-lg bg-amber-600 flex items-center justify-center">
+                  <Zap className="w-4 h-4 text-white" />
+                </div>
+                <h3 className="font-bold text-white">Pro Tips</h3>
               </div>
-              <h3 className="font-bold text-white">Pro Tips</h3>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-2 text-zinc-400">
+                  <Target className="w-4 h-4 mt-0.5 shrink-0 text-blue-400" />
+                  <span>Complete phases in order</span>
+                </li>
+                <li className="flex items-start gap-2 text-zinc-400">
+                  <Clock className="w-4 h-4 mt-0.5 shrink-0 text-blue-400" />
+                  <span>Use 15-20 min timers</span>
+                </li>
+                <li className="flex items-start gap-2 text-zinc-400">
+                  <Brain className="w-4 h-4 mt-0.5 shrink-0 text-blue-400" />
+                  <span>Review flashcards multiple times</span>
+                </li>
+              </ul>
             </div>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-2 text-zinc-400">
-                <Target className="w-4 h-4 mt-0.5 shrink-0 text-blue-400" />
-                <span>Complete phases in order</span>
-              </li>
-              <li className="flex items-start gap-2 text-zinc-400">
-                <Clock className="w-4 h-4 mt-0.5 shrink-0 text-blue-400" />
-                <span>Use 15-20 min timers</span>
-              </li>
-              <li className="flex items-start gap-2 text-zinc-400">
-                <Brain className="w-4 h-4 mt-0.5 shrink-0 text-blue-400" />
-                <span>Review flashcards multiple times</span>
-              </li>
-            </ul>
-          </div>
+          </TipsWrapper>
         </div>
       </div>
 
@@ -158,11 +182,26 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
-            { title: "Short Sessions", desc: "15-20 minute bursts prevent overwhelm" },
-            { title: "Active Recall", desc: "Engages your brain instead of passive reading" },
-            { title: "Instant Feedback", desc: "Quiz mode gives immediate rewards" },
-            { title: "Visual Structure", desc: "Clear progress tracking keeps you motivated" },
-            { title: "Scenario-Based", desc: "Real-world examples stick better" },
+            {
+              title: "Short Sessions",
+              desc: "15-20 minute bursts prevent overwhelm",
+            },
+            {
+              title: "Active Recall",
+              desc: "Engages your brain instead of passive reading",
+            },
+            {
+              title: "Instant Feedback",
+              desc: "Quiz mode gives immediate rewards",
+            },
+            {
+              title: "Visual Structure",
+              desc: "Clear progress tracking keeps you motivated",
+            },
+            {
+              title: "Scenario-Based",
+              desc: "Real-world examples stick better",
+            },
             { title: "Tiered Learning", desc: "Build knowledge progressively" },
           ].map((item, index) => (
             <div key={index} className="flex items-start gap-3">
@@ -170,7 +209,9 @@ export default function Home() {
                 <span className="text-white text-xs">✓</span>
               </div>
               <div>
-                <div className="font-medium text-white text-sm">{item.title}</div>
+                <div className="font-medium text-white text-sm">
+                  {item.title}
+                </div>
                 <div className="text-xs text-zinc-400">{item.desc}</div>
               </div>
             </div>

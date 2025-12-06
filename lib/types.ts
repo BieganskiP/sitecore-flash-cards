@@ -49,3 +49,9 @@ export interface Course {
   estimatedHours: number;
   level: "beginner" | "intermediate" | "advanced";
 }
+
+export interface UserSettings {
+  showTips: boolean;
+  tipsPromptDismissed: boolean;
+  theme: "light" | "dark" | "system";
+}

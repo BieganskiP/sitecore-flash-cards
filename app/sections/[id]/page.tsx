@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useEffect, useRef } from "react";
 import { sections } from "@/lib/data";
 import { learningPhases } from "@/lib/data";
 import { saveProgress } from "@/lib/storage";
@@ -9,6 +9,7 @@ import QuizView from "@/components/QuizView";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import TipsWrapper from "@/components/TipsWrapper";
 import {
   ArrowLeft,
   Clock,
@@ -32,6 +33,47 @@ export default function SectionDetailPage({ params }: PageProps) {
 
   const [activePhase, setActivePhase] = useState<string | null>(null);
   const [timeRemaining, setTimeRemaining] = useState<number | null>(null);
+  const [isTimerSticky, setIsTimerSticky] = useState(false);
+  const rafRef = useRef<number | null>(null);
+
+  // Track scroll position for sticky timer
+  useEffect(() => {
+    if (activePhase !== "flash-exposure") {
+      return;
+    }
+
+    const handleScroll = () => {
+      // Use requestAnimationFrame to throttle scroll updates
+      if (rafRef.current !== null) {
+        return;
+      }
+
+      rafRef.current = requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+
+        // Add hysteresis to prevent flickering:
+        // Show sticky at 250px, hide it below 200px
+        setIsTimerSticky((prev) => {
+          if (scrollY > 250) return true;
+          if (scrollY < 200) return false;
+          return prev; // Keep current state in the middle zone
+        });
+
+        rafRef.current = null;
+      });
+    };
+
+    // Set initial state
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, [activePhase]);
 
   if (!section) {
     return (
@@ -110,24 +152,42 @@ export default function SectionDetailPage({ params }: PageProps) {
               </Link>
             </div>
 
-            {/* Timer */}
+            {/* Timer - Static Position - Always reserve space to prevent layout shift */}
             {timeRemaining !== null && timeRemaining > 0 && (
-              <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-amber-600 flex items-center justify-center">
-                      <Clock className="w-5 h-5 text-white" />
+              <div className="mb-6">
+                <div
+                  className={`bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 ${
+                    isTimerSticky ? "invisible" : "visible"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-amber-600 flex items-center justify-center">
+                        <Clock className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-amber-900 dark:text-amber-200">
+                          Flash Exposure Timer
+                        </div>
+                        <div className="text-sm text-amber-800 dark:text-amber-300">
+                          Skim for structure only - no memorization needed
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-semibold text-amber-900 dark:text-amber-200">
-                        Flash Exposure Timer
-                      </div>
-                      <div className="text-sm text-amber-800 dark:text-amber-300">
-                        Skim for structure only - no memorization needed
-                      </div>
+                    <div className="text-3xl font-bold text-amber-900 dark:text-amber-200">
+                      {formatTime(timeRemaining)}
                     </div>
                   </div>
-                  <div className="text-3xl font-bold text-amber-900 dark:text-amber-200">
+                </div>
+              </div>
+            )}
+
+            {/* Sticky Timer - Bottom Right */}
+            {timeRemaining !== null && timeRemaining > 0 && isTimerSticky && (
+              <div className="fixed bottom-24 right-8 z-40">
+                <div className="bg-amber-600 text-white rounded-full px-6 py-4 shadow-2xl border-2 border-amber-500 flex items-center gap-3">
+                  <Clock className="w-5 h-5" />
+                  <div className="text-2xl font-bold tabular-nums">
                     {formatTime(timeRemaining)}
                   </div>
                 </div>
@@ -172,38 +232,42 @@ export default function SectionDetailPage({ params }: PageProps) {
           </div>
 
           {/* Tips Sidebar */}
-          <div className="w-80 shrink-0 hidden lg:block">
-            <div className="sticky top-6 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-amber-600 flex items-center justify-center">
-                  <Zap className="w-4 h-4 text-white" />
+          <TipsWrapper>
+            <div className="w-80 shrink-0 hidden lg:block">
+              <div className="sticky top-6 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 rounded-lg bg-amber-600 flex items-center justify-center">
+                    <Zap className="w-4 h-4 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-amber-900 dark:text-amber-200">
+                    Flash Exposure Tips
+                  </h3>
                 </div>
-                <h3 className="text-lg font-semibold text-amber-900 dark:text-amber-200">
-                  Flash Exposure Tips
-                </h3>
+                <ul className="space-y-3 text-sm text-amber-800 dark:text-amber-300">
+                  <li className="flex items-start gap-2">
+                    <Clock className="w-4 h-4 mt-0.5 shrink-0" />
+                    <span>Don&apos;t try to memorize - just skim quickly</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Target className="w-4 h-4 mt-0.5 shrink-0" />
+                    <span>Look for headings, structure, and key topics</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Zap className="w-4 h-4 mt-0.5 shrink-0" />
+                    <span>
+                      Stop when the timer ends - it&apos;s okay to not finish
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Brain className="w-4 h-4 mt-0.5 shrink-0" />
+                    <span>
+                      You&apos;ll learn the details in the next phases
+                    </span>
+                  </li>
+                </ul>
               </div>
-              <ul className="space-y-3 text-sm text-amber-800 dark:text-amber-300">
-                <li className="flex items-start gap-2">
-                  <Clock className="w-4 h-4 mt-0.5 shrink-0" />
-                  <span>Don&apos;t try to memorize - just skim quickly</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Target className="w-4 h-4 mt-0.5 shrink-0" />
-                  <span>Look for headings, structure, and key topics</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Zap className="w-4 h-4 mt-0.5 shrink-0" />
-                  <span>
-                    Stop when the timer ends - it&apos;s okay to not finish
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Brain className="w-4 h-4 mt-0.5 shrink-0" />
-                  <span>You&apos;ll learn the details in the next phases</span>
-                </li>
-              </ul>
             </div>
-          </div>
+          </TipsWrapper>
         </div>
       </div>
     );
@@ -371,40 +435,43 @@ export default function SectionDetailPage({ params }: PageProps) {
         </div>
 
         {/* Tips Sidebar */}
-        <div className="w-80 shrink-0 hidden lg:block">
-          <div className="sticky top-6 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center">
-                <Lightbulb className="w-4 h-4 text-white" />
+        <TipsWrapper>
+          <div className="w-80 shrink-0 hidden lg:block">
+            <div className="sticky top-6 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center">
+                  <Lightbulb className="w-4 h-4 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold text-purple-900 dark:text-purple-200">
+                  Tips for This Section
+                </h3>
               </div>
-              <h3 className="text-lg font-semibold text-purple-900 dark:text-purple-200">
-                Tips for This Section
-              </h3>
+              <ul className="space-y-3 text-sm text-purple-800 dark:text-purple-300">
+                <li className="flex items-start gap-2">
+                  <Clock className="w-4 h-4 mt-0.5 shrink-0" />
+                  <span>Take a short break between phases if needed</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+                  <span>
+                    Don&apos;t try to memorize during Flash Exposure - just
+                    skim!
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Target className="w-4 h-4 mt-0.5 shrink-0" />
+                  <span>
+                    Repeat flashcards multiple times for better retention
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Rocket className="w-4 h-4 mt-0.5 shrink-0" />
+                  <span>Quiz mode focuses on real-world scenarios</span>
+                </li>
+              </ul>
             </div>
-            <ul className="space-y-3 text-sm text-purple-800 dark:text-purple-300">
-              <li className="flex items-start gap-2">
-                <Clock className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>Take a short break between phases if needed</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>
-                  Don&apos;t try to memorize during Flash Exposure - just skim!
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Target className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>
-                  Repeat flashcards multiple times for better retention
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Rocket className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>Quiz mode focuses on real-world scenarios</span>
-              </li>
-            </ul>
           </div>
-        </div>
+        </TipsWrapper>
       </div>
     </div>
   );

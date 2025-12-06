@@ -3,17 +3,21 @@
 import Link from "next/link";
 import { Section } from "@/lib/types";
 import { getSectionProgress } from "@/lib/storage";
-import { useEffect, useState } from "react";
-import { BookOpen, Clock, CreditCard, HelpCircle, ChevronRight } from "lucide-react";
+import {
+  BookOpen,
+  Clock,
+  CreditCard,
+  HelpCircle,
+  ChevronRight,
+} from "lucide-react";
 
 interface SectionCardProps {
   section: Section;
 }
 
 export default function SectionCard({ section }: SectionCardProps) {
-  const [progress, setProgress] = useState<number>(0);
-
-  useEffect(() => {
+  // Calculate progress directly from storage during render
+  const calculateProgress = () => {
     const sectionProgress = getSectionProgress(section.id);
     if (sectionProgress) {
       let completed = 0;
@@ -21,9 +25,12 @@ export default function SectionCard({ section }: SectionCardProps) {
       if (sectionProgress.flashcardsReviewed > 0) completed += 25;
       if (sectionProgress.quizScore !== null) completed += 25;
       if (sectionProgress.completed) completed += 25;
-      setProgress(completed);
+      return completed;
     }
-  }, [section.id]);
+    return 0;
+  };
+
+  const progress = calculateProgress();
 
   return (
     <Link
@@ -37,7 +44,9 @@ export default function SectionCard({ section }: SectionCardProps) {
         </div>
         <div className="flex items-center gap-2">
           <Clock className="w-4 h-4 text-zinc-500" />
-          <span className="text-sm text-zinc-400">{section.estimatedTime}m</span>
+          <span className="text-sm text-zinc-400">
+            {section.estimatedTime}m
+          </span>
         </div>
       </div>
 
@@ -56,7 +65,9 @@ export default function SectionCard({ section }: SectionCardProps) {
         <div className="space-y-2 mb-4">
           <div className="flex justify-between items-center">
             <span className="text-xs text-zinc-400">Progress</span>
-            <span className="text-xs font-medium text-blue-400">{progress}%</span>
+            <span className="text-xs font-medium text-blue-400">
+              {progress}%
+            </span>
           </div>
           <div className="w-full bg-zinc-800 rounded-full h-1.5 overflow-hidden">
             <div

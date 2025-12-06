@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Flashcard } from "@/lib/types";
+import TipsWrapper from "@/components/TipsWrapper";
 import {
   ChevronLeft,
   ChevronRight,
@@ -297,36 +298,40 @@ export default function FlashcardView({
       </div>
 
       {/* Tips Sidebar */}
-      <div className="w-80 shrink-0 hidden lg:block">
-        <div className="sticky top-6 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center">
-              <Lightbulb className="w-4 h-4 text-white" />
+      <TipsWrapper>
+        <div className="w-80 shrink-0 hidden lg:block">
+          <div className="sticky top-6 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center">
+                <Lightbulb className="w-4 h-4 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-purple-900 dark:text-purple-200">
+                Flashcard Tips
+              </h3>
             </div>
-            <h3 className="text-lg font-semibold text-purple-900 dark:text-purple-200">
-              Flashcard Tips
-            </h3>
+            <ul className="space-y-3 text-sm text-purple-800 dark:text-purple-300">
+              <li className="flex items-start gap-2">
+                <MousePointer className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>Click cards to flip between question and answer</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <RefreshCw className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>Review multiple times for better retention</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>Try to recall the answer before flipping</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Lightbulb className="w-4 h-4 mt-0.5 shrink-0" />
+                <span>
+                  Focus on understanding concepts, not just memorizing
+                </span>
+              </li>
+            </ul>
           </div>
-          <ul className="space-y-3 text-sm text-purple-800 dark:text-purple-300">
-            <li className="flex items-start gap-2">
-              <MousePointer className="w-4 h-4 mt-0.5 shrink-0" />
-              <span>Click cards to flip between question and answer</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <RefreshCw className="w-4 h-4 mt-0.5 shrink-0" />
-              <span>Review multiple times for better retention</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 mt-0.5 shrink-0" />
-              <span>Try to recall the answer before flipping</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Lightbulb className="w-4 h-4 mt-0.5 shrink-0" />
-              <span>Focus on understanding concepts, not just memorizing</span>
-            </li>
-          </ul>
         </div>
-      </div>
+      </TipsWrapper>
     </div>
   );
 }
