@@ -35,7 +35,7 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  const stored = localStorage.getItem('user-settings');
+                  const stored = localStorage.getItem('sitecore-user-settings');
                   const settings = stored ? JSON.parse(stored) : { theme: 'system' };
                   const theme = settings.theme || 'system';
                   
