@@ -82,7 +82,10 @@ export default function SettingsPage() {
                     <Icon className="w-5 h-5" aria-hidden="true" />
                     <span className="text-sm font-medium">{label}</span>
                     {settings.theme === value && (
-                      <Check className="w-4 h-4 absolute top-2 right-2" aria-hidden="true" />
+                      <Check
+                        className="w-4 h-4 absolute top-2 right-2"
+                        aria-hidden="true"
+                      />
                     )}
                   </button>
                 ))}
@@ -114,7 +117,10 @@ export default function SettingsPage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-750 transition-colors">
               <div className="flex items-start gap-3 flex-1">
-                <Lightbulb className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" aria-hidden="true" />
+                <Lightbulb
+                  className="w-5 h-5 text-amber-500 mt-0.5 shrink-0"
+                  aria-hidden="true"
+                />
                 <div>
                   <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">
                     Show Tips
@@ -147,7 +153,10 @@ export default function SettingsPage() {
 
             {mounted && settings.showTips && (
               <div className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 border border-green-300 dark:border-green-800 rounded-lg">
-                <Check className="w-5 h-5 text-green-700 dark:text-green-400 shrink-0 mt-0.5" aria-hidden="true" />
+                <Check
+                  className="w-5 h-5 text-green-700 dark:text-green-400 shrink-0 mt-0.5"
+                  aria-hidden="true"
+                />
                 <div className="text-sm">
                   <p className="text-green-800 dark:text-green-300 font-medium mb-1">
                     Tips are visible
