@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { getProgress, resetProgress } from "@/lib/storage";
-import { sections } from "@/lib/data";
+import { sections, courses } from "@/lib/data";
 import { UserProgress } from "@/lib/types";
 import Link from "next/link";
 import {
-  BarChart3,
   CheckCircle,
   Target,
   BookOpen,
@@ -14,11 +13,17 @@ import {
   TrendingUp,
   Award,
   AlertTriangle,
+  ChevronDown,
+  ChevronRight,
+  GraduationCap,
 } from "lucide-react";
 
 export default function ProgressPage() {
   const [progress, setProgress] = useState<Record<string, UserProgress>>({});
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [expandedCourses, setExpandedCourses] = useState<Set<string>>(
+    new Set(courses.map((c) => c.id))
+  );
 
   useEffect(() => {
     // Load progress from localStorage on client mount to avoid hydration mismatch
@@ -26,6 +31,18 @@ export default function ProgressPage() {
     const timer = setTimeout(() => setProgress(getProgress()), 0);
     return () => clearTimeout(timer);
   }, []);
+
+  const toggleCourse = (courseId: string) => {
+    setExpandedCourses((prev) => {
+      const next = new Set(prev);
+      if (next.has(courseId)) {
+        next.delete(courseId);
+      } else {
+        next.add(courseId);
+      }
+      return next;
+    });
+  };
 
   const handleReset = () => {
     resetProgress();
@@ -44,6 +61,25 @@ export default function ProgressPage() {
     return completed;
   };
 
+  const getCourseCompletion = (courseId: string) => {
+    const course = courses.find((c) => c.id === courseId);
+    if (!course) return 0;
+
+    const completions = course.sectionIds.map((id) => getSectionCompletion(id));
+    const total = completions.reduce((sum, val) => sum + val, 0);
+    return Math.round(total / course.sectionIds.length);
+  };
+
+  const getCourseCompletedSections = (courseId: string) => {
+    const course = courses.find((c) => c.id === courseId);
+    if (!course) return 0;
+
+    return course.sectionIds.filter((id) => {
+      const sectionProgress = progress[id];
+      return sectionProgress?.completed;
+    }).length;
+  };
+
   const totalSections = sections.length;
   const completedSections = Object.values(progress).filter(
     (p) => p.completed
@@ -52,6 +88,14 @@ export default function ProgressPage() {
     totalSections > 0
       ? Math.round((completedSections / totalSections) * 100)
       : 0;
+
+  const studyHours =
+    Object.values(progress).reduce((total, p) => {
+      const section = sections.find(
+        (s) => s.id === Object.keys(progress).find((k) => progress[k] === p)
+      );
+      return total + (section?.estimatedTime || 0);
+    }, 0) / 60;
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 pt-20 lg:pt-8">
@@ -78,7 +122,7 @@ export default function ProgressPage() {
         <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-3 sm:mb-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-linear-to-br from-blue-600 to-cyan-600 flex items-center justify-center">
-              <BarChart3
+              <GraduationCap
                 className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                 aria-hidden="true"
               />
@@ -95,7 +139,7 @@ export default function ProgressPage() {
             {overallProgress}%
           </div>
           <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300">
-            Overall Progress
+            Course Progress
           </div>
         </div>
 
@@ -116,7 +160,7 @@ export default function ProgressPage() {
             className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1"
             suppressHydrationWarning
           >
-            {completedSections}/{totalSections}
+            {completedSections}
           </div>
           <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300">
             Sections Completed
@@ -140,140 +184,220 @@ export default function ProgressPage() {
             className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1"
             suppressHydrationWarning
           >
-            {Object.keys(progress).length}
+            {studyHours.toFixed(1)}h
           </div>
           <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300">
-            Sections Started
+            Study Time
           </div>
         </div>
       </div>
 
-      {/* Section Progress */}
+      {/* Course Progress */}
       <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 rounded-xl p-4 sm:p-6 mb-6 lg:mb-8">
         <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white mb-4 sm:mb-6">
-          Section Progress
+          Course Progress
         </h2>
 
-        <div className="space-y-3 sm:space-y-4">
-          {sections.map((section) => {
-            const sectionProgress = progress[section.id];
-            const completion = getSectionCompletion(section.id);
+        <div className="space-y-4 sm:space-y-6">
+          {courses.map((course) => {
+            const courseCompletion = getCourseCompletion(course.id);
+            const completedCount = getCourseCompletedSections(course.id);
+            const isExpanded = expandedCourses.has(course.id);
 
             return (
-              <Link
-                key={section.id}
-                href={`/sections/${section.id}`}
-                className="block p-4 sm:p-5 rounded-lg border border-zinc-300 dark:border-zinc-800 hover:border-blue-500 hover:bg-zinc-200 dark:hover:bg-zinc-800/50 transition-all group"
+              <div
+                key={course.id}
+                className="border border-zinc-300 dark:border-zinc-800 rounded-lg overflow-hidden"
               >
-                <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-linear-to-br from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
-                    <BookOpen
-                      className="w-5 h-5 sm:w-6 sm:h-6 text-white"
-                      aria-hidden="true"
+                {/* Course Header */}
+                <button
+                  onClick={() => toggleCourse(course.id)}
+                  className="w-full p-4 sm:p-5 hover:bg-zinc-200 dark:hover:bg-zinc-800/50 transition-all text-left"
+                >
+                  <div className="flex items-center gap-3 sm:gap-4 mb-3">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-linear-to-br from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
+                      <GraduationCap
+                        className="w-6 h-6 sm:w-7 sm:h-7 text-white"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-bold text-zinc-900 dark:text-white text-base sm:text-lg">
+                          {course.title}
+                        </h3>
+                        <span className="px-2 py-0.5 text-[10px] sm:text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded">
+                          {course.level}
+                        </span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-2">
+                        {course.description}
+                      </p>
+                      <div className="text-[10px] sm:text-xs text-zinc-500 dark:text-zinc-500">
+                        {completedCount}/{course.sectionIds.length} sections •{" "}
+                        {course.estimatedHours}h estimated
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                      <div className="text-right">
+                        <div className="text-lg sm:text-xl font-bold text-blue-700 dark:text-blue-400">
+                          {courseCompletion}%
+                        </div>
+                      </div>
+                      {isExpanded ? (
+                        <ChevronDown className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
+                      ) : (
+                        <ChevronRight className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="w-full bg-zinc-300 dark:bg-zinc-800 rounded-full h-2 overflow-hidden">
+                    <div
+                      className="bg-linear-to-r from-blue-600 to-purple-600 h-2 rounded-full transition-all"
+                      style={{ width: `${courseCompletion}%` }}
+                      role="progressbar"
+                      aria-valuenow={courseCompletion}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
                     />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate text-sm sm:text-base">
-                      {section.title}
-                    </h3>
-                    {sectionProgress && (
-                      <div className="text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 mt-1">
-                        Last studied:{" "}
-                        {new Date(
-                          sectionProgress.lastStudied
-                        ).toLocaleDateString()}
-                      </div>
-                    )}
-                  </div>
-                  <div className="text-base sm:text-lg font-bold text-blue-700 dark:text-blue-400">
-                    {completion}%
-                  </div>
-                </div>
+                </button>
 
-                <div className="w-full bg-zinc-300 dark:bg-zinc-800 rounded-full h-1.5 sm:h-2 mb-2 sm:mb-3 overflow-hidden">
-                  <div
-                    className="bg-linear-to-r from-blue-600 to-purple-600 h-1.5 sm:h-2 rounded-full transition-all"
-                    style={{ width: `${completion}%` }}
-                    role="progressbar"
-                    aria-valuenow={completion}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                  />
-                </div>
+                {/* Expandable Sections */}
+                {isExpanded && (
+                  <div className="border-t border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/50">
+                    <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
+                      {course.sectionIds.map((sectionId) => {
+                        const section = sections.find(
+                          (s) => s.id === sectionId
+                        );
+                        if (!section) return null;
 
-                {sectionProgress && (
-                  <div className="flex flex-wrap gap-2 sm:gap-4 text-[10px] sm:text-xs">
-                    <span className="flex items-center gap-1 sm:gap-1.5">
-                      {sectionProgress.flashExposureCompleted ? (
-                        <CheckCircle
-                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600 dark:text-green-500"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <Circle
-                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-400 dark:text-zinc-600"
-                          aria-hidden="true"
-                        />
-                      )}
-                      <span
-                        className={
-                          sectionProgress.flashExposureCompleted
-                            ? "text-green-700 dark:text-green-400"
-                            : "text-zinc-600 dark:text-zinc-400"
-                        }
-                      >
-                        Flash Exposure
-                      </span>
-                    </span>
-                    <span className="flex items-center gap-1 sm:gap-1.5">
-                      {sectionProgress.flashcardsReviewed > 0 ? (
-                        <CheckCircle
-                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600 dark:text-green-500"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <Circle
-                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-400 dark:text-zinc-600"
-                          aria-hidden="true"
-                        />
-                      )}
-                      <span
-                        className={
-                          sectionProgress.flashcardsReviewed > 0
-                            ? "text-green-700 dark:text-green-400"
-                            : "text-zinc-600 dark:text-zinc-400"
-                        }
-                      >
-                        Flashcards
-                      </span>
-                    </span>
-                    <span className="flex items-center gap-1 sm:gap-1.5">
-                      {sectionProgress.quizScore !== null ? (
-                        <CheckCircle
-                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-600 dark:text-green-500"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <Circle
-                          className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-400 dark:text-zinc-600"
-                          aria-hidden="true"
-                        />
-                      )}
-                      <span
-                        className={
-                          sectionProgress.quizScore !== null
-                            ? "text-green-700 dark:text-green-400"
-                            : "text-zinc-600 dark:text-zinc-400"
-                        }
-                      >
-                        {sectionProgress.quizScore !== null
-                          ? `Quiz (${sectionProgress.quizScore}%)`
-                          : "Quiz"}
-                      </span>
-                    </span>
+                        const sectionProgress = progress[section.id];
+                        const completion = getSectionCompletion(section.id);
+
+                        return (
+                          <Link
+                            key={section.id}
+                            href={`/sections/${section.id}`}
+                            className="block p-3 sm:p-4 rounded-lg border border-zinc-300 dark:border-zinc-800 hover:border-blue-500 hover:bg-zinc-100 dark:hover:bg-zinc-800/50 transition-all group bg-white dark:bg-zinc-900"
+                          >
+                            <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-linear-to-br from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
+                                <BookOpen
+                                  className="w-4 h-4 sm:w-5 sm:h-5 text-white"
+                                  aria-hidden="true"
+                                />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <h4 className="font-semibold text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors text-xs sm:text-sm">
+                                  {section.title}
+                                </h4>
+                                {sectionProgress && (
+                                  <div className="text-[9px] sm:text-[10px] text-zinc-500 dark:text-zinc-500 mt-0.5">
+                                    Last studied:{" "}
+                                    {new Date(
+                                      sectionProgress.lastStudied
+                                    ).toLocaleDateString()}
+                                  </div>
+                                )}
+                              </div>
+                              <div className="text-sm sm:text-base font-bold text-blue-700 dark:text-blue-400">
+                                {completion}%
+                              </div>
+                            </div>
+
+                            <div className="w-full bg-zinc-300 dark:bg-zinc-800 rounded-full h-1 sm:h-1.5 mb-2 overflow-hidden">
+                              <div
+                                className="bg-linear-to-r from-blue-600 to-purple-600 h-1 sm:h-1.5 rounded-full transition-all"
+                                style={{ width: `${completion}%` }}
+                                role="progressbar"
+                                aria-valuenow={completion}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                              />
+                            </div>
+
+                            {sectionProgress && (
+                              <div className="flex flex-wrap gap-1.5 sm:gap-3 text-[9px] sm:text-[10px]">
+                                <span className="flex items-center gap-0.5 sm:gap-1">
+                                  {sectionProgress.flashExposureCompleted ? (
+                                    <CheckCircle
+                                      className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-green-600 dark:text-green-500"
+                                      aria-hidden="true"
+                                    />
+                                  ) : (
+                                    <Circle
+                                      className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-zinc-400 dark:text-zinc-600"
+                                      aria-hidden="true"
+                                    />
+                                  )}
+                                  <span
+                                    className={
+                                      sectionProgress.flashExposureCompleted
+                                        ? "text-green-700 dark:text-green-400"
+                                        : "text-zinc-600 dark:text-zinc-400"
+                                    }
+                                  >
+                                    Flash
+                                  </span>
+                                </span>
+                                <span className="flex items-center gap-0.5 sm:gap-1">
+                                  {sectionProgress.flashcardsReviewed > 0 ? (
+                                    <CheckCircle
+                                      className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-green-600 dark:text-green-500"
+                                      aria-hidden="true"
+                                    />
+                                  ) : (
+                                    <Circle
+                                      className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-zinc-400 dark:text-zinc-600"
+                                      aria-hidden="true"
+                                    />
+                                  )}
+                                  <span
+                                    className={
+                                      sectionProgress.flashcardsReviewed > 0
+                                        ? "text-green-700 dark:text-green-400"
+                                        : "text-zinc-600 dark:text-zinc-400"
+                                    }
+                                  >
+                                    Cards
+                                  </span>
+                                </span>
+                                <span className="flex items-center gap-0.5 sm:gap-1">
+                                  {sectionProgress.quizScore !== null ? (
+                                    <CheckCircle
+                                      className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-green-600 dark:text-green-500"
+                                      aria-hidden="true"
+                                    />
+                                  ) : (
+                                    <Circle
+                                      className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-zinc-400 dark:text-zinc-600"
+                                      aria-hidden="true"
+                                    />
+                                  )}
+                                  <span
+                                    className={
+                                      sectionProgress.quizScore !== null
+                                        ? "text-green-700 dark:text-green-400"
+                                        : "text-zinc-600 dark:text-zinc-400"
+                                    }
+                                  >
+                                    {sectionProgress.quizScore !== null
+                                      ? `Quiz (${sectionProgress.quizScore}%)`
+                                      : "Quiz"}
+                                  </span>
+                                </span>
+                              </div>
+                            )}
+                          </Link>
+                        );
+                      })}
+                    </div>
                   </div>
                 )}
-              </Link>
+              </div>
             );
           })}
         </div>

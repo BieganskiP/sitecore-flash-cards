@@ -8807,6 +8807,1103 @@ json
       },
     ],
   },
+  {
+    id: "renderings-layouts-intro",
+    title: "Renderings & Layouts Introduction",
+    description:
+      "Understanding components, layouts, and page structure in SitecoreAI CMS",
+    estimatedTime: 18,
+
+    content: `# Renderings & Layouts Introduction
+
+## What Are Renderings (Components)?
+
+In SitecoreAI CMS, **renderings** (also called components) are the building blocks of digital experiences. They are specialized containers that transform content from the CMS into visually appealing, interactive elements.
+
+### Key Characteristics of Components
+
+**Modular content blocks:**
+- Self-contained units of functionality
+- Transform data into visual elements
+- Can be combined to build complex pages
+
+**Reusable across multiple pages:**
+- Use once, deploy everywhere
+- Ensures consistency across the site
+- Streamlines development effort
+
+**Highly configurable:**
+- Customizable parameters
+- Adjustable styles
+- Match brand requirements
+
+**Dynamic and responsive:**
+- Adapt to different screen sizes
+- Work seamlessly across devices
+- Mobile-first approach
+
+## Types of Components
+
+Components in SitecoreAI CMS can be categorized by their function:
+
+### Content Components
+Display content from the CMS.
+
+**Examples:**
+- Article displays
+- Product details
+- Event information
+- Blog posts
+
+### Navigation Components
+Help users navigate the site.
+
+**Examples:**
+- Menus (horizontal, vertical, mega)
+- Breadcrumbs
+- Pagination
+- Site maps
+
+### Interactive Components
+Enable user interactions.
+
+**Examples:**
+- Forms (contact, registration, search)
+- Search boxes
+- Filters and sorting
+- Comment sections
+
+### Layout Components
+Structure the page.
+
+**Examples:**
+- Columns and rows
+- Containers
+- Grid systems
+- Spacers
+
+### Composite Components
+Contain other components.
+
+**Examples:**
+- Carousels (with slides)
+- Tabs (with tab panels)
+- Accordions
+- Modal dialogs
+
+## Common Component Examples
+
+### Hero Banners
+**Features:**
+- Customizable backgrounds
+- Call-to-action buttons
+- Messaging overlays
+- Video or image support
+
+**Use case:** Homepage impact, campaign launches
+
+### Product Showcases
+**Features:**
+- Filtering options
+- Interactive galleries
+- Quick view functionality
+- Compare features
+
+**Use case:** E-commerce, product catalogs
+
+### Content Carousels
+**Features:**
+- Automatic rotation
+- Manual navigation
+- Featured items
+- Responsive behavior
+
+**Use case:** Featured content, testimonials, image galleries
+
+### Personalized Recommendation Blocks
+**Features:**
+- Based on user behavior
+- Dynamic content
+- A/B testing support
+- Analytics integration
+
+**Use case:** Product recommendations, related articles
+
+### Interactive Forms
+**Features:**
+- Field validation
+- Multi-step support
+- Submission handling
+- Error messaging
+
+**Use case:** Contact, registration, surveys
+
+## What Are Layouts?
+
+Layouts establish the **structural framework** that organizes components within pages. They provide the skeleton upon which components are placed.
+
+### Layout Functions
+
+**Define overall page structure:**
+- Header area
+- Main content zones
+- Sidebar regions
+- Footer area
+
+**Establish grids and content zones:**
+- Column layouts (1, 2, 3, or more columns)
+- Designated areas for components
+- Responsive grid systems
+
+**Control responsive behavior:**
+- Breakpoints for different devices
+- Mobile, tablet, desktop variations
+- Progressive enhancement
+
+**Maintain visual hierarchy:**
+- Content priority
+- User flow guidance
+- Intended journey mapping
+
+**Ensure brand consistency:**
+- Consistent header/footer
+- Standard spacing
+- Page-specific variations allowed
+
+## Key Layout Considerations
+
+### Header and Footer Frameworks
+Remain consistent across the site:
+- Logo placement
+- Navigation structure
+- Contact information
+- Social media links
+- Copyright and legal
+
+### Main Content Areas
+Flexible column arrangements:
+- Single column (full width)
+- Two columns (main + sidebar)
+- Three columns (flexible layouts)
+- Custom arrangements
+
+### Sidebar Regions
+Supplementary information:
+- Related content
+- Calls to action
+- Navigation aids
+- Widgets
+
+### Responsive Breakpoints
+Device-specific experiences:
+- Mobile: < 768px
+- Tablet: 768px - 1024px
+- Desktop: > 1024px
+- Large screens: > 1440px
+
+### Specialized Templates
+Different content types:
+- Product pages (with specs, reviews)
+- Article pages (with author, date)
+- Landing pages (conversion-focused)
+- Home pages (comprehensive overview)
+
+## Example: Events Site Layout
+
+The Events site implements a consistent layout:
+
+**Header Section:**
+- Logo
+- Main navigation
+- Search
+
+**Main Content Area:**
+- Flexible placeholder for components
+- Adapts based on page type
+
+**Footer Section:**
+- Contact information
+- Social media links
+- Legal links
+
+## Managing Renderings and Layouts in Content Editor
+
+All renderings and layouts are maintained as definition items in Content Editor:
+
+### Key Locations
+
+**Headless Layout (JSS Layout):**
+- Path: \`/sitecore/layout/Layouts/Project/[Your-Site]\`
+- Default layout for Headless SXA sites
+- Includes header, main, footer placeholders
+
+**Renderings Folder:**
+- Path: \`/sitecore/layout/Renderings\`
+- Central repository of all rendering definitions
+- Organized by Feature/Foundation/Project
+
+**Available Renderings:**
+- Path: \`[Site]/Presentation/Available Renderings\`
+- Site-specific collection
+- Controls what editors see in Page Builder
+
+### Component Configuration
+
+**Each rendering definition contains:**
+- Component name (matches front-end code)
+- Parameters template (rendering behavior)
+- Datasource template (content structure)
+- Datasource location (where content lives)
+- Insert options (nesting rules)
+
+## Separation of Concerns
+
+**Content (What):**
+- Stored in content items
+- Data templates define structure
+- Managed by content editors
+
+**Presentation (How):**
+- Defined by components
+- Layout determines placement
+- Configured by developers
+
+**Behavior (Interactions):**
+- JavaScript/framework code
+- Event handlers
+- State management
+
+**Benefits:**
+- Content reuse across multiple presentations
+- Components reuse across multiple pages
+- Easier maintenance
+- Flexibility for personalization
+
+## Key Takeaways
+
+- Renderings (components) are modular building blocks of pages
+- Components can be content, navigation, interactive, layout, or composite
+- Components are reusable, configurable, and responsive
+- Layouts provide the structural framework for organizing components
+- Layouts include header, main content, sidebars, and footer areas
+- Renderings and layouts are managed in Content Editor
+- Separation of content from presentation enables flexibility
+- Available Renderings control what editors see in Page Builder
+- Good architecture supports consistency and scalability`,
+
+    flashcards: [
+      {
+        id: "render-intro-1",
+        question: "What are renderings in SitecoreAI CMS?",
+        answer:
+          "Renderings (also called components) are modular, reusable building blocks that transform CMS content into visual, interactive elements. They can be configured and used across multiple pages.",
+        difficulty: "easy",
+      },
+      {
+        id: "render-intro-2",
+        question: "What are the five types of components in SitecoreAI CMS?",
+        answer:
+          "Content components (display content), Navigation components (help navigate), Interactive components (user interactions), Layout components (structure pages), and Composite components (contain other components).",
+        difficulty: "medium",
+      },
+      {
+        id: "render-intro-3",
+        question: "What is a layout in SitecoreAI CMS?",
+        answer:
+          "A layout is the structural framework that organizes components within pages. It defines the overall structure, establishes grids and content zones, and controls responsive behavior.",
+        difficulty: "easy",
+      },
+      {
+        id: "render-intro-4",
+        question: "What is the default layout for Headless SXA sites?",
+        answer:
+          "Headless Layout (JSS Layout) which includes header, main, and footer placeholders. It serves as the default template for all pages.",
+        difficulty: "medium",
+      },
+      {
+        id: "render-intro-5",
+        question: "Where are rendering definitions stored?",
+        answer:
+          "In Content Editor at /sitecore/layout/Renderings, organized by Feature/Foundation/Project structure. These are the central repository of all component definitions.",
+        difficulty: "medium",
+      },
+      {
+        id: "render-intro-6",
+        question: "What are Available Renderings?",
+        answer:
+          "A site-specific collection of renderings at [Site]/Presentation/Available Renderings that controls which components content editors can use in Page Builder.",
+        difficulty: "medium",
+      },
+      {
+        id: "render-intro-7",
+        question: "What's an example of a composite component?",
+        answer:
+          "Carousels, tabs, accordions, or modal dialogs - components that contain other components within them to create complex interactive experiences.",
+        difficulty: "easy",
+      },
+      {
+        id: "render-intro-8",
+        question:
+          "What are the key benefits of separating content from presentation?",
+        answer:
+          "Content reuse across multiple presentations, component reuse across pages, easier maintenance, and flexibility for personalization and testing.",
+        difficulty: "hard",
+      },
+      {
+        id: "render-intro-9",
+        question: "What are typical responsive breakpoints?",
+        answer:
+          "Mobile (< 768px), Tablet (768px - 1024px), Desktop (> 1024px), and Large screens (> 1440px). Layouts adapt to these breakpoints.",
+        difficulty: "medium",
+      },
+      {
+        id: "render-intro-10",
+        question: "What information does a rendering definition contain?",
+        answer:
+          "Component name (matches code), parameters template (behavior), datasource template (content structure), datasource location (where content lives), and insert options (nesting rules).",
+        difficulty: "hard",
+      },
+    ],
+
+    quizQuestions: [
+      {
+        id: "render-intro-quiz-1",
+        question:
+          "You need a component that displays product information. What type of component is this?",
+        options: [
+          "Navigation component",
+          "Content component",
+          "Layout component",
+          "Interactive component",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Content components display content from the CMS, such as articles, product details, or event information. They transform CMS data into visual displays.",
+        scenario: "Choosing the right component type for displaying products.",
+      },
+      {
+        id: "render-intro-quiz-2",
+        question:
+          "What's the main difference between a rendering and a layout?",
+        options: [
+          "Renderings are for mobile, layouts for desktop",
+          "Renderings are components with content, layouts provide the structural framework",
+          "Renderings are in JavaScript, layouts are in HTML",
+          "There is no difference - they're the same thing",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Renderings (components) are the modular building blocks that display content. Layouts provide the structural framework (header, main, footer) that organizes where components can be placed.",
+      },
+      {
+        id: "render-intro-quiz-3",
+        question:
+          "Content editors can't see your new component in Page Builder. Where should you add it?",
+        options: [
+          "/sitecore/layout/Renderings",
+          "[Site]/Presentation/Available Renderings",
+          "/sitecore/templates",
+          "/sitecore/content",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Available Renderings at [Site]/Presentation/Available Renderings controls which components appear in Page Builder for content editors. The rendering must be added here to be visible.",
+      },
+      {
+        id: "render-intro-quiz-4",
+        question: "What's an example of an interactive component?",
+        options: [
+          "Hero banner",
+          "Navigation menu",
+          "Contact form with validation",
+          "Column layout",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Interactive components enable user interactions. A contact form with validation is interactive - users input data, submit, and receive feedback. Hero banners are content components, menus are navigation, columns are layout.",
+      },
+      {
+        id: "render-intro-quiz-5",
+        question:
+          "You need the same component to look different on mobile vs desktop. What layout feature handles this?",
+        options: [
+          "Multiple component versions",
+          "Responsive breakpoints and behavior",
+          "Separate mobile and desktop sites",
+          "JavaScript detection",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Layouts control responsive behavior through breakpoints. Components adapt their display based on device size using responsive design, not by creating separate versions.",
+      },
+      {
+        id: "render-intro-quiz-6",
+        question: "What's the benefit of separating content from presentation?",
+        options: [
+          "Faster page load times",
+          "Better SEO rankings",
+          "Content can be reused with different presentations",
+          "Easier to learn",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Separation of concerns allows content to be reused across multiple presentations, components to be reused across pages, and enables personalization. The same content can appear in different formats or contexts.",
+      },
+      {
+        id: "render-intro-quiz-7",
+        question:
+          "A carousel that contains image components is an example of what type?",
+        options: [
+          "Content component",
+          "Layout component",
+          "Composite component",
+          "Navigation component",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Composite components contain other components. A carousel holds slides/images, tabs hold panels, accordions hold sections. They create complex experiences by composing simpler components.",
+      },
+      {
+        id: "render-intro-quiz-8",
+        question:
+          "What typically stays consistent across all pages in a layout?",
+        options: [
+          "Main content area only",
+          "Header and footer frameworks",
+          "Sidebar content",
+          "All components",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Header and footer frameworks typically remain consistent across the site for brand consistency and navigation. Main content and sidebars vary by page type and purpose.",
+      },
+      {
+        id: "render-intro-quiz-9",
+        question: "Where are rendering definitions centrally stored?",
+        options: [
+          "/sitecore/content",
+          "/sitecore/templates",
+          "/sitecore/layout/Renderings",
+          "/sitecore/system",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "/sitecore/layout/Renderings is the central repository for all rendering definitions, organized by Feature/Foundation/Project structure. This is where component configurations are maintained.",
+      },
+      {
+        id: "render-intro-quiz-10",
+        question:
+          "What allows the same product data to appear differently on mobile vs a product comparison page?",
+        options: [
+          "Creating duplicate content items",
+          "Separation of content from presentation",
+          "Using different databases",
+          "Manual content editing",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Separation of content (what) from presentation (how) allows the same product data to be displayed differently based on context - mobile view, comparison table, quick view popup, etc. One content source, multiple presentations.",
+      },
+    ],
+  },
+  {
+    id: "clone-rendering",
+    title: "Clone Rendering",
+    description: "Accelerate development by cloning existing components",
+    estimatedTime: 20,
+
+    content: `# Clone Rendering
+
+## Approaches to Component Development
+
+There are three primary ways to create components for SitecoreAI CMS:
+
+### 1. Code-Based Components
+Using JavaScript front-end frameworks and Sitecore JavaScript Services (JSS) SDK.
+
+**Frameworks supported:**
+- Next.js (most common for XM Cloud)
+- React
+- Vue
+- Angular
+
+**Process:**
+- Manual development
+- Full control over functionality
+- Use JSS SDK for Sitecore integration
+
+### 2. No-Code/Low-Code Components
+Using the SitecoreAI CMS Components Builder.
+
+**Features:**
+- Visual interface
+- Drag-and-drop design
+- No coding required
+- Front End as a Service (FEaaS)
+
+### 3. Bring Your Own Components (BYOC)
+Integrating existing external components.
+
+**Use case:**
+- Leverage existing component libraries
+- Import third-party components
+- Integrate design systems
+
+**Note:** This course focuses on code-based components, particularly cloning for rapid development.
+
+## Why Clone Existing Renderings?
+
+Cloning an existing component streamlines development by providing significant advantages:
+
+### Automatic Boilerplate Generation
+
+**Creates necessary items:**
+- Rendering definition item
+- Parameter template
+- Datasource template
+- Datasource location
+
+**Ensures proper configuration:**
+- Base templates set up correctly
+- Field definitions included
+- Content authoring features ready
+
+### Accelerates Development
+
+**Benefits:**
+- Start with working foundation
+- Avoid configuration mistakes
+- Focus on customization, not setup
+- Proven patterns and structure
+
+### SXA Component Foundation
+
+When you clone a Headless SXA rendering:
+- Inherits SXA base templates
+- Gets authoring features for Page Builder
+- Includes standard rendering parameters
+- Supports variants and datasources
+
+## The Cloning Process
+
+### Step 1: Choose a Component to Clone
+
+Select an existing Headless SXA component that's similar to what you need.
+
+**Common base components:**
+- **Page Content** - For rich text content
+- **Promo** - For promotional blocks
+- **Container** - For layout containers
+- **Navigation** - For menu components
+
+**Selection criteria:**
+- Similar functionality
+- Appropriate field structure
+- Datasource requirements match
+
+### Step 2: Clone the Component
+
+**In Content Editor:**
+
+1. Navigate to source component:
+   \`/sitecore/layout/Renderings/Feature/Headless Experience Accelerator/[Component]\`
+
+2. Right-click the component item
+
+3. Select **Scripts → Clone Rendering**
+
+4. **Clone Rendering Wizard opens**
+
+### Step 3: Configure Clone Settings
+
+**New Rendering Name:**
+- Enter descriptive name (e.g., "EventInfo")
+- Use PascalCase convention
+- Clear, specific naming
+
+**Add to Module:**
+- Select \`Renderings/Project/[your-project]\`
+- Keeps project components organized
+- Separate from Foundation/Feature
+
+**Parameters Tab:**
+- **Rendering Parameters:** Usually keep default
+- Creates parameter template for component styling
+
+**Datasource Tab:**
+- **Datasource Template:** Usually keep default
+- Creates template for component content
+- **Datasource Location:** Can customize later
+
+### Step 4: Review Generated Items
+
+After cloning, several items are created:
+
+**Rendering Definition:**
+- Location: \`/sitecore/layout/Renderings/Project/[project]/[ComponentName]\`
+- Type: Json Rendering
+- Inherits from Json Rendering template
+
+**Key Fields:**
+- **Component Name:** Matches your code filename
+- **Datasource Template:** For content structure
+- **Datasource Location:** Where content is stored
+- **Parameters Template:** For rendering options
+
+**Example Structure:**
+\`\`\`
+Renderings/
+  Project/
+    demo/
+      EventInfo (Json Rendering)
+        - Component Name: "EventInfo"
+        - Datasource Template: EventInfo Template
+        - Datasource Location: ./Data/EventInfo
+        - Parameters Template: EventInfo Parameters
+\`\`\`
+
+## Step 5: Create the Component Code
+
+### Duplicate and Modify
+
+**In your Next.js project:**
+
+1. **Create project folder:**
+   \`src/components/[project-name]/\`
+   Example: \`src/components/tac/\`
+
+2. **Duplicate source component:**
+   Copy \`PageContent.tsx\` → \`EventInfo.tsx\`
+
+3. **Modify the code:**
+   - Update component name
+   - Add/modify fields
+   - Adjust rendering logic
+   - Update imports
+
+### Example: EventInfo Component
+
+**Original (Page Content):**
+- Displays: Content (Rich Text)
+
+**Modified (Event Info):**
+- Displays: Title, Content, Intro
+- Extends functionality
+- Adds new fields
+
+**Code structure:**
+\`\`\`typescript
+import { Field, RichTextField, TextField } from '@sitecore-jss/sitecore-jss-nextjs';
+
+type EventInfoProps = {
+  params: { [key: string]: string };
+  Title: Field<string>;
+  Content: RichTextField;
+  Intro: TextField;
+};
+
+export const Default = (props: EventInfoProps): JSX.Element => {
+  // Component rendering logic
+  return (
+    <div>
+      <h1><Text field={props.Title} /></h1>
+      <RichText field={props.Content} />
+      <Text field={props.Intro} />
+    </div>
+  );
+};
+\`\`\`
+
+## Step 6: Add to Available Renderings
+
+Make the component available to content editors:
+
+### Create Rendering Category
+
+**In Content Editor:**
+1. Navigate to \`[Site]/Presentation/Available Renderings\`
+2. Verify "Group renderings in sections" is checked
+3. Insert new Available Renderings item (e.g., "Events")
+
+### Add Component to Category
+
+1. Select your category item
+2. Click **Edit** in Renderings field
+3. Select your cloned component
+4. Save
+
+**Result:** Component appears in Page Builder Components tab under your category.
+
+## Step 7: Test the Component
+
+### Set Up Local Development
+
+**Start development server:**
+\`\`\`bash
+npm run start:connected
+\`\`\`
+
+**Verify:**
+- Localhost:3000 is running
+- Connected to Sitecore CM
+
+### Configure Editing Host
+
+**In Page Builder:**
+1. Open your page
+2. Currently on Default editing host
+3. Component may show as disabled (local component)
+4. Change editing host to \`http://localhost:3000\`
+
+### Add Component to Page
+
+1. Components tab shows your new component
+2. Drag to appropriate placeholder
+3. Assign or create content
+4. Verify rendering
+
+**Check for:**
+- No errors in browser console
+- Fields display correctly
+- Styling works as expected
+- Datasource assignment works
+
+## Best Practices
+
+### Component Naming
+
+**Consistent conventions:**
+- Use PascalCase
+- Descriptive names
+- Avoid abbreviations
+- Match code filename exactly
+
+**Examples:**
+- EventInfo ✓
+- ProductCard ✓
+- HeroWithVideo ✓
+- evt-info ✗ (not PascalCase)
+
+### Code Organization
+
+**Project structure:**
+\`\`\`
+src/
+  components/
+    [project-name]/
+      EventInfo.tsx
+      ProductCard.tsx
+      HeroWithVideo.tsx
+\`\`\`
+
+**Benefits:**
+- Easy to locate
+- Clear ownership
+- Scalable structure
+
+### Module Organization
+
+**Recommended approach:**
+Create a Headless module before cloning renderings.
+
+**Benefits:**
+- Organized rendering definitions
+- Clear project boundaries
+- Better dependency management
+
+**Module structure:**
+\`\`\`
+/sitecore/layout/
+  Renderings/
+    Project/
+      [Module Name]/
+        [Component 1]
+        [Component 2]
+\`\`\`
+
+### Version Control
+
+**Track all changes:**
+- Component code files
+- Sitecore item serialization
+- Module configurations
+- Documentation
+
+## Common Pitfalls
+
+### Component Name Mismatch
+
+**Problem:**
+- Sitecore component name: "EventInfo"
+- Code filename: "EventDetails.tsx"
+- Names don't match → Component won't render
+
+**Solution:**
+- Ensure exact match between Component Name field and code filename
+- Case-sensitive match required
+
+### Missing in Available Renderings
+
+**Problem:**
+- Component created but not visible in Page Builder
+
+**Solution:**
+- Add to Available Renderings
+- Check site-specific configuration
+- Verify grouping is enabled
+
+### Local vs Default Host
+
+**Problem:**
+- Component works on localhost but disabled on default host
+
+**Solution:**
+- Deploy component to default editing host
+- Or keep using localhost for development
+- Understand editing host architecture
+
+### Datasource Template Issues
+
+**Problem:**
+- Content fields don't appear
+- Wrong template structure
+
+**Solution:**
+- Verify datasource template includes all needed fields
+- Check field types match code expectations
+- Review template inheritance
+
+## Key Takeaways
+
+- Cloning accelerates development with automatic boilerplate
+- Choose similar existing component as base
+- Clone Rendering wizard creates all necessary items
+- Duplicate and modify component code to match
+- Add to Available Renderings for editor visibility
+- Test with local editing host first
+- Match component names exactly between Sitecore and code
+- Use proper project structure and naming conventions
+- Create headless modules for better organization`,
+
+    flashcards: [
+      {
+        id: "clone-1",
+        question:
+          "What are the three approaches to component development in SitecoreAI CMS?",
+        answer:
+          "Code-based components (using JSS SDK), No-code/low-code components (Components Builder), and Bring Your Own Components (BYOC - integrating external components).",
+        difficulty: "easy",
+      },
+      {
+        id: "clone-2",
+        question:
+          "Why clone existing renderings instead of creating from scratch?",
+        answer:
+          "Cloning automatically creates necessary boilerplate items (rendering definition, parameter template, datasource template), ensures proper base template setup, and accelerates development.",
+        difficulty: "medium",
+      },
+      {
+        id: "clone-3",
+        question: "Where do you initiate cloning a rendering?",
+        answer:
+          "In Content Editor, navigate to the source component, right-click, and select Scripts → Clone Rendering.",
+        difficulty: "easy",
+      },
+      {
+        id: "clone-4",
+        question:
+          "What items are automatically created when you clone a rendering?",
+        answer:
+          "Rendering definition item, parameter template (for styling), datasource template (for content), and datasource location configuration.",
+        difficulty: "medium",
+      },
+      {
+        id: "clone-5",
+        question: "What is the Component Name field and why is it important?",
+        answer:
+          "The Component Name field in the rendering definition must exactly match the code filename (case-sensitive). If they don't match, the component won't render.",
+        difficulty: "hard",
+      },
+      {
+        id: "clone-6",
+        question:
+          "Where should you add cloned components to make them visible in Page Builder?",
+        answer:
+          "Add them to Available Renderings at [Site]/Presentation/Available Renderings. Create a category and add your component to the Renderings field.",
+        difficulty: "medium",
+      },
+      {
+        id: "clone-7",
+        question: "Why might a component be disabled in Page Builder?",
+        answer:
+          "If it's a local component (only in your development environment), it will be disabled on the default editing host. Switch to http://localhost:3000 as the editing host to enable it.",
+        difficulty: "hard",
+      },
+      {
+        id: "clone-8",
+        question: "What command starts the local development server?",
+        answer:
+          "npm run start:connected - This connects your local Next.js development server to the Sitecore CM instance.",
+        difficulty: "easy",
+      },
+      {
+        id: "clone-9",
+        question: "What naming convention should you use for component names?",
+        answer:
+          "Use PascalCase (e.g., EventInfo, ProductCard, HeroWithVideo) with descriptive, non-abbreviated names that match the code filename exactly.",
+        difficulty: "medium",
+      },
+      {
+        id: "clone-10",
+        question: "Where should project-specific component code be organized?",
+        answer:
+          "In src/components/[project-name]/ directory structure, keeping project components separate and organized.",
+        difficulty: "easy",
+      },
+    ],
+
+    quizQuestions: [
+      {
+        id: "clone-quiz-1",
+        question:
+          "You cloned PageContent to create EventInfo. The component doesn't render. Most likely cause?",
+        options: [
+          "Didn't restart Sitecore",
+          "Component Name field doesn't match code filename",
+          "Need to rebuild indexes",
+          "Datasource template is wrong",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "The Component Name field in the rendering definition must exactly match the code filename (case-sensitive). 'EventInfo' in Sitecore must match 'EventInfo.tsx' in code.",
+        scenario: "Cloned component not rendering.",
+      },
+      {
+        id: "clone-quiz-2",
+        question:
+          "Your cloned component doesn't appear in Page Builder. Where should you add it?",
+        options: [
+          "/sitecore/layout/Renderings",
+          "[Site]/Presentation/Available Renderings",
+          "/sitecore/templates",
+          "It appears automatically after cloning",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "After cloning, you must add the component to [Site]/Presentation/Available Renderings for it to appear in Page Builder. Create a category and add your component to the Renderings field.",
+      },
+      {
+        id: "clone-quiz-3",
+        question:
+          "Which existing component should you clone for a promotional block with image and text?",
+        options: [
+          "Page Content (rich text only)",
+          "Promo (promotional blocks)",
+          "Container (layout container)",
+          "Navigation (menu component)",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Promo component is designed for promotional blocks with images, text, and CTAs. Choose a base component similar to your target functionality.",
+      },
+      {
+        id: "clone-quiz-4",
+        question: "What does the Clone Rendering wizard automatically create?",
+        options: [
+          "Only the rendering definition",
+          "Only the code file",
+          "Rendering definition, parameter template, datasource template, and location",
+          "Only the datasource template",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "The Clone Rendering wizard creates all necessary boilerplate: rendering definition, parameter template (for styling options), datasource template (for content), and datasource location configuration.",
+      },
+      {
+        id: "clone-quiz-5",
+        question:
+          "Your component shows as disabled in Page Builder. What should you check?",
+        options: [
+          "User permissions",
+          "Whether you're on default host vs localhost editing host",
+          "Workflow state",
+          "Publishing status",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Local components are disabled on the default editing host. Switch to http://localhost:3000 as the editing host to enable local development components.",
+      },
+      {
+        id: "clone-quiz-6",
+        question:
+          "Where should you select to add your cloned rendering in the wizard?",
+        options: [
+          "Renderings/Feature/[project]",
+          "Renderings/Foundation/[project]",
+          "Renderings/Project/[project]",
+          "Renderings/System/[project]",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Project-specific components should be added to Renderings/Project/[project-name]. This follows Helix architecture and keeps project code separate from Foundation/Feature layers.",
+      },
+      {
+        id: "clone-quiz-7",
+        question:
+          "What's the recommended code organization for project components?",
+        options: [
+          "src/[component-name].tsx",
+          "src/components/[component-name].tsx",
+          "src/components/[project-name]/[component-name].tsx",
+          "components/[component-name].tsx",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "Organize project components in src/components/[project-name]/ directory. This keeps project components together, separate, and easy to locate. Example: src/components/tac/EventInfo.tsx",
+      },
+      {
+        id: "clone-quiz-8",
+        question:
+          "You cloned a component and modified the code. What command tests it locally?",
+        options: [
+          "npm run dev",
+          "npm start",
+          "npm run start:connected",
+          "npm run build",
+        ],
+        correctAnswer: 2,
+        explanation:
+          "npm run start:connected starts the development server connected to Sitecore CM. This allows Page Builder to use your local component code for testing.",
+      },
+      {
+        id: "clone-quiz-9",
+        question: "What's a best practice before cloning renderings?",
+        options: [
+          "Create a new site first",
+          "Create a Headless module for organization",
+          "Delete all existing components",
+          "Backup the entire database",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "Creating a Headless module before cloning provides better organization, clear project boundaries, and proper dependency management. It's a recommended best practice.",
+      },
+      {
+        id: "clone-quiz-10",
+        question:
+          "What's the relationship between rendering definition and code filename?",
+        options: [
+          "Names should be similar but don't need to match",
+          "Must match exactly (case-sensitive)",
+          "Code filename should be lowercase version",
+          "No relationship required",
+        ],
+        correctAnswer: 1,
+        explanation:
+          "The Component Name field in Sitecore rendering definition must exactly match the code filename (case-sensitive). 'EventInfo' = 'EventInfo.tsx'. Mismatch prevents rendering.",
+      },
+    ],
+  },
 ];
 
 // Courses - collections of sections
