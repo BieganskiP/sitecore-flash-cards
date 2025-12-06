@@ -64,9 +64,6 @@ export default function SectionsPage() {
               <h1 className="text-2xl sm:text-3xl font-bold text-white">
                 Learning Sections
               </h1>
-              <p className="text-zinc-400 text-xs sm:text-sm">
-                Complete all 4 phases for maximum retention
-              </p>
             </div>
           </div>
 
