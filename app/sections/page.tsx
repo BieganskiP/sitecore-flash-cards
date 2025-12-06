@@ -2,7 +2,7 @@
 
 import { sections, courses } from '@/lib/data';
 import SectionCard from '@/components/SectionCard';
-import { FileEdit, Sparkles, GraduationCap } from 'lucide-react';
+import { FileEdit, Sparkles, GraduationCap, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { getSelectedCourse, setSelectedCourse } from '@/lib/storage';
 
@@ -17,6 +17,8 @@ export default function SectionsPage() {
     }
     return null;
   });
+
+  const [isSectionsExpanded, setIsSectionsExpanded] = useState<boolean>(true);
 
   // Save to storage when selection changes
   useEffect(() => {
@@ -87,36 +89,60 @@ export default function SectionsPage() {
           )}
         </div>
 
-        {/* Course Info */}
-        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
-          <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-linear-to-br from-green-600 to-emerald-600 flex items-center justify-center shrink-0">
-              <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-            </div>
-            <div className="flex-1">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
-                <h2 className="text-lg sm:text-xl font-bold text-white">{currentCourse.title}</h2>
-                <span className="px-2 py-1 bg-blue-600 text-white text-xs rounded-full uppercase font-semibold self-start">
-                  {currentCourse.level}
-                </span>
+        {/* Course Header - Distinct from section cards */}
+        <div className="bg-gradient-to-r from-blue-950 via-purple-950 to-blue-950 border-2 border-blue-800/50 rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8 shadow-lg shadow-blue-900/20">
+          <div className="flex flex-col gap-4">
+            {/* Course Title Row */}
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shrink-0 shadow-lg">
+                <GraduationCap className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
               </div>
-              <p className="text-zinc-400 text-sm mb-2 sm:mb-3">{currentCourse.description}</p>
-              <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-zinc-500">
-                <span>{courseSections.length} sections</span>
-                <span>•</span>
-                <span>~{currentCourse.estimatedHours} hours</span>
+              <div className="flex-1">
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <h2 className="text-xl sm:text-2xl font-bold text-white leading-tight">{currentCourse.title}</h2>
+                  <span className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs rounded-full uppercase font-bold tracking-wider shadow-md">
+                    {currentCourse.level}
+                  </span>
+                </div>
+                <p className="text-blue-100 text-sm sm:text-base mb-3">{currentCourse.description}</p>
+                <div className="flex items-center gap-4 text-sm text-blue-200/80">
+                  <span className="flex items-center gap-1.5">
+                    <span className="font-semibold">{courseSections.length}</span> sections
+                  </span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="font-semibold">~{currentCourse.estimatedHours}</span> hours
+                  </span>
+                </div>
               </div>
             </div>
+
+            {/* Accordion Toggle Button */}
+            <button
+              onClick={() => setIsSectionsExpanded(!isSectionsExpanded)}
+              className="flex items-center justify-between px-4 py-3 bg-blue-900/30 hover:bg-blue-900/50 rounded-lg transition-colors border border-blue-700/30"
+            >
+              <span className="text-sm font-semibold text-blue-100">
+                {isSectionsExpanded ? 'Hide' : 'Show'} Course Sections
+              </span>
+              {isSectionsExpanded ? (
+                <ChevronUp className="w-5 h-5 text-blue-300" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-blue-300" />
+              )}
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Sections Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 lg:mb-8">
-        {courseSections.map((section) => (
-          <SectionCard key={section.id} section={section} />
-        ))}
-      </div>
+      {/* Sections Grid - Collapsible */}
+      {isSectionsExpanded && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 lg:mb-8">
+          {courseSections.map((section) => (
+            <SectionCard key={section.id} section={section} />
+          ))}
+        </div>
+      )}
 
       {/* Notice */}
       <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 sm:p-6">
